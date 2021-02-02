@@ -1,0 +1,6 @@
+framework module Pods_CheckList_app {
+  umbrella header "Pods-CheckList app-umbrella.h"
+
+  export *
+  module * { export * }
+}
