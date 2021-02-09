@@ -14,8 +14,6 @@ class Functions {
     static var timer: Timer!
     static var motion = CMMotionManager()
     
-    static let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
-    
     //MARK: - Returns a label as the header view for a navigation controller
     static func createHeaderView(title: String) -> UILabel {
         
@@ -70,7 +68,7 @@ class Functions {
         var images = [UIImage]()
         
         for img_index in 1...ParticipantViewController.itemNum {
-            let imgPath = userDirectory.appendingPathComponent("\(object)/\(img_index).jpg")
+            let imgPath = Log.userDirectory.appendingPathComponent("\(object)/\(img_index).jpg")
             
             //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             if let data = try? Data(contentsOf: imgPath) {
@@ -97,9 +95,9 @@ class Functions {
             let fileManager = FileManager.default
                    
             // Check if file exists
-            if fileManager.fileExists(atPath: userDirectory.appendingPathComponent("tmpobj").path) {
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path) {
                 // Delete file
-                try fileManager.removeItem(atPath: userDirectory.appendingPathComponent("tmpobj").path)
+                try fileManager.removeItem(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path)
                 print("Deleted image path")
                 
             } else {
@@ -120,7 +118,7 @@ class Functions {
         
         Util().createDirectory(object)
         
-        let imgPath = Functions.userDirectory.appendingPathComponent("\(object)")
+        let imgPath = Log.userDirectory.appendingPathComponent("\(object)")
         print("Images path-> \(imgPath)")
         
         for (index, image) in images.enumerated() {
@@ -145,10 +143,15 @@ class Functions {
             let fileManager = FileManager.default
                    
             // Check if file exists
-            if fileManager.fileExists(atPath: userDirectory.appendingPathComponent("recording-tmpobj.wav").path) {
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("recording-tmpobj.wav").path) {
                 // Delete file
-                try fileManager.moveItem(atPath: userDirectory.appendingPathComponent("recording-tmpobj.wav").path, toPath: userDirectory.appendingPathComponent(object).appendingPathComponent("\(object).wav").path)
-                print("Saved audio file")
+                let destURL = Log.userDirectory.appendingPathComponent(object).appendingPathComponent("\(object).wav")
+                if fileManager.fileExists(atPath: destURL.path) {
+                    try! fileManager.removeItem(at: destURL)
+                }
+                
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("recording-tmpobj.wav").path, toPath: destURL.path)
+                print("Saved audio file. \(Log.userDirectory.appendingPathComponent(object).appendingPathComponent("\(object).wav").path))")
                 
             } else {
                 print("File does not exist")

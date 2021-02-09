@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
      */
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Thread.sleep(forTimeInterval: 0.5)
@@ -38,22 +37,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create UUID for this user to be used for logging and store it in UserDefault
         // to be retrieved everytime the app is launched
         if let userUUID = UserDefaults.standard.value(forKey: "userUUID") as? String {
-            
             Log.userUUID = userUUID
-            
         } else {
-            
             // UserUID does not exist. Create one and store it
             let userUUID = UUID().uuidString
             UserDefaults.standard.set(userUUID, forKey: "userUUID")
             Log.userUUID = userUUID
-            
+            ParticipantViewController.userName = userUUID
+        }
+        
+        
+        Log.userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
+        var isDirectory = ObjCBool(true)
+        if !FileManager.default.fileExists(atPath: Log.userDirectory.path, isDirectory: &isDirectory) {
+            do {
+                try FileManager.default.createDirectory(atPath: Log.userDirectory.path, withIntermediateDirectories: true, attributes: nil)
+                print("directory is created. \(Log.userDirectory.path)")
+            } catch let error as NSError {
+                print("Error creating directory: \(error.localizedDescription)")
+            }
+        } else {
+            print("The directory exists. \(Log.userDirectory.path)")
         }
         
         Log.writeToLog(Actions.appLaunched.rawValue)
-        
-        
-        
         
         return true
     }

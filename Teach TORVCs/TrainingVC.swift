@@ -23,7 +23,6 @@ class TrainingVC: BaseItemAudioVC {
     var olView: UIView!
     
     var recordingSession: AVAudioSession!
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     var httpController = HTTPController()
     var fileName = "recording-tmpobj.wav"
     
@@ -85,75 +84,81 @@ class TrainingVC: BaseItemAudioVC {
         
         //TODO: Handle saving object to database and begin training..
         print("Saving.....")
-        
-        uploadPhotos()
-        
-        // upload arkit info
-        httpController.sendARInfo(object_name: object_name) {(response) in
-            print("Send AR Info: " + response)
-        }
-
         Log.writeToLog("\(Actions.tappedOnBtn.rawValue) saveButton")
-        navigationController?.popToRootViewController(animated: true)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            Functions.stopGyros()
+        
+        activityIndicator("Uploading images")
+        
+            
+        DispatchQueue.global(qos: .background).async {
+            self.uploadPhotos()
+            
+            // upload arkit info
+            self.httpController.sendARInfo(object_name: self.object_name) {(response) in
+                print("Send AR Info: " + response)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+                Functions.stopGyros()
+            }
+            
+            DispatchQueue.main.async {
+                self.effectView.removeFromSuperview()
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
     
     ///MARK: - This sends the photos to the database for training
     func uploadPhotos() {
-        DispatchQueue.global(qos: .background).async {
-            
-            self.markTraining()
-            let images = Functions.fetchImages(for: "tmpobj")
-            
-            for (index, image) in images.enumerated() {
-                self.httpController.sendImage(object_name: self.object_name, index: index, image: image) {}
-            }
-            
-            self.httpController.reqeustTrain {
-                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
-                print("Training ended.")
-            }
-            
-            Functions.deleteImages(for: self.object_name)
-            Functions.saveRecording(for: self.object_name)
+        let images = Functions.fetchImages(for: "tmpobj")
+        
+        for (index, image) in images.enumerated() {
+            self.httpController.sendImage(object_name: self.object_name, index: index, image: image) {}
         }
         
-//       DispatchQueue.global(qos: .background).async{
-//           //Time consuming task here
-//           UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, self.toastLabel)
-//           
-//           self.markTraining()
-//            
-//           for i in 1...ParticipantViewController.itemNum {
-//               self.httpController.sendImage(object_name: self.object_name, index: i){}
-//           }
-//           
-//           self.httpController.reqeustTrain(){
-//               //self.textToSpeech("Training ended.")
-//               UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
-//           }
-//        
-//        Functions.deleteImages(for: self.object_name)
-//
-//       }
+        self.httpController.reqeustTrain(){(response) in
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
+            print("Training ended.")
+        }
+        
+        Functions.deleteImages(for: self.object_name)
+        Functions.saveRecording(for: self.object_name)
     }
     
-    func markTraining() {
-        let file = "trainMark.txt" //this is the file. we will write to and read from it
-        let text = "on"
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let fileURL = dir.appendingPathComponent(file)
-            
-            //writing
-            do {
-                try text.write(to: fileURL, atomically: false, encoding: .utf8)
-            }
-            catch {/* error handling here */}
-        }
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    var strLabel = UILabel()
+    var activityIndicator = UIActivityIndicatorView()
+    func activityIndicator(_ title: String) {
+        strLabel.removeFromSuperview()
+        activityIndicator.removeFromSuperview()
+        effectView.removeFromSuperview()
+        strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 160, height: 46))
+        strLabel.text = title
+        strLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        strLabel.textColor = UIColor(white: 0.9, alpha: 0.7)
+        effectView.frame = CGRect(x: view.frame.midX - strLabel.frame.width/2, y: view.frame.midY - strLabel.frame.height/2 - 200, width: 200, height: 46)
+        effectView.layer.cornerRadius = 15
+        effectView.layer.masksToBounds = true
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 46, height: 46)
+        activityIndicator.startAnimating()
+        effectView.contentView.addSubview(activityIndicator)
+        effectView.contentView.addSubview(strLabel)
+        view.addSubview(effectView)
     }
+    
+//    func markTraining() {
+//        let file = "trainMark.txt" //this is the file. we will write to and read from it
+//        let text = "on"
+//        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+//            let fileURL = dir.appendingPathComponent(file)
+//
+//            //writing
+//            do {
+//                try text.write(to: fileURL, atomically: false, encoding: .utf8)
+//            }
+//            catch {/* error handling here */}
+//        }
+//    }
     
     func openEnterNameView() {
         // custom view
@@ -182,9 +187,7 @@ class TrainingVC: BaseItemAudioVC {
     }
     
     func rename(newName: String) {
-        ParticipantViewController.writeLog("TrainingView-rename-\(newName)")
         Log.writeToLog("\(Actions.renamedSavedObj.rawValue) new_name= \(newName)")
-        httpController.requestRename(org_name: "tmpobj", new_name: newName){}
         print("---> Invoking rename function...")
         
 //        do {
@@ -231,9 +234,7 @@ class TrainingVC: BaseItemAudioVC {
                 audioTimer.invalidate()
                 audioController.stopAudio()
                 progressBar.progress = 0.0
-                
             } else {
-                
                 audioController.playFileSound(name: "recording-tmpobj.wav", delegate: nil)
                 audioDuration = audioController.audioPlayer.duration - 0.3
                 audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(checkAudioTime), userInfo: nil, repeats: true)
@@ -253,7 +254,6 @@ class TrainingVC: BaseItemAudioVC {
             mainActionButton.setImage(#imageLiteral(resourceName: "play_button"), for: .normal)
             
         } else {
-            
             mainActionButton.setImage(#imageLiteral(resourceName: "recording"), for: .normal)
             ParticipantViewController.writeLog("TrainRecordStart")
             print("Recording -----> ")

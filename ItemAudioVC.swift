@@ -35,23 +35,29 @@ class ItemAudioVC: BaseItemAudioVC {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         
-        setupButtons()
-        audioPlayer.delegate = self
-        
         mainActionButton.accessibilityLabel = "Plays the recorded audio description for \(headerName)"
         elapsedLabel.accessibilityLabel = "Elapsed time"
         remainingLabel.accessibilityLabel = "Time remaining"
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if fileExist {
+            setupButtons()
+            audioPlayer.delegate = self
+        }
+        Log.writeToLog("\(Actions.enteredScreen.rawValue) \(Screens.objScreen.rawValue)")
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         Log.writeToLog("\(Actions.exitedScreen.rawValue) \(Screens.objScreen.rawValue), object= \(objectName)")
     }
     
     override func handleMainActionButton() {
-        ParticipantViewController.writeLog("ItemAudioPlay")
+        Log.writeToLog("ItemAudioPlay")
                 
         if audioController.isAudioPlaying() {
             print("Not playing")
@@ -65,7 +71,6 @@ class ItemAudioVC: BaseItemAudioVC {
             secondaryButton.isAccessibilityElement = false
             
         } else {
-            
 //            audioController.playFileSound(name: "recording-\(objectName).wav", delegate: nil)
             audioDuration = audioPlayer.duration - 0.3
             audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(checkAudioTime), userInfo: nil, repeats: true)

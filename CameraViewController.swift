@@ -38,8 +38,6 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
     var count = 0
     var attributes = ["• Hand in photo", "• Cropped object", "• Blurry", "• Small object"]
     
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
-    
     var httpController = HTTPController()
     
     override func viewDidLoad() {
@@ -433,7 +431,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
     
     
     func countSamples (_ label: String) -> Int {
-        let imgPath = userDirectory.appendingPathComponent("\(label)")
+        let imgPath = Log.userDirectory.appendingPathComponent("\(label)")
         let fileManager = FileManager.default
         
         var isDirectory = ObjCBool(true)
@@ -452,7 +450,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func createDirectory(_ label: String) {
-        let classPath = userDirectory.appendingPathComponent("\(label)")
+        let classPath = Log.userDirectory.appendingPathComponent("\(label)")
         var isDirectory = ObjCBool(true)
         if !FileManager.default.fileExists(atPath: classPath.absoluteString, isDirectory: &isDirectory) {
             do {
@@ -466,7 +464,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
     
     func saveImage(_ index: Int) {
         if captureView.image == nil { return }
-        let imgPath = userDirectory.appendingPathComponent("\(object_name)")
+        let imgPath = Log.userDirectory.appendingPathComponent("\(object_name)")
         
         // Save high-res photos to be sent to the server
         if let data = UIImageJPEGRepresentation(currImg!, 1.0) {

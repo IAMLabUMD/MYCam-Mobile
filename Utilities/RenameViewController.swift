@@ -16,7 +16,6 @@ class RenameViewController: UIViewController,UITextFieldDelegate {
     
     var orgName = ""
     var orgView: UIViewController!
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     var httpController = HTTPController()
     
     override func viewDidLoad() {
@@ -43,10 +42,10 @@ class RenameViewController: UIViewController,UITextFieldDelegate {
             do {
                 let fileManager = FileManager.init()
                 var isDirectory = ObjCBool(true)
-                if fileManager.fileExists(atPath: userDirectory.appendingPathComponent(orgName).appendingPathComponent("recording-\(orgName).wav").path, isDirectory: &isDirectory) {
-                    try fileManager.moveItem(atPath: userDirectory.appendingPathComponent(orgName).appendingPathComponent("recording-\(orgName).wav").path, toPath: userDirectory.appendingPathComponent(orgName).appendingPathComponent("recording-\(newName).wav").path)
+                if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(orgName).appendingPathComponent("recording-\(orgName).wav").path, isDirectory: &isDirectory) {
+                    try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(orgName).appendingPathComponent("recording-\(orgName).wav").path, toPath: Log.userDirectory.appendingPathComponent(orgName).appendingPathComponent("recording-\(newName).wav").path)
                 }
-                try fileManager.moveItem(atPath: userDirectory.appendingPathComponent(orgName).path, toPath: userDirectory.appendingPathComponent(newName).path)
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(orgName).path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
             }
             catch let error as NSError {
                 print("Ooops! Something went wrong: \(error)")

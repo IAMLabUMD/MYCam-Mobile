@@ -32,7 +32,6 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
     
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     var httpController = HTTPController()
     var audioController = AudioController()
     
@@ -148,8 +147,9 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
                //self.httpController.sendImage(object_name: self.object_name, index: i){}
            }
            
-           self.httpController.reqeustTrain(){
+           self.httpController.reqeustTrain() {(response) in
                //self.textToSpeech("Training ended.")
+               print("Training response: \(response)")
                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
            }
 
@@ -409,12 +409,12 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
         do {
             let fileManager = FileManager.init()
             var isDirectory = ObjCBool(true)
-            if fileManager.fileExists(atPath: userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, isDirectory: &isDirectory) {
-                try fileManager.moveItem(atPath: userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, toPath: userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-\(newName).wav").path)
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, isDirectory: &isDirectory) {
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, toPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-\(newName).wav").path)
             }
             
-            if fileManager.fileExists(atPath: userDirectory.appendingPathComponent("tmpobj").path, isDirectory: &isDirectory) {
-                try fileManager.moveItem(atPath: userDirectory.appendingPathComponent("tmpobj").path, toPath: userDirectory.appendingPathComponent(newName).path)
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path, isDirectory: &isDirectory) {
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
             }
         }
         catch let error as NSError {
@@ -441,7 +441,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
         imgContainer.isAccessibilityElement = true
         
         for img_index in 1...ParticipantViewController.itemNum {
-            let imgPath = userDirectory.appendingPathComponent("\(object_name)/\(img_index).jpg")
+            let imgPath = Log.userDirectory.appendingPathComponent("\(object_name)/\(img_index).jpg")
             let data = try? Data(contentsOf: imgPath) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             let x = img_spacing + ((img_index-1)%img_row_num)*img_width
             let y = top+img_height*((img_index-1)/img_row_num)

@@ -10,7 +10,6 @@ import Foundation
 
 class ItemList {
     var itemArray = [Item]() //to set-up table
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     
     func getListString() -> String {
         var res = ""
@@ -29,7 +28,7 @@ class ItemList {
         
         let fileManager = FileManager.default
         do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: userDirectory, includingPropertiesForKeys: nil)
+            let fileURLs = try fileManager.contentsOfDirectory(at: Log.userDirectory, includingPropertiesForKeys: nil)
             //print(fileURLs)
             for url in fileURLs {
                 let components = url.pathComponents
@@ -59,14 +58,14 @@ class ItemList {
                 }
             }
         } catch {
-            print("Error while enumerating classes \(userDirectory): \(error.localizedDescription)")
+            print("Error while enumerating classes \(Log.userDirectory): \(error.localizedDescription)")
         }
         
         itemArray = itemArray.sorted(by: { $0.itemDate > $1.itemDate })
     }
     
     func countSamples (_ label: String) -> Int {
-        let imgPath = userDirectory.appendingPathComponent("\(label)")
+        let imgPath = Log.userDirectory.appendingPathComponent("\(label)")
         let fileManager = FileManager.default
         
         var isDirectory = ObjCBool(true)
@@ -86,7 +85,7 @@ class ItemList {
     }
     
     func deleteDirectory(_ label: String) {
-        let classPath = userDirectory.appendingPathComponent("\(label)")
+        let classPath = Log.userDirectory.appendingPathComponent("\(label)")
         let fileManager = FileManager.default
         do {
             try fileManager.removeItem(at: classPath)

@@ -22,9 +22,6 @@ class ItemInfoViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     
     var audioPlayer: AVAudioPlayer?
     var audioRecorder: AVAudioRecorder!
-    
-    
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     let audioController = AudioController()
     
     var images = [UIImage]()
@@ -278,7 +275,7 @@ class ItemInfoViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         
         
         for img_index in 1...30 {
-            let imgPath = userDirectory.appendingPathComponent("\(object_name)/\(img_index).jpg")
+            let imgPath = Log.userDirectory.appendingPathComponent("\(object_name)/\(img_index).jpg")
             let data = try? Data(contentsOf: imgPath) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             let x = img_spacing + ((img_index-1)%img_row_num)*img_width
             let y = top+img_height*((img_index-1)/img_row_num)

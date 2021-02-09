@@ -11,7 +11,6 @@ import AVFoundation
 
 class ItemAudioViewController: UIViewController, AVAudioPlayerDelegate {
     var object_name = "keyboard"
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var ffButton: UIButton!
@@ -132,7 +131,7 @@ class ItemAudioViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func setupAudioButton() {
-        let audioPath = userDirectory.appendingPathComponent("recording-\(object_name).wav")
+        let audioPath = Log.userDirectory.appendingPathComponent("recording-\(object_name).wav")
         ffButton.isEnabled = false
         ffButton.isAccessibilityElement = false
         rewindButton.isEnabled = false
@@ -191,7 +190,7 @@ class ItemAudioViewController: UIViewController, AVAudioPlayerDelegate {
         
         
         for img_index in 1...30 {
-            let imgPath = userDirectory.appendingPathComponent("\(object_name)/\(img_index).jpg")
+            let imgPath = Log.userDirectory.appendingPathComponent("\(object_name)/\(img_index).jpg")
             let data = try? Data(contentsOf: imgPath) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             let x = img_spacing + ((img_index-1)%img_row_num)*img_width
             let y = top+img_height*((img_index-1)/img_row_num)

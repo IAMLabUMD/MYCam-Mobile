@@ -13,7 +13,6 @@ class HTTPController {
     let url = URL(string: "http://128.8.235.4/TOR_app/db_command.php")!
     //let url = URL(string: "http://128.8.224.124:5000")!
     let boundary = "Boundary-\(UUID().uuidString)"
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     
     func formatDate(date: Date) -> String {
         let formatter = DateFormatter()
@@ -36,7 +35,7 @@ class HTTPController {
     
     func checkIsTraining(postProcessing: @escaping (String)->Void) {
         print("request-isTraining")
-        Log.writeToLog("\(Actions.trainingBegan.rawValue)")
+        Log.writeToLog("\(Actions.checkTraining.rawValue)")
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -121,7 +120,7 @@ class HTTPController {
         task.resume()
     }
     
-    func reqeustTrain(postProcessing: @escaping ()->Void) {
+    func reqeustTrain_old(postProcessing: @escaping ()->Void) {
         simpleRequest(type: "trainRequest", postProcessing: postProcessing)
     }
     
@@ -313,14 +312,31 @@ class HTTPController {
             }
             
             let dataString = String(data: data, encoding: .utf8) ?? "Undecodable result"
-            print(params)
-            print("Successfully sent to server")
+            print("Successfully sent to server. \(params)")
             
             DispatchQueue.main.async {
                 postProcessing(dataString)
             }
         }
         task.resume()
+    }
+    
+    func reqeustTrain(postProcessing: @escaping (String)->Void) {
+        Log.writeToLog("RequestTrain")
+        
+        let params = [
+            "type": "trainRequest"
+        ]
+        sendMessage(params: params, file_data: nil, postProcessing: postProcessing)
+    }
+    
+    func reqeustReset(postProcessing: @escaping (String)->Void) {
+        Log.writeToLog("RequestReset")
+        
+        let params = [
+            "type": "Reset"
+        ]
+        sendMessage(params: params, file_data: nil, postProcessing: postProcessing)
     }
     
     // get descriptors of a set of images
@@ -356,7 +372,7 @@ class HTTPController {
     }
     
     func sendARInfo(object_name: String, postProcessing: @escaping (String)->Void) {
-        let filePath = userDirectory.appendingPathComponent("desc_info.txt")
+        let filePath = Log.userDirectory.appendingPathComponent("desc_info.txt")
         
         if let desc_data = FileManager.default.contents(atPath: filePath.path) {
             let params = [

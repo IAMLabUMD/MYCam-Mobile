@@ -58,6 +58,14 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        let clearButton = UIButton()
+        clearButton.setTitleColor(.white, for: .normal)
+        clearButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
+        clearButton.setTitle("Clear", for: .normal)
+        clearButton.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
+        clearButton.accessibilityLabel = "Clear. This button removes all items in the list."
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: clearButton)
+        
         resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
@@ -78,6 +86,11 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         addEmptyLabel()
         setAccessibilityLabels()
         
+    }
+    
+    @objc func clearButtonAction() {
+        Log.writeToLog("\(Actions.tappedOnBtn) clearItemsButton")
+        clearItems()
     }
     
     
@@ -480,7 +493,6 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
 extension ChecklistViewController2: ChecklistTableViewCellDelegate {
     
     func didTapOnCell(cell: ChecklistTableViewCell) {
-        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ItemAttributesVC") as! ItemAttributesTVC
         vc.item = cell.item
         self.navigationController?.pushViewController(vc, animated: true)
@@ -491,11 +503,26 @@ extension ChecklistViewController2: ChecklistTableViewCellDelegate {
 // Handle user actions
 extension ChecklistViewController2 {
     
-
-    func handleDeleteItem(indexPath: IndexPath) {
+    // clear the items in the list
+    func clearItems() {
+        httpController.reqeustReset() {(response) in
+            print("Reset response: \(response)")
+        }
         
+        for item in itemList.itemArray {
+            let itemName = item.itemName
+            httpController.requestRemove(itemName){}
+            itemList.deleteDirectory(itemName)
+        }
+        itemList.itemArray.removeAll()
+        self.header.text = "NO ITEMS"
+        self.navigationItem.titleView = self.header
+        self.tableView.reloadData()
+        self.emptyLabel.alpha = 1
+    }
+    
+    func handleDeleteItem(indexPath: IndexPath) {
         let itemName = self.itemList.itemArray[indexPath.row].itemName
-        ParticipantViewController.writeLog("ListSelectItem-\(itemName)")
         Log.writeToLog("\(Actions.tappedOnBtn) yesDeleteButton")
         self.httpController.requestRemove(itemName){}
         self.itemList.deleteDirectory(itemName)

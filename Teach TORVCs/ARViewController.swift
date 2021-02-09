@@ -43,8 +43,6 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     var count = 0
     var attributes = ["• Hand in photo", "• Cropped object", "• Blurry", "• Small object"]
     
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
-    
     var httpController = HTTPController()
     
     var detections = 0
@@ -96,7 +94,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         
         // delete the existing descriptor file
         do {
-            try FileManager.default.removeItem(at: userDirectory.appendingPathComponent("desc_info.txt"))
+            try FileManager.default.removeItem(at: Log.userDirectory.appendingPathComponent("desc_info.txt"))
         } catch let error as NSError {
             print("Error: \(error.domain)")
         }
@@ -748,7 +746,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     
     
     func countSamples (_ label: String) -> Int {
-        let imgPath = userDirectory.appendingPathComponent("\(label)")
+        let imgPath = Log.userDirectory.appendingPathComponent("\(label)")
         let fileManager = FileManager.default
         
         var isDirectory = ObjCBool(true)
@@ -767,7 +765,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     }
     
     func createDirectory(_ label: String) {
-        let classPath = userDirectory.appendingPathComponent("\(label)")
+        let classPath = Log.userDirectory.appendingPathComponent("\(label)")
         var isDirectory = ObjCBool(true)
         if !FileManager.default.fileExists(atPath: classPath.absoluteString, isDirectory: &isDirectory) {
             do {
@@ -781,7 +779,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     
     func saveImage(_ index: Int) {
         if captureView.image == nil { return }
-        let imgPath = userDirectory.appendingPathComponent("\(object_name)")
+        let imgPath = Log.userDirectory.appendingPathComponent("\(object_name)")
         
         // Save high-res photos to be sent to the server
         if let data = UIImageJPEGRepresentation(currImg!, 1.0) {
@@ -827,7 +825,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     //https://stackoverflow.com/questions/24097826/read-and-write-a-string-from-text-file
     func writeDescInfo(line: String) {
         // If the directory was found, we write a file to it and read it back
-        let fileURL = userDirectory.appendingPathComponent("desc_info.txt")
+        let fileURL = Log.userDirectory.appendingPathComponent("desc_info.txt")
         do {
             try line.appendLineToURL(fileURL: fileURL as URL)
         } catch {

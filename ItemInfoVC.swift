@@ -25,7 +25,6 @@ class ItemInfoVC: BaseItemAudioVC {
     
     var recordingSession: AVAudioSession!
     //var audioRecorder: AVAudioRecorder!
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     var httpController = HTTPController()
     let playImage = #imageLiteral(resourceName: "record")
 
@@ -108,7 +107,8 @@ class ItemInfoVC: BaseItemAudioVC {
             Functions.saveRecording(for: objectName)
         }
         
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+//        navigationController?.popToRootViewController(animated: true)
     }
     
     func presentEnterNameVC() {
@@ -135,12 +135,12 @@ class ItemInfoVC: BaseItemAudioVC {
         do {
             let fileManager = FileManager.init()
             var isDirectory = ObjCBool(true)
-            if fileManager.fileExists(atPath: Functions.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, isDirectory: &isDirectory) {
-                try fileManager.moveItem(atPath: Functions.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, toPath: userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-\(newName).wav").path)
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, isDirectory: &isDirectory) {
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, toPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-\(newName).wav").path)
             }
 
-            if fileManager.fileExists(atPath: Functions.userDirectory.appendingPathComponent("tmpobj").path, isDirectory: &isDirectory) {
-                try fileManager.moveItem(atPath: Functions.userDirectory.appendingPathComponent("tmpobj").path, toPath: Functions.userDirectory.appendingPathComponent(newName).path)
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path, isDirectory: &isDirectory) {
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
             }
         }
         catch let error as NSError {

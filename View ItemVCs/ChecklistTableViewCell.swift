@@ -29,7 +29,7 @@ class ChecklistTableViewCell: UITableViewCell {
             itemName.text = name
             itemDate.text = item?.relativeDate
             
-            let imgPath = util.userDirectory.appendingPathComponent("\(item?.itemName ?? "")/1.jpg")
+            let imgPath = Log.userDirectory.appendingPathComponent("\(item?.itemName ?? "")/1.jpg")
             //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             if let data = try? Data(contentsOf: imgPath) {
                 itemImage.image = UIImage(data: data)

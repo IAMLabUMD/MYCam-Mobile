@@ -10,7 +10,6 @@ import Foundation
 import AVFoundation
 
 class AudioController{
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     var audioPlayer: AVAudioPlayer!
     var audioRecorder: AVAudioRecorder!
     
@@ -20,7 +19,7 @@ class AudioController{
     }
     
     func playFileSound(name: String, delegate: AVAudioPlayerDelegate?) {
-        let audioPath = userDirectory.appendingPathComponent(name)
+        let audioPath = Log.userDirectory.appendingPathComponent(name)
         playAudio(url: audioPath, fileType: AVFileType.wav.rawValue, delegate: delegate)
     }
     
@@ -62,7 +61,7 @@ class AudioController{
     
     
     func startRecording(fileName: String, delegate: AVAudioRecorderDelegate?) {
-        let filePath = userDirectory.appendingPathComponent(fileName)
+        let filePath = Log.userDirectory.appendingPathComponent(fileName)
         
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)

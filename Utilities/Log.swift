@@ -46,7 +46,8 @@ public enum Actions: String {
     voiceOver = "voice_over_text= ",
     photoTaken = "action=photo_taken",
     getImageDescriptor = "action=get_image_descriptor",
-    getSetDescriptor = "action=get_set_descriptor"
+    getSetDescriptor = "action=get_set_descriptor",
+    checkTraining = "action=check_training"
 }
 
 
@@ -54,20 +55,15 @@ class Log {
     
     var num = 0
     static var userUUID = ""
-    
+    static var userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
     // Logs the user's activity to the log file
     static func writeToLog(_ text: String) {
-        
-        
         let file = "Log_\(userUUID).txt"
         
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
             let fileURL = dir.appendingPathComponent(userUUID).appendingPathComponent(file)
-            
             do {
-                
                 // Create Date object
                 let date = Date()
                 let formatter = DateFormatter()
@@ -92,18 +88,35 @@ class Log {
                 
 //                print("Log entry --> \(String(decoding: textData, as: UTF8.self))")
                 
+                
+                
+//                if !FileManager.default.fileExists(atPath: (fileURL.absoluteString)) {
+//                    FileManager.default.createFile(atPath: (fileURL.absoluteString), contents: textData, attributes: nil)
+//                    print("Log file is created. \(fileURL.absoluteString)")
+//
+//                    try textData.write(to: fileURL)
+//                } else {
+//                    if let fileHandle = try? FileHandle(forWritingTo: fileURL) {
+//                        defer {
+//                            fileHandle.closeFile()
+//                        }
+//
+//                        fileHandle.seekToEndOfFile()
+//                        fileHandle.write(textData)
+//                    }
+//                }
                 if let fileHandle = try? FileHandle(forWritingTo: fileURL) {
                     defer {
                         fileHandle.closeFile()
                     }
-                    
+
                     fileHandle.seekToEndOfFile()
                     fileHandle.write(textData)
                 } else {
                     try textData.write(to: fileURL)
                 }
             } catch {
-                print("write log error")
+                print("write log error \(error)")
             }
         }
         

@@ -148,6 +148,12 @@ class BaseItemAudioVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderD
         let headerName = Functions.separateWords(name: objectName)
         navigationItem.titleView = Functions.createHeaderView(title: headerName)
         
+//        setupRecorder()
+//        setupPlayer()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupRecorder()
         setupPlayer()
     }
@@ -155,7 +161,7 @@ class BaseItemAudioVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderD
     
     func setupRecorder() {
         
-        let audioFilename = Util().userDirectory.appendingPathComponent(self.audioFilename)
+        let audioFilename = Log.userDirectory.appendingPathComponent(self.audioFilename)
         let settings = [AVFormatIDKey: kAudioFormatAppleLossless,
                         AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue,
                         AVEncoderBitRateKey: 320000,
@@ -169,16 +175,18 @@ class BaseItemAudioVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderD
         }
     }
     
-    
+    var fileExist = false
     func setupPlayer() {
         
-        let audioFilename = Util().userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(objectName).wav")
+        let audioFilename = Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(objectName).wav")
         print(audioFilename)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioFilename)
             audioPlayer.prepareToPlay()
             audioPlayer.volume = 1.0
+            fileExist = true
         } catch {
+            fileExist = false
             print("Failed setting up player for \(objectName).")
         }
     }

@@ -29,7 +29,6 @@ class MainViewController: BaseViewController {
     var capturedImg: UIImage?
     var synth = AVSpeechSynthesizer()
     var myUtterance = AVSpeechUtterance(string: "")
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
     var isTraining = false
     var itemList = ItemList()
     var httpController = HTTPController()
@@ -56,8 +55,7 @@ class MainViewController: BaseViewController {
         addViewsToSuperView()
         //addSlideMenuButton()
         //unmarkTraining()
-        createUserDirectory()
-        itemList.renewList()
+//        itemList.renewList()
         
         // set navigation bar
         self.navigationItem.setHidesBackButton(true, animated:true);
@@ -109,20 +107,20 @@ class MainViewController: BaseViewController {
         navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "#0097BD")
         navigationController?.navigationBar.isTranslucent = false
         
-        print("URL -> \(Util().userDirectory)")
-        let list = ItemList()
-        list.renewList()
-        list.itemArray.forEach { (item) in
-            print(item.itemName)
-        }
+//        let list = ItemList()
+//        list.renewList()
+//        list.itemArray.forEach { (item) in
+//            print(item.itemName)
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-    
         Log.writeToLog("\(Actions.enteredScreen.rawValue) \(Screens.mainScreen.rawValue)")
         listenVolumeButton()
+        itemList.renewList()
+        print("We have \(itemList.itemArray.count) item(s) now.")
         trainChecker = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkTraining), userInfo: nil, repeats: true)
     }
  
@@ -189,23 +187,10 @@ class MainViewController: BaseViewController {
 //                view.setValue(audioLevel, animated: false)
             }
             
-            let audioSession = AVAudioSession.sharedInstance()
+//            let audioSession = AVAudioSession.sharedInstance()
             //print(audioLevel, audioSession.outputVolume, volumeView.subviews.compactMap({ $0 as? UISlider }).first?.value)
-            ParticipantViewController.writeLog("MainVolumeButton")
             Log.writeToLog("action= volumeUpdated")
             recognize()
-        }
-    }
-    
-    func createUserDirectory() {
-        var isDirectory = ObjCBool(true)
-        if !FileManager.default.fileExists(atPath: userDirectory.path, isDirectory: &isDirectory) {
-            do {
-                try FileManager.default.createDirectory(atPath: userDirectory.path, withIntermediateDirectories: true, attributes: nil)
-                print("directory is created. \(userDirectory.path)")
-            } catch let error as NSError {
-                print("Error creating directory: \(error.localizedDescription)")
-            }
         }
     }
     
@@ -223,10 +208,13 @@ class MainViewController: BaseViewController {
 //        ParticipantViewController.writeLog("MainHelpButton")
 //        Log.writeToLog("\(Actions.tappedOnBtn.rawValue) helpButton")
         
-        httpController.reqeustTrain(){}
+
+//        httpController.reqeustTrain() {(response) in
+//            print("Training response: \(response)")
+//        }
         
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "settingsTableVC") as! SettingsTableVC
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "settingsTableVC") as! SettingsTableVC
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -308,18 +296,22 @@ class MainViewController: BaseViewController {
     
     var cnt = 0
     @IBAction func recognizeButtonAction(_ sender: Any) {
-        ParticipantViewController.writeLog("MainScanButton")
+        Log.writeToLog("\(Actions.tappedOnBtn.rawValue) scanButton")
         recognize()
     }
     
     func recognize() {
-        ParticipantViewController.writeLog("recognize")
-        Log.writeToLog("\(Actions.tappedOnBtn.rawValue) scanButton")
-        
         if isTraining {
             textToSpeech("Training is in progress. Please wait until it is done.")
             //showRecognitionToast(message: "Training is in progress. Please wait until it is done.")
-            ParticipantViewController.writeLog("RecResult-TrainingInProgress")
+            Log.writeToLog("RecResult-TrainingInProgress")
+            return
+        }
+        
+        if itemList.itemArray.count < 3 {
+            Log.writeToLog("RecResult-FewerThanThree")
+            textToSpeech("You should save at least three objects to recognize objects.")
+            print("You should save at least three objects to recognize objects.")
             return
         }
         
@@ -373,7 +365,7 @@ class MainViewController: BaseViewController {
     
     func handleRecognitionResult(output: String) {
         let output_components = output.components(separatedBy: "-:-")
-        ParticipantViewController.writeLog("RecResult-\(output)")
+        Log.writeToLog("RecResult-\(output)")
         print("Handling recognition result: \(output)")
         
         if output == "Error" {
@@ -426,17 +418,15 @@ class MainViewController: BaseViewController {
             } else {
                 Log.writeToLog("\(Actions.recognitionSuccessful.rawValue) true")
             }
-            print(label, entropy)
-            ParticipantViewController.writeLog("RecResultLabel-\(label)")
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, label)
-            //showRecognitionToast(message: label)
-            animateLabel(message: message, delay: 2)
-            scanButton.isEnabled = true
-            
-            Log.writeToLog("returned_recognized_object= \(message)")
-            Log.writeToLog("\(Actions.recognitionEnded.rawValue)")
         }
+        print(label, entropy)
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, label)
+        //showRecognitionToast(message: label)
+        animateLabel(message: message, delay: 2)
+        scanButton.isEnabled = true
         
+        Log.writeToLog("returned_recognized_object= \(message)")
+        Log.writeToLog("\(Actions.recognitionEnded.rawValue)")
     }
     
     
@@ -551,7 +541,6 @@ class MainViewController: BaseViewController {
     
     // MARK: - This function animates a view that alerts the user that a background task is being executed
     @objc func handleAnimation() {
-        
         if isTraining {
             value += 0.015
             bgView.alpha = CGFloat(value)
@@ -562,7 +551,6 @@ class MainViewController: BaseViewController {
     }
     
     @objc func checkTraining() {
-        
         httpController.checkIsTraining(postProcessing: processCheckTraining)
         
         /*
