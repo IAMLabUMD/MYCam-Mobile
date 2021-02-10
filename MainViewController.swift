@@ -528,6 +528,9 @@ class MainViewController: BaseViewController {
             print("yes training")
             
         } else {
+            if isTraining {
+                textToSpeech("Training ended.")
+            }
             print("no training, normal")
             isTraining = false
             bgView.alpha = 0

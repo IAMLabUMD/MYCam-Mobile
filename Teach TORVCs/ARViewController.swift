@@ -68,7 +68,6 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         let textAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         
-        
         // add overlay
         if ParticipantViewController.VisitedCameraView == 0 && ParticipantViewController.mode == "step12" {
             let currentWindow: UIWindow? = UIApplication.shared.keyWindow
@@ -98,9 +97,6 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         } catch let error as NSError {
             print("Error: \(error.domain)")
         }
-//        httpController.sendARInfo(object_name: "tmpObj") {(response) in
-//            print("Send AR Info: " + response)
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,64 +131,50 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             fatalError("Missing expected asset catalog resources.")
         }
         print("load objects")
-        do{
-            var b1: ARReferenceObject?
-            var b2: ARReferenceObject?
-            var c1: ARReferenceObject?
-            var c2: ARReferenceObject?
-            var c3: ARReferenceObject?
-            var c4: ARReferenceObject?
-            var c5: ARReferenceObject?
-            var w1: ARReferenceObject?
-            for obj in referenceObjects {
-                if obj.name! == "bottle1" {
-                    b1 = obj
-                }
-                
-                if obj.name! == "bottle2" {
-                    b2 = obj
-                }
-                
-                if obj.name! == "cereal1" {
-                    c1 = obj
-                }
-                
-                if obj.name! == "cereal2" {
-                    c2 = obj
-                }
-                
-                if obj.name! == "cereal1" {
-                    c3 = obj
-                }
-                
-                if obj.name! == "cereal2" {
-                    c4 = obj
-                }
-                
-                if obj.name! == "cereal1" {
-                    c5 = obj
-                }
-                
-                if obj.name! == "waterbottle1" {
-                    w1 = obj
-                }
+        var o1 = [ARReferenceObject]()
+        var o2 = [ARReferenceObject]()
+        var o3 = [ARReferenceObject]()
+        for obj in referenceObjects {
+            if obj.name!.contains("BakingSoda") {
+                o1.append(obj)
+            } else if obj.name!.contains("Nutrition") {
+                o2.append(obj)
+            } else if obj.name!.contains("ChewyBar") {
+                o3.append(obj)
             }
-            
-            print("merge objects")
-            let merged_b = try b1!.merging(b2!)
-            var merged_c = try c1!.merging(c2!)
-            merged_c = try merged_c.merging(c3!)
-            merged_c = try merged_c.merging(c4!)
-            merged_c = try merged_c.merging(c5!)
-            
-            print("save objects")
-            let bottle_url = FileManager.default.temporaryDirectory.appendingPathComponent("merged_bottle.arobject")
-            let cereal_url = FileManager.default.temporaryDirectory.appendingPathComponent("merged_cereal.arobject")
-            try merged_b.export(to: bottle_url, previewImage: UIImage(named: "shutter"))
-            try merged_c.export(to: cereal_url, previewImage: UIImage(named: "shutter"))
-        } catch {
-            print("Merge error: \(error).")
         }
+        print("obj lists \(o1.count) \(o2.count) \(o3.count)")
+            
+        print("merge objects")
+        let merged_o1 = mergeARObjects(obj_list: o1)
+        let merged_o2 = mergeARObjects(obj_list: o2)
+        let merged_o3 = mergeARObjects(obj_list: o3)
+        
+        print("save objects")
+        saveARObject(obj: merged_o1, filename: "merged_BakingSoda.arobject")
+        saveARObject(obj: merged_o2, filename: "merged_Nutrition.arobject")
+        saveARObject(obj: merged_o3, filename: "merged_ChewyBar.arobject")
+    }
+    
+    func saveARObject(obj: ARReferenceObject, filename: String) {
+        do {
+            let url = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
+            try obj.export(to: url, previewImage: UIImage(named: "shutter"))
+        } catch {
+            print("Save merged object error: \(error).")
+        }
+    }
+    
+    func mergeARObjects(obj_list: [ARReferenceObject]) -> ARReferenceObject{
+        var merged_obj = obj_list[0]
+        for i in 1...obj_list.count-1 {
+            do {
+                merged_obj = try merged_obj.merging(obj_list[i])
+            } catch {
+                print("Merge error: \(error).")
+            }
+        }
+        return merged_obj
     }
     
     func initARScene() {
@@ -203,23 +185,22 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             fatalError("Missing expected asset catalog resources.")
         }
         
-        do{
-            var bottle: ARReferenceObject?
-            var cereal: ARReferenceObject?
-            for obj in referenceObjects {
-                if obj.name! == "merged_bottle" {
-                    bottle = obj
-                }
-                
-                if obj.name! == "merged_cereal" {
-                    cereal = obj
-                }
+        var o1: ARReferenceObject?
+        var o2: ARReferenceObject?
+        var o3: ARReferenceObject?
+        for obj in referenceObjects {
+            if obj.name! == "merged_BakingSoda" {
+                o1 = obj
             }
-            
-            configuration.detectionObjects = [bottle!, cereal!]
-        } catch {
-            print("Merge error: \(error).")
+            if obj.name! == "merged_Nutrition" {
+                o2 = obj
+            }
+            if obj.name! == "merged_ChewyBar" {
+                o3 = obj
+            }
         }
+        
+        configuration.detectionObjects = [o1!, o2!, o3!]
         
         arSceneView.session.run(configuration)
         initDetection()
@@ -661,6 +642,9 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
                         attrs += self.attributes[3]+"\n"
                     }
                     self.textView.text = attrs
+                    if attrs != "" {
+                        self.textToSpeech(attrs.replacingOccurrences(of: "•", with: ""))
+                    }
                     self.animateIn(view: self.photoAttrView)
                 }
                 resp = response

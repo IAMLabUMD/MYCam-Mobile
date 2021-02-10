@@ -79,6 +79,21 @@ class TrainingVC: BaseItemAudioVC {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
     }
     
+    let synth = AVSpeechSynthesizer()
+    var myUtterance = AVSpeechUtterance(string: "")
+    func textToSpeech(_ text: String) {
+        if synth.isSpeaking {
+            synth.stopSpeaking(at: AVSpeechBoundary.immediate)
+        }
+        
+        print("tts: \(text)")
+        myUtterance = AVSpeechUtterance(string: text)
+        myUtterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        myUtterance.volume = 1.0
+        synth.speak(myUtterance)
+    }
+    
+    
     @objc
     func saveButtonAction() {
         
@@ -86,6 +101,7 @@ class TrainingVC: BaseItemAudioVC {
         print("Saving.....")
         Log.writeToLog("\(Actions.tappedOnBtn.rawValue) saveButton")
         
+        textToSpeech("Uploading images")
         activityIndicator("Uploading images")
         
             
@@ -115,9 +131,10 @@ class TrainingVC: BaseItemAudioVC {
             self.httpController.sendImage(object_name: self.object_name, index: index, image: image) {}
         }
         
+        textToSpeech("Training started.")
         self.httpController.reqeustTrain(){(response) in
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
-            print("Training ended.")
+//            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
+//            print("Training ended.")
         }
         
         Functions.deleteImages(for: self.object_name)

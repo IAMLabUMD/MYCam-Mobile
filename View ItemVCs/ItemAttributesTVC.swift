@@ -213,7 +213,7 @@ class ItemAttributesTVC: UITableViewController {
     }
     
     
-    var verbose = false
+    var verbose = true
     func updateVerbosity(v: Bool) {
         verbose = v
         DispatchQueue.main.async {
@@ -243,6 +243,7 @@ class SwitchTableViewCell: UITableViewCell {
         label.textColor = .darkGray
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
         label.textAlignment = .left
+        verbositySwitch.isOn = true
         
         self.contentView.setupView(viewToAdd: label, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
         
