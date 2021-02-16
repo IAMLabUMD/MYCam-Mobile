@@ -122,6 +122,18 @@ extension UIView {
         })
     }
     
+    func showView2(viewToShow: UIView) {
+        
+        self.addSubview(viewToShow)
+        viewToShow.center = CGPoint(x: self.center.x, y: self.center.y - 100)
+        viewToShow.alpha = 0
+        
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+            viewToShow.transform = .identity
+            viewToShow.alpha = 1
+        })
+    }
+    
 }
 
 struct Device {

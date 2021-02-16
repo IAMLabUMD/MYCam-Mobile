@@ -1219,6 +1219,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="jdg-Gx-umD"/>
                     <connections>
+                        <outlet property="clearLabel" destination="Nd6-XV-Ddb" id="lAg-wn-m1D"/>
+                        <outlet property="clearView" destination="2EV-Tb-UTm" id="zyS-R2-PUI"/>
                         <outlet property="deleteLabel" destination="8QI-P6-93W" id="sjy-xY-NgV"/>
                         <outlet property="deleteView" destination="Kp1-dE-e1V" id="nBK-qv-DjF"/>
                         <outlet property="emptyLabel" destination="Zdj-m2-E4O" id="6S1-FK-Qn6"/>
@@ -1244,6 +1246,60 @@
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" id="2EV-Tb-UTm">
+                    <rect key="frame" x="0.0" y="0.0" width="326" height="154"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2r-kO-06q">
+                            <rect key="frame" x="163" y="100" width="163" height="54"/>
+                            <color key="backgroundColor" red="0.84705882349999995" green="0.076139114800000005" blue="0.15752634409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="163" id="Moi-UX-lYw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                            <state key="normal" title="YES">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="handleYesClearButton:" destination="ny3-Ui-dE6" eventType="touchUpInside" id="8hv-yy-bYs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0c-hs-Rhb">
+                            <rect key="frame" x="0.0" y="100" width="163" height="54"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="163" id="RDW-2i-YhO"/>
+                                <constraint firstAttribute="height" constant="54" id="Vj4-yd-8Ag"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                            <state key="normal" title="NO">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="handleNoClearButton:" destination="ny3-Ui-dE6" eventType="touchUpInside" id="3Zg-Av-7fF"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to remove all objects in the list?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nd6-XV-Ddb">
+                            <rect key="frame" x="16" y="9" width="302" height="57"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="tdH-t1-ttT"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstItem="h0c-hs-Rhb" firstAttribute="leading" secondItem="2EV-Tb-UTm" secondAttribute="leading" id="B6Y-es-mM5"/>
+                        <constraint firstItem="h0c-hs-Rhb" firstAttribute="baseline" secondItem="E2r-kO-06q" secondAttribute="firstBaseline" id="GFo-Ch-AU0"/>
+                        <constraint firstItem="E2r-kO-06q" firstAttribute="top" secondItem="Nd6-XV-Ddb" secondAttribute="bottom" constant="34" id="XhP-YL-hfM"/>
+                        <constraint firstItem="E2r-kO-06q" firstAttribute="leading" secondItem="h0c-hs-Rhb" secondAttribute="trailing" id="kax-Uu-WQm"/>
+                        <constraint firstItem="tdH-t1-ttT" firstAttribute="trailing" secondItem="Nd6-XV-Ddb" secondAttribute="trailing" constant="8" id="lcH-Dl-ncy"/>
+                        <constraint firstItem="Nd6-XV-Ddb" firstAttribute="leading" secondItem="2EV-Tb-UTm" secondAttribute="leadingMargin" id="mgK-93-yJl"/>
+                        <constraint firstItem="Nd6-XV-Ddb" firstAttribute="top" secondItem="2EV-Tb-UTm" secondAttribute="top" constant="9" id="oVf-Oz-D7M"/>
+                        <constraint firstAttribute="bottom" secondItem="h0c-hs-Rhb" secondAttribute="bottom" id="sU6-Ju-zh1"/>
+                        <constraint firstItem="h0c-hs-Rhb" firstAttribute="top" secondItem="E2r-kO-06q" secondAttribute="top" id="xb7-nm-CWQ"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" id="Kp1-dE-e1V">
                     <rect key="frame" x="0.0" y="0.0" width="326" height="154"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

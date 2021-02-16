@@ -15,6 +15,9 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var deleteLabel: UILabel!
     @IBOutlet weak var emptyLabel: UILabel!
     
+    
+    @IBOutlet var clearView: UIView!
+    @IBOutlet weak var clearLabel: UILabel!
     // table view tutorial
     // http://www.theappguruz.com/blog/ios-table-view-tutorial-using-swift
 //    var itemArray = [FoodItem]() //to set-up table
@@ -39,8 +42,6 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var numLabel: UILabel!
     var player: AVAudioPlayer?
     
-    
-    
     var toastLabel: UILabel!
     var trainChecker: Timer!
     var cellHeight: CGFloat!
@@ -52,6 +53,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         let contentSpace = view.frame.height - navHeight
         cellHeight = contentSpace > 700 ? contentSpace / 4.5 : contentSpace / 4.2
         deleteView.addShadow()
+        clearView.addShadow()
 
         print("ChecklistViewController2: \(ParticipantViewController.userName) \(ParticipantViewController.category)")
         // Do any additional setup after loading the view.
@@ -88,14 +90,30 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    let synth = AVSpeechSynthesizer()
+    var myUtterance = AVSpeechUtterance(string: "")
+    func textToSpeech(_ text: String) {
+        if synth.isSpeaking {
+            synth.stopSpeaking(at: AVSpeechBoundary.immediate)
+        }
+        
+        print("tts: \(text)")
+        myUtterance = AVSpeechUtterance(string: text)
+        myUtterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        myUtterance.volume = 1.0
+        synth.speak(myUtterance)
+    }
+    
     @objc func clearButtonAction() {
         Log.writeToLog("\(Actions.tappedOnBtn) clearItemsButton")
-        clearItems()
+        
+        self.view.showView2(viewToShow: clearView)
     }
     
     
     func setAccessibilityLabels() {
         deleteLabel.accessibilityLabel = "Are you sure you want to delete this item?"
+        clearLabel.accessibilityLabel = "Are you sure you want to remove all objects in the list?"
     }
     
     
@@ -546,6 +564,18 @@ extension ChecklistViewController2 {
         
     }
     
+    
+    
+    @IBAction func handleYesClearButton(_ sender: Any) {
+        clearItems()
+        textToSpeech("All items are removed.")
+    }
+    
+    @IBAction func handleNoClearButton(_ sender: Any) {
+        dismissClearView()
+    }
+    
+    
     @IBAction func handleYesButton(_ sender: Any) {
         handleDeleteItem(indexPath: selectedIndexPath)
     }
@@ -553,6 +583,16 @@ extension ChecklistViewController2 {
     @IBAction func handleNoButton(_ sender: Any) {
         Log.writeToLog("\(Actions.tappedOnBtn) noDeleteButton")
         dismissDeleteView()
+    }
+    
+    func dismissClearView() {
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+            
+            self.clearView.transform = CGAffineTransform(translationX: 0, y: 32)
+            self.clearView.alpha = 0
+        }) {(_) in
+            self.clearView.removeFromSuperview()
+        }
     }
     
     func dismissDeleteView() {

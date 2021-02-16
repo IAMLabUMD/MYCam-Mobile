@@ -212,9 +212,12 @@ class MainViewController: BaseViewController {
 //        httpController.reqeustTrain() {(response) in
 //            print("Training response: \(response)")
 //        }
+        self.httpController.sendARInfo(object_name: "Temp") {(response) in
+            print("Send AR Info: " + response)
+        }
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "settingsTableVC") as! SettingsTableVC
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "settingsTableVC") as! SettingsTableVC
+//        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -383,6 +386,7 @@ class MainViewController: BaseViewController {
         var entropy = 0.0 // entropy calculation: http://users.umiacs.umd.edu/~zhuolin/Publications/OnlineDDL.pdf
         print(output_components)
         print(output_components.count)
+        print(itemList.getListString())
         if output_components.count >= 2 {
             for index in 1...output_components.count - 1 {
                 let label_pair = output_components[index].components(separatedBy: "/")

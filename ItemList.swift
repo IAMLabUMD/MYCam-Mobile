@@ -119,7 +119,7 @@ class ItemList {
     
     func contains(obj_name: String) -> Bool {
         for item in itemArray {
-            if item.itemName == obj_name {
+            if item.itemName.lowercased() == obj_name.lowercased() {
                 return true
             }
         }
