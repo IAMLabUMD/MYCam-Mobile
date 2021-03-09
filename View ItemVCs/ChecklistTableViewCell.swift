@@ -40,7 +40,9 @@ class ChecklistTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        bgView.addShadow()
+        //bgView.addShadow()
+        itemName.font = .rounded(ofSize: 21, weight: .bold)
+        itemDate.font = .rounded(ofSize: 16, weight: .bold)
         self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnCell)))
     }
     

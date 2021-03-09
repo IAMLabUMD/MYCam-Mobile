@@ -27,6 +27,10 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     var parentView: UIViewController!
     var trainingVC: TrainingVC?
     var itemInfoVC: ItemInfoVC?
+    var confirmTitle = ""
+    var denyTitle = ""
+    var hideTextfield = false
+    var placeholder = "Enter the name of this object"
     
 
     
@@ -38,10 +42,23 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
 //        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, "Enter name")
 //        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, self.enterNameLabel)
         objName.delegate = self
-        print("EnterName: \(ParticipantViewController.category) \(ParticipantViewController.itemNum)")
-        objName.attributedPlaceholder = NSAttributedString(string: "Enter the name of this object", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        //print("EnterName: \(ParticipantViewController.category) \(ParticipantViewController.itemNum)")
+        objName.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.rounded(ofSize: 16, weight: .medium)])
         enterNameLabel.text = header
+        enterNameLabel.font = .rounded(ofSize: 16, weight: .bold)
+        saveButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
+        cancelButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
         alertView.addShadow()
+        
+        objName.isHidden = hideTextfield
+        
+        if confirmTitle != "" {
+            saveButton.setTitle(confirmTitle, for: .normal)
+        }
+        
+        if denyTitle != "" {
+            cancelButton.setTitle(denyTitle, for: .normal)
+        }
         
     }
     
@@ -64,6 +81,12 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
         if let objectName = objectName {
             itemInfoVC?.rename(newName: objectName)
             trainingVC?.rename(newName: objectName)
+        }
+        
+        if parentView != nil {
+            if let settingsVC = parentView as? SettingsVC {
+                settingsVC.tableView.reloadData()
+            }
         }
         
     }
@@ -104,31 +127,30 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
             Log.writeToLog("action= entered name: \(oName)")
             self.dismiss(animated: true, completion: nil)
             //delegate?.addItemTapped(object_name: oName)
+            
         }
+        
+        if parentView != nil {
+            
+            if let newParticipantID = objName.text {
+                
+                UserDefaults.standard.set(newParticipantID, forKey: "participantID")
+                Log.participantID = newParticipantID
+            }
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonAction(_ sender: Any) {
         ParticipantViewController.writeLog("NameCancelButton")
+        
         Log.writeToLog("\(Actions.tappedOnBtn) cancelEnterNameButton")
-        //parentView.httpController.requestRollback {}
-        //delegate?.cancelButtonTapped()
+        
         self.dismiss(animated: true, completion: nil)
     }
     
-    // passing variable to the next view
-    // https://learnappmaking.com/pass-data-between-view-controllers-swift-how-to/
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        /*
-        if segue.destination is CameraViewController
-        {
-            let vc = segue.destination as? CameraViewController
-            vc?.object_name = objName.text!
-            vc?.itemNum = itemNum
-//            self.dismiss(animated: true, completion: nil)
-        }
-         */
-    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         textField.resignFirstResponder()

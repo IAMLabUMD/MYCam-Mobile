@@ -20,7 +20,7 @@ class Functions {
         let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: 280, height: 40)
         label.backgroundColor = .clear
-        label.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        label.font = .rounded(ofSize: 18, weight: .bold)
         label.textAlignment = .center
         label.text = title
         label.textColor = .white
@@ -44,13 +44,13 @@ class Functions {
         headerLabel.backgroundColor = UIColor.black.withAlphaComponent(0.25)
         headerLabel.layer.cornerRadius = 12
         headerLabel.clipsToBounds = true
-        headerLabel.font = UIFont(name: "AvenirNext-Bold", size: 40)
+        headerLabel.font = .rounded(ofSize: 40, weight: .bold)
         
         let subtitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 320, height: 80))
         subtitleLabel.textColor = .white
         subtitleLabel.textAlignment = .center
         subtitleLabel.text = ""
-        subtitleLabel.font = UIFont(name: "AvenirNext-Bold", size: 40)
+        subtitleLabel.font = .rounded(ofSize: 40, weight: .bold)
         
         bgView.addSubview(headerLabel)
         headerLabel.center = CGPoint(x: bgView.center.x, y: bgView.center.y - 48)

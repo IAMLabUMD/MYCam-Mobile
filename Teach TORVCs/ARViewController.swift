@@ -84,7 +84,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             //UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification,  self.cameraButton);
         }
         
-        navigationItem.titleView = Functions.createHeaderView(title: "TEACH TOR")
+        navigationItem.titleView = Functions.createHeaderView(title: "Teach TOR")
         photoAttrView.layer.cornerRadius = 12
         dismissButton.roundButton(withBackgroundColor: .clear, opacity: 0)
         
@@ -527,7 +527,6 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     // MARK: - Animates a view in
     func animateIn(view: UIView) {
         
-        print("Animating in?")
         self.view.addSubview(view)
         view.center = CGPoint(x: arSceneView.center.x, y: arSceneView.center.y - 54)
         view.alpha = 0
@@ -565,13 +564,13 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 180))
         countLabel.textColor = .white
         countLabel.textAlignment = .center
-        countLabel.font = UIFont(name: "AvenirNext-Bold", size: 80)
+        countLabel.font = .rounded(ofSize: 80, weight: .bold)
         
         let leftLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 249, height: 80))
         leftLabel.textColor = .white
         leftLabel.textAlignment = .center
         leftLabel.text = showSubtitle ? "left": ""
-        leftLabel.font = UIFont(name: "AvenirNext-Bold", size: 40)
+        leftLabel.font = .rounded(ofSize: 40, weight: .bold)
         
         bgView.addSubview(countLabel)
         countLabel.center = CGPoint(x: bgView.center.x, y: bgView.center.y - 48)
@@ -627,7 +626,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         
         count = count + 1
         saveImage(count)
-        var desc_info = "\(count)#\(self.ar_side)#" +
+        let desc_info = "\(count)#\(self.ar_side)#" +
             "\(self.camera_position.0)#\(self.camera_position.1)#\(self.camera_position.2)#" +
             "\(self.camera_orientation.0)#\(self.camera_orientation.1)#\(self.camera_orientation.2)#" +
             "\(self.obj_position.0)#\(self.obj_position.1)#\(self.obj_position.2)#" +

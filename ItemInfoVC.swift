@@ -179,6 +179,8 @@ class ItemInfoVC: BaseItemAudioVC {
             return
         }
         
+        
+        
         if isRecording {
             ParticipantViewController.writeLog("TrainRecordStop")
             print("Stop recording -----> ")
@@ -197,8 +199,14 @@ class ItemInfoVC: BaseItemAudioVC {
             ParticipantViewController.writeLog("TrainRecordStart")
             print("Recording -----> ")
             
-            audioController.startRecording(fileName: "recording-tmpobj.wav", delegate: nil)
-            isRecording = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                print("Now recording")
+                self.audioController.startRecording(fileName: "recording-tmpobj.wav", delegate: nil)
+                self.isRecording = true
+            }
+            
+            
         }
     }
     

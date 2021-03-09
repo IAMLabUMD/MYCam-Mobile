@@ -30,9 +30,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Thread.sleep(forTimeInterval: 0.5)
         
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        
+        // Check to see if onboarding screens should be presented
+        if let onboardedUser = UserDefaults.standard.value(forKey: "onboardedUser") as? Bool {
+            
+            if onboardedUser {
+                let homeNavVC = mainStoryboard.instantiateViewController(withIdentifier: "baseNavVC") as! BaseNavigationController
+                window?.rootViewController = homeNavVC
+            } else {
+                
+                let onboardingNavVC = mainStoryboard.instantiateViewController(withIdentifier: "onboardingNavVC") as! OnboardingNavVC
+                window?.rootViewController = onboardingNavVC
+                UserDefaults.standard.setValue(true, forKey: "onboardedUser")
+            }
+            
+            
+        } else {
+            
+            // Set the boolean flag to true as user has been onboarded
+            let onboardingNavVC = mainStoryboard.instantiateViewController(withIdentifier: "onboardingNavVC") as! OnboardingNavVC
+            window?.rootViewController = onboardingNavVC
+            UserDefaults.standard.setValue(true, forKey: "onboardedUser")
+            print("here?")
+        }
+        
+        self.window?.makeKeyAndVisible()
+        
+        
         // Get the session ID for this app launch
         let sessionID = UUID().uuidString
-        UserDefaults.standard.set(sessionID, forKey: "sessionID")
+        Log.sessionID = sessionID
+        //UserDefaults.standard.set(sessionID, forKey: "sessionID")
+        
         
         // Create UUID for this user to be used for logging and store it in UserDefault
         // to be retrieved everytime the app is launched
@@ -44,6 +76,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(userUUID, forKey: "userUUID")
             Log.userUUID = userUUID
             ParticipantViewController.userName = userUUID
+        }
+        
+        
+        // Check if the participantID has been set
+        if let participantID = UserDefaults.standard.value(forKey: "participantID") as? String {
+            Log.participantID = participantID
+        } else {
+            
+            // ParticipantID does not exist. Create one and store it
+            let uuid = UUID().uuidString
+            let participantID = uuid.components(separatedBy: "-").first ?? "0ADE198"
+            print("Participant ID: \(participantID)")
+            UserDefaults.standard.set(participantID, forKey: "participantID")
+            Log.participantID = participantID
         }
         
         

@@ -60,7 +60,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         
         let clearButton = UIButton()
         clearButton.setTitleColor(.white, for: .normal)
-        clearButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
+        clearButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
         clearButton.setTitle("Clear", for: .normal)
         clearButton.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
         clearButton.accessibilityLabel = "Clear. This button removes all items in the list."
@@ -103,6 +103,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         
         view.addSubview(emptyLabel)
         emptyLabel.center = view.center
+        emptyLabel.font = .rounded(ofSize: 16, weight: .bold)
         emptyLabel.alpha = 0
     }
     
@@ -146,7 +147,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
             self.effectView.removeFromSuperview()
             
             let count = self.itemList.itemArray.count
-            let header = count > 1 ? "\(count) ITEMS" : count == 0 ? "NO ITEMS" : "\(count) ITEM"
+            let header = count > 1 ? "\(count) items" : count == 0 ? "No items" : "\(count) item"
             self.navigationItem.titleView = Functions.createHeaderView(title: header)
         }
         
@@ -191,7 +192,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         tableView.tableFooterView = UIView()
         
         let count = itemList.itemArray.count
-        let headerText = count > 1 ? "\(count) ITEMS" : count == 0 ? "NO ITEMS" : "\(count) ITEM"
+        let headerText = count > 1 ? "\(count) items" : count == 0 ? "No items" : "\(count) item"
         
         header = Functions.createHeaderView(title: headerText)
         navigationItem.titleView = header
@@ -415,7 +416,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
         
-        navigationItem.titleView = Functions.createHeaderView(title: "\(itemList.itemArray.count) ITEMS")
+        navigationItem.titleView = Functions.createHeaderView(title: "\(itemList.itemArray.count) items")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -493,7 +494,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
 extension ChecklistViewController2: ChecklistTableViewCellDelegate {
     
     func didTapOnCell(cell: ChecklistTableViewCell) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ItemAttributesVC") as! ItemAttributesTVC
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemAttrVC") as! ItemAttrVC
         vc.item = cell.item
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -515,7 +516,7 @@ extension ChecklistViewController2 {
             itemList.deleteDirectory(itemName)
         }
         itemList.itemArray.removeAll()
-        self.header.text = "NO ITEMS"
+        self.header.text = "No items"
         self.navigationItem.titleView = self.header
         self.tableView.reloadData()
         self.emptyLabel.alpha = 1
@@ -532,9 +533,9 @@ extension ChecklistViewController2 {
         let count = self.itemList.itemArray.count
 
         if count > 0 {
-            self.header.text = "\(count) ITEMS"
+            self.header.text = "\(count) items"
         } else {
-            self.header.text = "NO ITEMS"
+            self.header.text = "No items"
             self.tableView.reloadData()
         }
 

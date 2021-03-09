@@ -11,6 +11,23 @@ import UIKit
 import UserNotifications
 
 
+
+extension UIColor {
+    
+    static let themeForeground = #colorLiteral(red: 0.1490196078, green: 0.5490196078, blue: 0.7098039216, alpha: 1)
+    static let themeBackground = #colorLiteral(red: 0.937254902, green: 0.9411764706, blue: 0.9607843137, alpha: 1)
+}
+
+
+extension UIFont {
+    class func rounded(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
+        let systemFont = UIFont.systemFont(ofSize: size, weight: weight)
+
+        guard #available(iOS 13.0, *), let descriptor = systemFont.fontDescriptor.withDesign(.rounded) else { return systemFont }
+        return UIFont(descriptor: descriptor, size: size)
+    }
+}
+
 extension UNUserNotificationCenter{
     func cleanRepeatingNotifications(){
         //cleans notification with a userinfo key endDate
