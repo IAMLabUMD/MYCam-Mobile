@@ -5,31 +5,46 @@
   },
   "resources" : [
     {
-      "filename" : "bottle1.arobject"
+      "filename" : "BakingSoda1.arobject"
     },
     {
-      "filename" : "bottle2.arobject"
+      "filename" : "BakingSoda2.arobject"
     },
     {
-      "filename" : "cereal1.arobject"
+      "filename" : "BakingSoda3.arobject"
     },
     {
-      "filename" : "cereal2.arobject"
+      "filename" : "ChewyBar1.arobject"
     },
     {
-      "filename" : "cereal3.arobject"
+      "filename" : "ChewyBar2.arobject"
     },
     {
-      "filename" : "cereal4.arobject"
+      "filename" : "ChewyBar3.arobject"
     },
     {
-      "filename" : "cereal5.arobject"
+      "filename" : "merged_BakingSoda.arobject"
     },
     {
       "filename" : "merged_bottle.arobject"
     },
     {
       "filename" : "merged_cereal.arobject"
+    },
+    {
+      "filename" : "merged_ChewyBar.arobject"
+    },
+    {
+      "filename" : "merged_Nutrition.arobject"
+    },
+    {
+      "filename" : "Nutrition1.arobject"
+    },
+    {
+      "filename" : "Nutrition2.arobject"
+    },
+    {
+      "filename" : "Nutrition3.arobject"
     }
   ]
 }

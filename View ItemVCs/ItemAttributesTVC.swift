@@ -59,8 +59,9 @@ class ItemAttributesTVC: UITableViewController {
                 objectImageView.image = UIImage(data: data)
             }
             objectImageView.layer.cornerRadius = 12
+            print("item name: \(item.itemName)")
             
-            httpController.getSetDescriptor(obj_name: name) { (response) in
+            httpController.getSetDescriptor(obj_name: item.itemName) { (response) in
                 print(response)
                 let output_components = response.components(separatedBy: ",")
                 if output_components.count != 7 {
@@ -125,22 +126,22 @@ class ItemAttributesTVC: UITableViewController {
 //        #         dist_var = min(dist_sd/0.15, 1.0) * 100
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-                let varVal = backgroundVariation/0.15*100
-                if verbose {
+                let varVal = min(backgroundVariation/0.15*100, 100)
+                if ItemAttributesTVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
                     cell.level.text = backgroundVariation > 0.1 ? "Yes": "No"
                 }
             } else if indexPath.row == 1 {
-                let varVal = sideVariation/1.5*100
-                if verbose {
+                let varVal = min(sideVariation/1.5*100, 100)
+                if ItemAttributesTVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
                     cell.level.text = sideVariation > 1 ? "Yes": "No"
                 }
             } else if indexPath.row == 2 {
-                let varVal = distanceVariation/0.15*100
-                if verbose {
+                let varVal = min(distanceVariation/0.15*100, 100)
+                if ItemAttributesTVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
                     cell.level.text = distanceVariation > 0.1 ? "Yes": "No"
@@ -149,25 +150,25 @@ class ItemAttributesTVC: UITableViewController {
         }
         else if indexPath.section == 2 {
             if indexPath.row == 0 {
-                if verbose {
+                if ItemAttributesTVC.VERBOSE {
                     cell.level.text = "\(cnt_hand) out of 30"
                 } else {
                     cell.level.text = cnt_hand > 5 ? "Yes": "No"
                 }
             } else if indexPath.row == 1 {
-                if verbose {
+                if ItemAttributesTVC.VERBOSE {
                     cell.level.text = "\(cnt_blurry) out of 30"
                 } else {
                     cell.level.text = cnt_blurry > 5 ? "Yes": "No"
                 }
             } else if indexPath.row == 2 {
-                if verbose {
+                if ItemAttributesTVC.VERBOSE {
                     cell.level.text = "\(cnt_crop) out of 30"
                 } else {
                     cell.level.text = cnt_crop > 5 ? "Yes": "No"
                 }
             } else if indexPath.row == 3 {
-                if verbose {
+                if ItemAttributesTVC.VERBOSE {
                     cell.level.text = "\(cnt_small) out of 30"
                 } else {
                     cell.level.text = cnt_small > 5 ? "Yes": "No"
@@ -213,9 +214,9 @@ class ItemAttributesTVC: UITableViewController {
     }
     
     
-    var verbose = false
+    static var VERBOSE = true
     func updateVerbosity(v: Bool) {
-        verbose = v
+        ItemAttributesTVC.VERBOSE = v
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -252,6 +253,7 @@ class SwitchTableViewCell: UITableViewCell {
         label.textColor = .darkGray
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
         label.textAlignment = .left
+        verbositySwitch.isOn = ItemAttributesTVC.VERBOSE
         
         self.contentView.setupView(viewToAdd: label, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
         
