@@ -40,11 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if onboardedUser {
                 let homeNavVC = mainStoryboard.instantiateViewController(withIdentifier: "baseNavVC") as! BaseNavigationController
                 window?.rootViewController = homeNavVC
-            } else {
-                
-                let onboardingNavVC = mainStoryboard.instantiateViewController(withIdentifier: "onboardingNavVC") as! OnboardingNavVC
-                window?.rootViewController = onboardingNavVC
-                UserDefaults.standard.setValue(true, forKey: "onboardedUser")
             }
             
             
@@ -54,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let onboardingNavVC = mainStoryboard.instantiateViewController(withIdentifier: "onboardingNavVC") as! OnboardingNavVC
             window?.rootViewController = onboardingNavVC
             UserDefaults.standard.setValue(true, forKey: "onboardedUser")
-            print("here?")
         }
         
         self.window?.makeKeyAndVisible()
