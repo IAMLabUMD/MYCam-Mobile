@@ -415,7 +415,7 @@ class MainViewController: BaseViewController {
                 }
             }
         
-            if entropy > 0.1 {
+            if entropy > 2 {
                 label = "Don't know"
                 message = "Don't know"
                 Log.writeToLog("\(Actions.recognitionSuccessful.rawValue) false")
