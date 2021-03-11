@@ -230,6 +230,15 @@ class ItemAttributeTableViewCell: UITableViewCell {
     @IBOutlet weak var attributeLabel: UILabel!
     @IBOutlet weak var level: UILabel!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        attributeLabel.font = .rounded(ofSize: 16, weight: .bold)
+        attributeLabel.textColor = .darkGray
+        
+        level.font = .rounded(ofSize: 16, weight: .bold)
+        level.textColor = .lightGray
+    }
 }
 
 

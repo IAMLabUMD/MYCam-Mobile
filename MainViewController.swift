@@ -74,7 +74,7 @@ class MainViewController: BaseViewController {
         helpButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
         helpButton.setTitle("•••", for: .normal)
         helpButton.addTarget(self, action: #selector(guideButtonAction), for: .touchUpInside)
-        helpButton.accessibilityLabel = "Help. This button takes you to a screen that will give you information about the TOR app"
+        helpButton.accessibilityLabel = "More. This button takes you to a screen that will give you information about the TOR app"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: helpButton)
         navigationItem.titleView = Functions.createHeaderView(title: "TOR")
         
@@ -102,16 +102,18 @@ class MainViewController: BaseViewController {
         }
         
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, scanButton)
-        
-        //        navigationController?.navigationBar.barTintColor = UIColor.init(red: 0.0/255.0, green: 152.0/255.0, blue: 189.0/255.0, alpha: 1.0)
         navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "#0097BD")
         navigationController?.navigationBar.isTranslucent = false
         
-//        let list = ItemList()
-//        list.renewList()
-//        list.itemArray.forEach { (item) in
-//            print(item.itemName)
-//        }
+        
+        // Shows user instructions for using the app
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+//            
+//            let instructionsVC = self.storyboard?.instantiateViewController(withIdentifier: "instructionsVC") as! InstructionsVC
+//            self.present(instructionsVC, animated: true, completion: nil)
+//        })
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -219,6 +221,8 @@ class MainViewController: BaseViewController {
 //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "settingsTableVC") as! SettingsTableVC
 //        self.navigationController?.pushViewController(vc, animated: true)
         
+        let moreVC = self.storyboard?.instantiateViewController(withIdentifier: "MoreVC") as! MoreViewController
+        self.navigationController?.pushViewController(moreVC, animated: true)
     }
     
     

@@ -55,6 +55,8 @@ class Log {
     
     var num = 0
     static var userUUID = ""
+    static var participantID = ""
+    static var sessionID = ""
     static var userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
     // Logs the user's activity to the log file
@@ -72,13 +74,13 @@ class Log {
                 let dateString = formatter.string(from: date)
                 
                 var textData: Data!
-                let sessionID = UserDefaults.standard.value(forKey: "sessionID") as? String
-                let header = sessionID != nil ? "user= \(userUUID), sessionID= \(sessionID!)" : "user= \(userUUID)"
+                //let sessionID = UserDefaults.standard.value(forKey: "sessionID") as? String
+                let header = "user= \(userUUID), participantID= \(participantID), sessionID= \(sessionID)"
                 
                 if text == Actions.appTerminated.rawValue {
                     
                     textData = "\(header), \(text), time=\(dateString) \(millis)\n".data(using: String.Encoding.utf8)!
-                    textData += "\nEND OF SESSION \(sessionID!)\n-----------------------------------------------------\n\n".data(using: String.Encoding.utf8)!
+                    textData += "\nEND OF SESSION \(sessionID)\n-----------------------------------------------------\n\n".data(using: String.Encoding.utf8)!
                     
                 } else {
                     

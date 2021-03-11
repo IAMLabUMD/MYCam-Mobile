@@ -21,10 +21,18 @@
 		176B25CC2411B162004C5C9E /* ChecklistTableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176B25CA2411B161004C5C9E /* ChecklistTableViewCell2.swift */; };
 		176B25D524173A86004C5C9E /* TrainingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176B25D424173A86004C5C9E /* TrainingVC.swift */; };
 		1775301F2402662D00EB7924 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775301E2402662D00EB7924 /* Functions.swift */; };
+		17A7E3E725E313FB00B8B0D2 /* ItemAttrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A7E3E625E313FB00B8B0D2 /* ItemAttrVC.swift */; };
+		17A7E3EA25E3179F00B8B0D2 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A7E3E925E3179E00B8B0D2 /* MoreViewController.swift */; };
+		17A7E3ED25E3181D00B8B0D2 /* InstructionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A7E3EC25E3181D00B8B0D2 /* InstructionsVC.swift */; };
+		17A7E3F125E339BA00B8B0D2 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A7E3F025E339BA00B8B0D2 /* SettingsVC.swift */; };
 		17AE6631240E3747004D3D65 /* ItemAudioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE6630240E3747004D3D65 /* ItemAudioVC.swift */; };
 		17AE6633240E3AA6004D3D65 /* ItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE6632240E3AA6004D3D65 /* ItemInfoVC.swift */; };
 		17AE66352410BEA2004D3D65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE66342410BEA2004D3D65 /* Constants.swift */; };
 		17B73D9F253E46A100D48506 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B73D9E253E46A100D48506 /* AboutVC.swift */; };
+		17CA82CD25F5A51100BD3D9F /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA82CC25F5A51100BD3D9F /* OnboardingVC.swift */; };
+		17CA82D025F5A5D500BD3D9F /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA82CF25F5A5D500BD3D9F /* OnboardingScreen.swift */; };
+		17CA82D325F5A81B00BD3D9F /* OnboardingViewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA82D225F5A81B00BD3D9F /* OnboardingViewsController.swift */; };
+		17CA82D625F7DBDB00BD3D9F /* OnboardingNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA82D525F7DBDB00BD3D9F /* OnboardingNavVC.swift */; };
 		17CC0C84252D8C0A00090FDA /* ItemAttributesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CC0C83252D8C0A00090FDA /* ItemAttributesTVC.swift */; };
 		44A439AAED1B927FD10F24B4 /* Pods_CheckList_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D606098C13B8E179A8DD8831 /* Pods_CheckList_app.framework */; };
 		AF36738E209E98160099A340 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF36738D209E98160099A340 /* AppDelegate.swift */; };
@@ -173,10 +181,18 @@
 		176B25CA2411B161004C5C9E /* ChecklistTableViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistTableViewCell2.swift; sourceTree = SOURCE_ROOT; };
 		176B25D424173A86004C5C9E /* TrainingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingVC.swift; sourceTree = "<group>"; };
 		1775301E2402662D00EB7924 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Functions.swift; path = ../Functions.swift; sourceTree = "<group>"; };
+		17A7E3E625E313FB00B8B0D2 /* ItemAttrVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAttrVC.swift; sourceTree = "<group>"; };
+		17A7E3E925E3179E00B8B0D2 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		17A7E3EC25E3181D00B8B0D2 /* InstructionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsVC.swift; sourceTree = "<group>"; };
+		17A7E3F025E339BA00B8B0D2 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		17AE6630240E3747004D3D65 /* ItemAudioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ItemAudioVC.swift; path = ../ItemAudioVC.swift; sourceTree = "<group>"; };
 		17AE6632240E3AA6004D3D65 /* ItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ItemInfoVC.swift; path = ../ItemInfoVC.swift; sourceTree = "<group>"; };
 		17AE66342410BEA2004D3D65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../Constants.swift; sourceTree = "<group>"; };
 		17B73D9E253E46A100D48506 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		17CA82CC25F5A51100BD3D9F /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		17CA82CF25F5A5D500BD3D9F /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = SOURCE_ROOT; };
+		17CA82D225F5A81B00BD3D9F /* OnboardingViewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewsController.swift; sourceTree = "<group>"; };
+		17CA82D525F7DBDB00BD3D9F /* OnboardingNavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavVC.swift; sourceTree = "<group>"; };
 		17CC0C83252D8C0A00090FDA /* ItemAttributesTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAttributesTVC.swift; sourceTree = "<group>"; };
 		9B4BF32A4657EF7668E2130E /* Pods-CheckList app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckList app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckList app/Pods-CheckList app.debug.xcconfig"; sourceTree = "<group>"; };
 		AF36738A209E98160099A340 /* TOR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				F3CFFA0D25C9E47B006719E9 /* Item.swift */,
+				17CA82CF25F5A5D500BD3D9F /* OnboardingScreen.swift */,
 				F3CFFA0E25C9E47B006719E9 /* ItemList.swift */,
 				F3CFFA0F25C9E47B006719E9 /* ParticipantViewController.swift */,
 			);
@@ -335,6 +352,7 @@
 				AF9AC68F209FAF880050A7BB /* ChecklistTableViewCell.swift */,
 				F31F9EB1226FF0A00015760D /* ItemAudioViewController.swift */,
 				17CC0C83252D8C0A00090FDA /* ItemAttributesTVC.swift */,
+				17A7E3E625E313FB00B8B0D2 /* ItemAttrVC.swift */,
 				17AE6630240E3747004D3D65 /* ItemAudioVC.swift */,
 				17AE6632240E3AA6004D3D65 /* ItemInfoVC.swift */,
 				F3EB806F22517F1400681A34 /* ItemInfoViewController.swift */,
@@ -384,8 +402,14 @@
 				AF367396209E98190099A340 /* LaunchScreen.storyboard */,
 				AF367399209E98190099A340 /* Info.plist */,
 				F3DA701022613A1400D22339 /* HelpViewController.swift */,
+				17CA82CC25F5A51100BD3D9F /* OnboardingVC.swift */,
+				17CA82D525F7DBDB00BD3D9F /* OnboardingNavVC.swift */,
+				17CA82D225F5A81B00BD3D9F /* OnboardingViewsController.swift */,
 				AF3673A1209EE65B0099A340 /* MainViewController.swift */,
 				1760C357247613630077D364 /* SettingsTableVC.swift */,
+				17A7E3F025E339BA00B8B0D2 /* SettingsVC.swift */,
+				17A7E3E925E3179E00B8B0D2 /* MoreViewController.swift */,
+				17A7E3EC25E3181D00B8B0D2 /* InstructionsVC.swift */,
 				17B73D9E253E46A100D48506 /* AboutVC.swift */,
 				08E7F01E2188B9C90074073C /* SettingsTableViewController.swift */,
 				17B814C12411AD240065A345 /* Teach TORVCs */,
@@ -463,7 +487,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "Jaina Gandhi";
+				ORGANIZATIONNAME = "IAM Lab";
 				TargetAttributes = {
 					AF367389209E98160099A340 = {
 						CreatedOnToolsVersion = 9.3;
@@ -643,10 +667,12 @@
 				F31F9EAE226EC9680015760D /* HTTPController.swift in Sources */,
 				175D647E2404B73A007B2D3D /* ImageCollectionViewCell.swift in Sources */,
 				F3CFFA0825C9E40F006719E9 /* WelcomeViewController.swift in Sources */,
+				17CA82D325F5A81B00BD3D9F /* OnboardingViewsController.swift in Sources */,
 				F3B42EDA222DC881002AFCE0 /* EnterNameController.swift in Sources */,
 				176B25CB2411B162004C5C9E /* ChecklistViewController2.swift in Sources */,
 				F355D14C2401B0C500FCB652 /* Util.swift in Sources */,
 				F3CFFA1225C9E47B006719E9 /* ParticipantViewController.swift in Sources */,
+				17A7E3EA25E3179F00B8B0D2 /* MoreViewController.swift in Sources */,
 				17AE6631240E3747004D3D65 /* ItemAudioVC.swift in Sources */,
 				F3CFF9FA25C9E3D3006719E9 /* MenuTableViewCell.swift in Sources */,
 				F3CFFA0725C9E40F006719E9 /* CollectionViewCell.swift in Sources */,
@@ -660,8 +686,11 @@
 				17AE66352410BEA2004D3D65 /* Constants.swift in Sources */,
 				F3CFFA0925C9E40F006719E9 /* GuideTableViewCell.swift in Sources */,
 				F3CFF9F325C9E392006719E9 /* SWRevealViewController.m in Sources */,
+				17CA82CD25F5A51100BD3D9F /* OnboardingVC.swift in Sources */,
+				17CA82D025F5A5D500BD3D9F /* OnboardingScreen.swift in Sources */,
 				F3A9DE35223AC25F0015F8D8 /* TrainingViewController.swift in Sources */,
 				17CC0C84252D8C0A00090FDA /* ItemAttributesTVC.swift in Sources */,
+				17CA82D625F7DBDB00BD3D9F /* OnboardingNavVC.swift in Sources */,
 				F372EDAE25A4D10F003A7369 /* ARViewController.swift in Sources */,
 				F3CFF9EC25C9E353006719E9 /* BaseNavigationController.swift in Sources */,
 				AF3673A2209EE65B0099A340 /* MainViewController.swift in Sources */,
@@ -670,6 +699,7 @@
 				F3DA701522651BB800D22339 /* RenameViewController.swift in Sources */,
 				F3CF84FE25F5ECA4001E15E1 /* ReviewTrainingVC.swift in Sources */,
 				176B25CC2411B162004C5C9E /* ChecklistTableViewCell2.swift in Sources */,
+				17A7E3F125E339BA00B8B0D2 /* SettingsVC.swift in Sources */,
 				176B25D524173A86004C5C9E /* TrainingVC.swift in Sources */,
 				F3DA701122613A1400D22339 /* HelpViewController.swift in Sources */,
 				F3CFFA0A25C9E40F006719E9 /* DetailViewController.swift in Sources */,
@@ -681,9 +711,11 @@
 				F3B42E97222B87B3002AFCE0 /* VideoCapture.swift in Sources */,
 				17AE6633240E3AA6004D3D65 /* ItemInfoVC.swift in Sources */,
 				1760C358247613630077D364 /* SettingsTableVC.swift in Sources */,
+				17A7E3E725E313FB00B8B0D2 /* ItemAttrVC.swift in Sources */,
 				AF9AC690209FAF880050A7BB /* ChecklistTableViewCell.swift in Sources */,
 				F3E5B97B25C9E9B2006084E2 /* GuideViewController.swift in Sources */,
 				F3CFFA1125C9E47B006719E9 /* ItemList.swift in Sources */,
+				17A7E3ED25E3181D00B8B0D2 /* InstructionsVC.swift in Sources */,
 				AF36738E209E98160099A340 /* AppDelegate.swift in Sources */,
 				0809EBCE219CC13000FC4973 /* CameraViewController.swift in Sources */,
 			);
@@ -834,7 +866,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VHXA3TE4B;
+				DEVELOPMENT_TEAM = D678R58TXJ;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -858,7 +890,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VHXA3TE4B;
+				DEVELOPMENT_TEAM = D678R58TXJ;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

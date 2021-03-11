@@ -68,7 +68,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
 
         }
         
-        navigationItem.titleView = Functions.createHeaderView(title: "TEACH TOR")
+        navigationItem.titleView = Functions.createHeaderView(title: "Teach TOR")
         photoAttrView.layer.cornerRadius = 12
         dismissButton.roundButton(withBackgroundColor: .clear, opacity: 0)
         
@@ -221,7 +221,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
     // MARK: - Animates a view in
     func animateIn(view: UIView) {
         
-        print("Animating in?")
+        //print("Animating in?")
         self.view.addSubview(view)
         view.center = CGPoint(x: cameraView.center.x, y: cameraView.center.y - 54)
         view.alpha = 0
@@ -259,13 +259,13 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
         let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 180))
         countLabel.textColor = .white
         countLabel.textAlignment = .center
-        countLabel.font = UIFont(name: "AvenirNext-Bold", size: 80)
+        countLabel.font = .rounded(ofSize: 80, weight: .bold)
         
         let leftLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 249, height: 80))
         leftLabel.textColor = .white
         leftLabel.textAlignment = .center
         leftLabel.text = showSubtitle ? "left": ""
-        leftLabel.font = UIFont(name: "AvenirNext-Bold", size: 40)
+        leftLabel.font = .rounded(ofSize: 40, weight: .bold)
         
         bgView.addSubview(countLabel)
         countLabel.center = CGPoint(x: bgView.center.x, y: bgView.center.y - 48)
@@ -329,7 +329,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
             let blurry = output_components[1]
             let cropped = output_components[2]
             let small = output_components[3]
-            var attributes = ["• Hand in photo", "• Cropped object", "• Blurry", "• Small object"]
+            _ = ["• Hand in photo", "• Cropped object", "• Blurry", "• Small object"]
             
             DispatchQueue.main.async {
                 var attrs = ""

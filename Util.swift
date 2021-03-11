@@ -9,7 +9,11 @@
 import UIKit
 
 class Util {
+    
+    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
+    
     func createDirectory(_ label: String) {
+        
         let classPath = Log.userDirectory.appendingPathComponent("\(label)")
         var isDirectory = ObjCBool(true)
         if !FileManager.default.fileExists(atPath: classPath.absoluteString, isDirectory: &isDirectory) {
