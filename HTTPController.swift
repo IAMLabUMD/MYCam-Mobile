@@ -171,7 +171,7 @@ class HTTPController {
         body.append(paramData(name: "type", value: "rename"))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         body.append(paramData(name: "org_name", value: org_name))
-        body.append(paramData(name: "new_name", value: new_name.replacingOccurrences(of: " ", with: "_", options: .literal, range: nil)))
+        body.append(paramData(name: "new_name", value: new_name))
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
         
         request.httpBody = body
@@ -321,11 +321,22 @@ class HTTPController {
         task.resume()
     }
     
-    func reqeustTrain(postProcessing: @escaping (String)->Void) {
+    func reqeustTrain_deprecated(postProcessing: @escaping (String)->Void) {
         Log.writeToLog("RequestTrain")
         
         let params = [
             "type": "trainRequest"
+        ]
+        sendMessage(params: params, file_data: nil, postProcessing: postProcessing)
+    }
+    
+    func reqeustTrain(train_id: String, object_name: String, postProcessing: @escaping (String)->Void) {
+        Log.writeToLog("RequestTrain")
+        
+        let params = [
+            "type": "trainRequest",
+            "train_id": "\(train_id)",
+            "object_name": object_name
         ]
         sendMessage(params: params, file_data: nil, postProcessing: postProcessing)
     }
@@ -348,11 +359,25 @@ class HTTPController {
             "object_name": obj_name
         ]
         sendMessage(params: params, file_data: nil, postProcessing: postProcessing)
+    }
+    
+    // get descriptors of a set of images
+    func getSetDescriptorForReview(train_id: String, postProcessing: @escaping (String)->Void) {
+        Log.writeToLog("getSetDescriptorForReview")
         
+        let filePath = Log.userDirectory.appendingPathComponent("desc_info.txt")
+        if let desc_data = FileManager.default.contents(atPath: filePath.path) {
+            let params = [
+                "type": "getSetDescriptorForReview",
+                "fname": "desc_info-\(train_id).txt",
+                "mimetype": "txt/csv"
+            ]
+            sendMessage(params: params, file_data: desc_data, postProcessing: postProcessing)
+        }
     }
     
     // send the current image to generate image descriptors
-    func getImgDescriptor(image: UIImage, index: Int, postProcessing: @escaping (String)->Void) {
+    func getImgDescriptor(image: UIImage, index: Int, object_name: String, postProcessing: @escaping (String)->Void) {
         Log.writeToLog("\(Actions.getImageDescriptor.rawValue)")
         
         let image_data = UIImageJPEGRepresentation(image, 0.5)
@@ -364,14 +389,15 @@ class HTTPController {
         
         let params = [
             "type": "getImgDescriptor",
-            "object_name": "tmpObj",
-            "fname": "tmp_\(index).jpg",
+            "object_name": object_name,
+            "fname": "\(index).jpg",
             "mimetype": "image/jpg"
         ]
         sendMessage(params: params, file_data: image_data!, postProcessing: postProcessing)
     }
     
     func sendARInfo(object_name: String, postProcessing: @escaping (String)->Void) {
+        Log.writeToLog("sendARInfo")
         let filePath = Log.userDirectory.appendingPathComponent("desc_info.txt")
         
         if let desc_data = FileManager.default.contents(atPath: filePath.path) {

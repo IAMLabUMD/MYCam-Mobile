@@ -145,6 +145,8 @@ class BaseItemAudioVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderD
         setupViews()
         imageCollectionView.dataSource = self
         images = Functions.fetchImages(for: objectName)
+        
+        
         let headerName = Functions.separateWords(name: objectName)
         navigationItem.titleView = Functions.createHeaderView(title: headerName)
         

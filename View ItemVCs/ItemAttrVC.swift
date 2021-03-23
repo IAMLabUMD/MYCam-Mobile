@@ -9,8 +9,6 @@
 import UIKit
 
 class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var objectImageView: UIImageView!
     @IBOutlet weak var objectNameLabel: UILabel!
@@ -18,7 +16,7 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var item: Item?
     
-    var attributes = ["Blurry", "Hand in image", "Cropped"]
+    var attributes = ["Small object", "Cropped object", "Blurry", "Hand in image"]
     var var_attributes = ["Background variation", "Side variation", "Distance variation"]
     
     var backgroundVariation = 0.0
@@ -113,7 +111,9 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if section == 0 {
+            return var_attributes.count
+        }
         return attributes.count
     }
     
@@ -160,23 +160,14 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             }
         }
         else if indexPath.section == 1 {
-            
             if indexPath.row == 0 {
                 if verbose {
-                    cell.level.text = "\(cnt_hand) out of 30"
+                    cell.level.text = "\(cnt_small) out of 30"
                 } else {
-                    cell.level.text = cnt_hand > 5 ? "Yes": "No"
+                    cell.level.text = cnt_small > 5 ? "Yes": "No"
                 }
                 
             } else if indexPath.row == 1 {
-                
-                if verbose {
-                    cell.level.text = "\(cnt_blurry) out of 30"
-                } else {
-                    cell.level.text = cnt_blurry > 5 ? "Yes": "No"
-                }
-                
-            } else if indexPath.row == 2 {
                 
                 if verbose {
                     cell.level.text = "\(cnt_crop) out of 30"
@@ -184,12 +175,20 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     cell.level.text = cnt_crop > 5 ? "Yes": "No"
                 }
                 
+            } else if indexPath.row == 2 {
+                
+                if verbose {
+                    cell.level.text = "\(cnt_blurry) out of 30"
+                } else {
+                    cell.level.text = cnt_blurry > 5 ? "Yes": "No"
+                }
+                
             } else if indexPath.row == 3 {
                 
                 if verbose {
-                    cell.level.text = "\(cnt_small) out of 30"
+                    cell.level.text = "\(cnt_hand) out of 30"
                 } else {
-                    cell.level.text = cnt_small > 5 ? "Yes": "No"
+                    cell.level.text = cnt_hand > 5 ? "Yes": "No"
                 }
             }
         }

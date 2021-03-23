@@ -53,6 +53,7 @@
 		F3B42E97222B87B3002AFCE0 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B42E96222B87B3002AFCE0 /* VideoCapture.swift */; };
 		F3B42EDA222DC881002AFCE0 /* EnterNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B42ED9222DC881002AFCE0 /* EnterNameController.swift */; };
 		F3CF84FE25F5ECA4001E15E1 /* ReviewTrainingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF84FD25F5ECA4001E15E1 /* ReviewTrainingVC.swift */; };
+		F3CF850926030A7D001E15E1 /* ItemAttrAndInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF850826030A7D001E15E1 /* ItemAttrAndInfoVC.swift */; };
 		F3CFF9EC25C9E353006719E9 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CFF9EB25C9E353006719E9 /* BaseNavigationController.swift */; };
 		F3CFF9EF25C9E368006719E9 /* BaseItemAudioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CFF9EE25C9E368006719E9 /* BaseItemAudioVC.swift */; };
 		F3CFF9F325C9E392006719E9 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CFF9F225C9E392006719E9 /* SWRevealViewController.m */; };
@@ -220,6 +221,7 @@
 		F3B42ED5222CDC72002AFCE0 /* MySQLDriveriOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MySQLDriveriOS.h; path = ../MySqlSwiftNative/MySQLDriveriOS/MySQLDriveriOS.h; sourceTree = "<group>"; };
 		F3B42ED9222DC881002AFCE0 /* EnterNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNameController.swift; sourceTree = "<group>"; };
 		F3CF84FD25F5ECA4001E15E1 /* ReviewTrainingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTrainingVC.swift; sourceTree = "<group>"; };
+		F3CF850826030A7D001E15E1 /* ItemAttrAndInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAttrAndInfoVC.swift; sourceTree = "<group>"; };
 		F3CFF9EB25C9E353006719E9 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = SOURCE_ROOT; };
 		F3CFF9EE25C9E368006719E9 /* BaseItemAudioVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseItemAudioVC.swift; sourceTree = SOURCE_ROOT; };
 		F3CFF9F125C9E392006719E9 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = SOURCE_ROOT; };
@@ -356,6 +358,7 @@
 				17AE6630240E3747004D3D65 /* ItemAudioVC.swift */,
 				17AE6632240E3AA6004D3D65 /* ItemInfoVC.swift */,
 				F3EB806F22517F1400681A34 /* ItemInfoViewController.swift */,
+				F3CF850826030A7D001E15E1 /* ItemAttrAndInfoVC.swift */,
 			);
 			path = "View ItemVCs";
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				17CC0C84252D8C0A00090FDA /* ItemAttributesTVC.swift in Sources */,
 				17CA82D625F7DBDB00BD3D9F /* OnboardingNavVC.swift in Sources */,
 				F372EDAE25A4D10F003A7369 /* ARViewController.swift in Sources */,
+				F3CF850926030A7D001E15E1 /* ItemAttrAndInfoVC.swift in Sources */,
 				F3CFF9EC25C9E353006719E9 /* BaseNavigationController.swift in Sources */,
 				AF3673A2209EE65B0099A340 /* MainViewController.swift in Sources */,
 				F3CFFA0B25C9E40F006719E9 /* ViewController.swift in Sources */,
@@ -866,13 +870,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D678R58TXJ;
+				DEVELOPMENT_TEAM = 8VHXA3TE4B;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = IAM.TOR;
+				PRODUCT_BUNDLE_IDENTIFIER = IAM.TOR2;
 				PRODUCT_NAME = TOR;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CheckList app-Bridging-Header.h";
@@ -890,13 +894,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D678R58TXJ;
+				DEVELOPMENT_TEAM = 8VHXA3TE4B;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = IAM.TOR;
+				PRODUCT_BUNDLE_IDENTIFIER = IAM.TOR2;
 				PRODUCT_NAME = TOR;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CheckList app-Bridging-Header.h";
