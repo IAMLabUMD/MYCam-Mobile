@@ -16,7 +16,9 @@ class ItemInfoVC: BaseItemAudioVC {
     var hasName = false
     var isTraining = true
     var recordedAudio = false
+    var madeChanges = false
     var object_name = "tmpobj"
+    var previousName = ""
     var trainChecker: Timer!
     var toastLabel: UILabel!
     var guideText = "You can add a personal note to the item by recording an audio description of the item. For example, my favorite almond, cashew and walnut nutbars from Kirkland."
@@ -33,8 +35,10 @@ class ItemInfoVC: BaseItemAudioVC {
         super.viewDidLoad()
         setupButtons()
         let headerName = Functions.separateWords(name: objectName)
+        object_name = headerName
+        previousName = headerName
         navigationItem.titleView = Functions.createHeaderView(title: "Edit \(headerName)")
-        mainActionButton.accessibilityLabel = "Record a new audio description for \(headerName)"
+        mainActionButton.accessibilityLabel = "Record button"
         elapsedLabel.accessibilityLabel = "Elapsed time"
         remainingLabel.accessibilityLabel = "Time remaining"
         
@@ -71,6 +75,7 @@ class ItemInfoVC: BaseItemAudioVC {
         remainingLabel.isHidden = true
         
         mainActionButton.setImage(playImage, for: .normal)
+        mainActionButton.accessibilityLabel = "Record"
     }
     
     func setupButtons() {
@@ -88,11 +93,11 @@ class ItemInfoVC: BaseItemAudioVC {
         saveButton = UIButton()
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.setTitleColor(.lightGray, for: .highlighted)
-        saveButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
+        saveButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
         saveButton.setTitle("SAVE", for: .normal)
         saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
         saveButton.accessibilityLabel = "Saves changes made to \(Functions.separateWords(name: objectName))."
-        saveButton.isHidden = true
+        saveButton.isHidden = false
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
     }
@@ -102,13 +107,11 @@ class ItemInfoVC: BaseItemAudioVC {
         
         // Handle saving object to database and begin training..
         print("Saving.....")
-        
-        if recordedAudio {
-            Functions.saveRecording(for: objectName)
+        if madeChanges {
+            saveAudio(newName: object_name)
         }
         
-        navigationController?.popViewController(animated: true)
-//        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func presentEnterNameVC() {
@@ -126,21 +129,45 @@ class ItemInfoVC: BaseItemAudioVC {
         
     }
     
+    func saveAudio(newName: String) {
+        
+        print("Previous name: \(previousName)")
+        do {
+            let fileManager = FileManager.default
+            let path = Log.userDirectory.appendingPathComponent(object_name).appendingPathComponent("\(previousName).wav").path
+            print("Audio file: \(path)")
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("recording-tmpobj.wav").path) {
+
+                print("We recorded a new audio")
+                Functions.saveRecording(for: newName)
+                 
+            } else if fileManager.fileExists(atPath: path) {
+                print("We are renaming the saved recording because file exists at path")
+                try fileManager.moveItem(atPath: path, toPath: Log.userDirectory.appendingPathComponent(object_name).appendingPathComponent("\(newName).wav").path)
+                
+                
+            } else {
+                print("Failed switching audio")
+            }
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong: \(error)")
+        }
+    }
+    
     func rename(newName: String) {
         
-        print("Renaming object to ---> \(newName)")
+        print("Renaming object to ---> \(newName) from \(object_name)")
         ParticipantViewController.writeLog("TrainingView-rename-\(newName)")
-        httpController.requestRename(org_name: "tmpobj", new_name: newName){}
+        httpController.requestRename(org_name: object_name, new_name: newName){}
 
         do {
             let fileManager = FileManager.init()
             var isDirectory = ObjCBool(true)
-            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, isDirectory: &isDirectory) {
-                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, toPath: Log.userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-\(newName).wav").path)
-            }
 
-            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path, isDirectory: &isDirectory) {
-                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("tmpobj").path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(object_name).path, isDirectory: &isDirectory) {
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(object_name).path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
+                print("Good with new path: \(Log.userDirectory.appendingPathComponent(newName).path)")
             }
         }
         catch let error as NSError {
@@ -153,6 +180,7 @@ class ItemInfoVC: BaseItemAudioVC {
         object_name = newName
         hasName = true
         saveButton.isHidden = false
+        madeChanges = true
     }
     
     func handleRecording() {
@@ -171,10 +199,23 @@ class ItemInfoVC: BaseItemAudioVC {
                 
             } else {
                 
-                audioController.playFileSound(name: "recording-tmpobj.wav", delegate: nil)
-                audioDuration = audioController.audioPlayer.duration - 0.3
-                audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(checkAudioTime), userInfo: nil, repeats: true)
-                remainingLabel.text = timeFloatToStr(audioDuration)
+                // This introduces a delay when voiceover is on so there's no interferance in playback
+                if UIAccessibilityIsVoiceOverRunning() {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        
+                        self.audioController.playFileSound(name: "recording-tmpobj.wav", delegate: nil)
+                        self.audioDuration = self.audioController.audioPlayer.duration - 0.3
+                        self.audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.checkAudioTime), userInfo: nil, repeats: true)
+                        self.remainingLabel.text = self.timeFloatToStr(self.audioDuration)
+                    }
+                } else {
+                    
+                    audioController.playFileSound(name: "recording-tmpobj.wav", delegate: nil)
+                    audioDuration = audioController.audioPlayer.duration - 0.3
+                    audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(checkAudioTime), userInfo: nil, repeats: true)
+                    remainingLabel.text = timeFloatToStr(audioDuration)
+                }
+                
             }
             return
         }
@@ -191,7 +232,9 @@ class ItemInfoVC: BaseItemAudioVC {
             recordedAudio = true
             mainActionButton.setImage(#imageLiteral(resourceName: "play_button"), for: .normal)
             saveButton.isHidden = false
+            madeChanges = true
             tertiaryButton.isHidden = false
+            mainActionButton.accessibilityLabel = "Play"
             
         } else {
             
@@ -199,12 +242,23 @@ class ItemInfoVC: BaseItemAudioVC {
             ParticipantViewController.writeLog("TrainRecordStart")
             print("Recording -----> ")
             
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                print("Now recording")
+            // This introduces a delay when voiceover is on so there is no interference during recording
+            if UIAccessibilityIsVoiceOverRunning() {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    print("Now recording")
+                    self.audioController.startRecording(fileName: "recording-tmpobj.wav", delegate: nil)
+                    self.isRecording = true
+                }
+                
+            } else {
+                
                 self.audioController.startRecording(fileName: "recording-tmpobj.wav", delegate: nil)
                 self.isRecording = true
+                
             }
+            
+            
             
             
         }
