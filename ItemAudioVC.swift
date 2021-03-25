@@ -11,7 +11,6 @@ import AVFoundation
 
 class ItemAudioVC: BaseItemAudioVC {
 
-    
     let playImage = #imageLiteral(resourceName: "play_button").withRenderingMode(.alwaysTemplate)
     let rewindImage = #imageLiteral(resourceName: "rewind").withRenderingMode(.alwaysTemplate)
     let forwardImage = #imageLiteral(resourceName: "forward").withRenderingMode(.alwaysTemplate)
@@ -82,7 +81,6 @@ class ItemAudioVC: BaseItemAudioVC {
             tertiaryButton.isEnabled = true
             tertiaryButton.isAccessibilityElement = true
         }
-        
     }
     
     
