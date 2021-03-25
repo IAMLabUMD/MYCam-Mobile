@@ -52,6 +52,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     var noDetectionTimer: Timer?
     
     internal var screenCenter = CGPoint()
+    var start_time = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +98,15 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         } catch let error as NSError {
             print("Error: \(error.domain)")
         }
+        
+        
+        // Create Date object
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss-SSSS"
+        start_time = formatter.string(from: date)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated) // No need for semicolon
@@ -615,7 +624,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             "\(self.obj_cam_position.0)#\(self.obj_cam_position.1)#\(self.obj_cam_position.2)#" +
             "\(cam_mat)#\(obj_mat)#\(cam_obj_mat)"
         
-        httpController.getImgDescriptor(image: currImg!, index: count) {(response) in
+        httpController.getImgDescriptor(image: currImg!, index: count, object_name: "Train-\(start_time)") {(response) in
             var resp = "NA"
             let output_components = response.components(separatedBy: "#")
             if output_components.count != 6 {
@@ -781,8 +790,13 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             cameraButton.isAccessibilityElement = false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-                let vc = TrainingVC()
-                vc.objectName = "tmpobj"
+//                let vc = TrainingVC()
+//                vc.objectName = "tmpobj"
+//                self.navigationController?.pushViewController(vc, animated: true)
+                
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReviewTrainingVC") as! ReviewTrainingVC
+                vc.item = Item(itemName: "New object", itemDate: "", relativeDate: "Now", image:"1")
+                vc.train_id = "Train-\(self.start_time)"
                 self.navigationController?.pushViewController(vc, animated: true)
             })
             

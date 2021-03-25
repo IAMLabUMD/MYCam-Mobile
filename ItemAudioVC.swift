@@ -87,9 +87,7 @@ class ItemAudioVC: BaseItemAudioVC {
     
     
     func setupButtons() {
-        
         // Set up the action buttons
-        
         mainActionButton.setImage(playImage, for: .normal)
         mainActionButton.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
         secondaryButton.setImage(rewindImage, for: .normal)
@@ -112,7 +110,6 @@ class ItemAudioVC: BaseItemAudioVC {
     // MARK:- Button action functions
     @objc
     func playButtonAction() {
-        
         if audioPlayer.isPlaying {
             audioPlayer.stop()
             mainActionButton.setImage(playImage, for: .normal)
@@ -135,6 +132,4 @@ class ItemAudioVC: BaseItemAudioVC {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         mainActionButton.setImage(playImage, for: .normal)
     }
-    
-
 }

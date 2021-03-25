@@ -25,6 +25,7 @@ class TrainingVC: BaseItemAudioVC {
     var recordingSession: AVAudioSession!
     var httpController = HTTPController()
     var fileName = "recording-tmpobj.wav"
+    var train_id: String?
     
     var saveButton = UIButton()
     
@@ -96,28 +97,34 @@ class TrainingVC: BaseItemAudioVC {
     
     @objc
     func saveButtonAction() {
-        
         //TODO: Handle saving object to database and begin training..
         print("Saving.....")
         Log.writeToLog("\(Actions.tappedOnBtn.rawValue) saveButton")
         
-        textToSpeech("Uploading images")
-        activityIndicator("Uploading images")
+//        textToSpeech("Uploading images")
+//        activityIndicator("Uploading images")
         
             
         DispatchQueue.global(qos: .background).async {
-            self.uploadPhotos()
+            //self.uploadPhotos()
+            
+            Functions.deleteImages(for: self.object_name)
+            Functions.saveRecording(for: self.object_name)
+            
+            self.textToSpeech("Training started.")
+            self.httpController.reqeustTrain(train_id: self.train_id!, object_name: self.object_name){(response) in
+            }
             
             // upload arkit info
-            self.httpController.sendARInfo(object_name: self.object_name) {(response) in
-                print("Send AR Info: " + response)
-            }
+//            self.httpController.sendARInfo(object_name: self.object_name) {(response) in
+//                print("Send AR Info: " + response)
+//            }
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
                 Functions.stopGyros()
             }
             
             DispatchQueue.main.async {
-                self.effectView.removeFromSuperview()
+//                self.effectView.removeFromSuperview()
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }
@@ -132,7 +139,7 @@ class TrainingVC: BaseItemAudioVC {
         }
         
         textToSpeech("Training started.")
-        self.httpController.reqeustTrain(){(response) in
+        self.httpController.reqeustTrain(train_id: "", object_name: "") {(response) in
 //            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
 //            print("Training ended.")
         }
@@ -206,24 +213,6 @@ class TrainingVC: BaseItemAudioVC {
     func rename(newName: String) {
         Log.writeToLog("\(Actions.renamedSavedObj.rawValue) new_name= \(newName)")
         print("---> Invoking rename function...")
-        
-//        do {
-//            let fileManager = FileManager.init()
-//            var isDirectory = ObjCBool(true)
-//            if fileManager.fileExists(atPath: userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, isDirectory: &isDirectory) {
-//                try fileManager.moveItem(atPath: userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-tmpobj.wav").path, toPath: userDirectory.appendingPathComponent("tmpobj").appendingPathComponent("recording-\(newName).wav").path)
-//                print("Saved audio file?")
-//            } else {
-//                print("Didn't save my G")
-//            }
-//
-//            if fileManager.fileExists(atPath: userDirectory.appendingPathComponent("tmpobj").path, isDirectory: &isDirectory) {
-//                try fileManager.moveItem(atPath: userDirectory.appendingPathComponent("tmpobj").path, toPath: userDirectory.appendingPathComponent(newName).path)
-//            }
-//        }
-//        catch let error as NSError {
-//            print("Ooops! Something went wrong: \(error)")
-//        }
         
         self.title = object_name
         navigationItem.titleView = Functions.createHeaderView(title: newName)

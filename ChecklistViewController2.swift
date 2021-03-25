@@ -194,15 +194,6 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
             self.navigationController?.navigationBar.accessibilityElementsHidden = true
         } else {
             itemList.renewList()
-            
-            // Make call to server for items
-            //httpController.syncRequest(items: itemList.getListString(), postProcessing: sendForSync)
-
-            //numLabel.text = "\(itemList.itemArray.count) items"
-            
-//            for item in itemList.itemArray {
-//                print(item.itemName)
-//            }
         }
         
         makeToast()
@@ -219,6 +210,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
             emptyLabel.alpha = 1
         }
         
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -512,8 +504,8 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
 extension ChecklistViewController2: ChecklistTableViewCellDelegate {
     
     func didTapOnCell(cell: ChecklistTableViewCell) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemAttrVC") as! ItemAttrVC
-        vc.item = cell.item
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ItemAttrAndInfoVC") as! ItemAttrAndInfoVC
+        vc.objectName = cell.itemName.text!
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

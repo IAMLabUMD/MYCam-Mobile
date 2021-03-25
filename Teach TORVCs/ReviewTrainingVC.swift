@@ -1,14 +1,16 @@
 //
-//  ItemAttrVC.swift
+//  ReviewTrainingVC.swift
 //  TOR-Mobile
 //
-//  Created by Ernest Essuah Mensah on 2/21/21.
-//  Copyright © 2021 IAM Lab. All rights reserved.
+//  Created by Jonggi Hong on 3/8/21.
+//  Copyright © 2021 Jaina Gandhi. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var objectImageView: UIImageView!
     @IBOutlet weak var objectNameLabel: UILabel!
@@ -16,11 +18,7 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var item: Item?
     
-<<<<<<< HEAD
-    var attributes = ["Small", "Cropped", "Blurry", "Hand in image"]
-=======
     var attributes = ["Small object", "Cropped object", "Blurry", "Hand in image"]
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
     var var_attributes = ["Background variation", "Side variation", "Distance variation"]
     
     var backgroundVariation = 0.0
@@ -31,19 +29,23 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var cnt_crop = 0
     var cnt_small = 0
     var verbose = true
+    var train_id: String?
     
     var httpController = HTTPController()
+    var switchCell = SwitchTableViewCellRT()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let item = item {
+            switchCell.initCell()
+            switchCell.myView = self
             
             let name = Functions.separateWords(name: item.itemName)
             objectNameLabel.text = name
             
             
-            let imgPath = Util().userDirectory.appendingPathComponent("\(item.itemName)/1.jpg")
+            let imgPath = Log.userDirectory.appendingPathComponent("tmpobj/1.jpg")
             if let data = try? Data(contentsOf: imgPath) {
                 objectImageView.image = UIImage(data: data)
             }
@@ -51,15 +53,12 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             objectImageView.layer.cornerRadius = 12
             objectNameLabel.font = .rounded(ofSize: 21, weight: .bold)
             
-            httpController.getSetDescriptor(obj_name: name) { (response) in
+            httpController.getSetDescriptorForReview (train_id: train_id!) { (response) in
                 print(response)
                 let output_components = response.components(separatedBy: ",")
                 if output_components.count != 7 {
                     print("The response is not valid. Response: \"\(response)\"...\(output_components.count)")
                 } else {
-//                    self.backgroundVariation = output_components[0]=="True" ? "Yes": "No"
-//                    self.sideVariation = output_components[1]=="True" ? "Yes": "No"
-//                    self.distanceVariation = output_components[2]=="True" ? "Yes": "No"
                     self.backgroundVariation = Double(output_components[0])!
                     self.sideVariation = Double(output_components[1])!
                     self.distanceVariation = Double(output_components[2])!
@@ -67,7 +66,7 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     self.cnt_blurry = Int(output_components[4])!
                     self.cnt_crop = Int(output_components[5])!
                     self.cnt_small = Int(output_components[6])!
-                    
+
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
@@ -89,18 +88,17 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         view.backgroundColor = .themeBackground
         objectImageView.layer.cornerRadius = 12
         objectImageView.layer.masksToBounds = true
-        
-        
-        
-        
-        let proceedButton = UIButton()
-        proceedButton.setTitleColor(.white, for: .normal)
-        proceedButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
-        proceedButton.setTitle("Next", for: .normal)
-        //helpButton.addTarget(self, action: #selector(guideButtonAction), for: .touchUpInside)
-        proceedButton.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
-        //proceedButton.accessibilityLabel = "More. This button takes you to a screen that will give you information about the TOR app"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: proceedButton)
+    }
+    
+    @IBAction func OKButtonAction(_ sender: Any) {
+        let vc = TrainingVC()
+        vc.train_id = train_id
+        vc.objectName = "tmpobj"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func RetrainButtonAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc
@@ -111,42 +109,43 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-<<<<<<< HEAD
-        
         if section == 0 {
+            return 1
+        } else if section == 1 {
             return var_attributes.count
+        } else if section == 2 {
+            return attributes.count
         }
-        
-=======
-        if section == 0 {
-            return var_attributes.count
-        }
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
-        return attributes.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+//            let cell = SwitchTableViewCell()
+            
+            return switchCell
+        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "attributesCell", for: indexPath) as! ItemAttributeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "attributesCell", for: indexPath) as! ItemAttributeTableViewCellRT
 
         // Configure the cell...
         cell.attributeLabel.text = attributes[indexPath.row]
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             cell.attributeLabel.text = var_attributes[indexPath.row]
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             cell.attributeLabel.text = attributes[indexPath.row]
         }
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             
             if indexPath.row == 0 {
                 let varVal = backgroundVariation/0.15*100
-                if verbose {
+                if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
                     cell.level.text = backgroundVariation > 0.1 ? "Yes": "No"
@@ -155,7 +154,7 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             } else if indexPath.row == 1 {
                 
                 let varVal = sideVariation/1.5*100
-                if verbose {
+                if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
                     cell.level.text = sideVariation > 1 ? "Yes": "No"
@@ -164,44 +163,41 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             } else if indexPath.row == 2 {
                 
                 let varVal = distanceVariation/0.15*100
-                if verbose {
+                if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
                     cell.level.text = distanceVariation > 0.1 ? "Yes": "No"
                 }
             }
         }
-        else if indexPath.section == 1 {
+        else if indexPath.section == 2 {
+            
             if indexPath.row == 0 {
-                
-                if verbose {
+                if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_small) out of 30"
                 } else {
                     cell.level.text = cnt_small > 5 ? "Yes": "No"
                 }
                 
-                
             } else if indexPath.row == 1 {
                 
-                if verbose {
+                if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_crop) out of 30"
                 } else {
                     cell.level.text = cnt_crop > 5 ? "Yes": "No"
                 }
                 
-                
             } else if indexPath.row == 2 {
                 
-                if verbose {
+                if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_blurry) out of 30"
                 } else {
                     cell.level.text = cnt_blurry > 5 ? "Yes": "No"
                 }
                 
-                
             } else if indexPath.row == 3 {
                 
-                if verbose {
+                if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_hand) out of 30"
                 } else {
                     cell.level.text = cnt_hand > 5 ? "Yes": "No"
@@ -231,9 +227,11 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let headerLabel = UILabel(frame: CGRect(x: 16, y: 0, width: tableView.frame.width, height: 40))
         
         if section == 0 {
-            headerLabel.text = "Group characteristics"
+            headerLabel.text = "Verbosity"
         } else if section == 1 {
-            headerLabel.text = "Photo characteristics"
+            headerLabel.text = "Variation attributes"
+        } else if section == 2 {
+            headerLabel.text = "Photo attributes"
         }
         
         headerLabel.textColor = .darkGray
@@ -243,6 +241,68 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         headerView.addSubview(headerLabel)
         return headerView
     }
-
+    
+    static var VERBOSE = true
+    func updateVerbosity(v: Bool) {
+        ReviewTrainingVC.VERBOSE = v
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
+
+
+
+class ItemAttributeTableViewCellRT: UITableViewCell {
+    
+    @IBOutlet weak var attributeLabel: UILabel!
+    @IBOutlet weak var level: UILabel!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        attributeLabel.font = .rounded(ofSize: 16, weight: .bold)
+        attributeLabel.textColor = .darkGray
+        
+        level.font = .rounded(ofSize: 16, weight: .bold)
+        level.textColor = .lightGray
+    }
+}
+
+
+class SwitchTableViewCellRT: UITableViewCell {
+    var verbositySwitch = UISwitch()
+    var myView: ReviewTrainingVC?
+    var verbosityLabel: UILabel!
+    
+    func initCell() {
+        self.contentView.backgroundColor = .white
+        verbosityLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 24))
+        verbosityLabel.text = "Verbose"
+        verbosityLabel.textColor = .darkGray
+        verbosityLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
+        verbosityLabel.textAlignment = .left
+        verbositySwitch.isOn = ReviewTrainingVC.VERBOSE
+        verbositySwitch.addTarget(self, action: #selector(switchIsChanged), for: UIControlEvents.valueChanged)
+        
+        self.contentView.setupView(viewToAdd: verbosityLabel, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
+        
+        self.contentView.setupView(viewToAdd: verbositySwitch, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -16, topView: self.contentView, shouldSwitchTop: false, topConstant: 8, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 8)
+    }
+    
+    func setup() {
+    }
+    
+    override func layoutSubviews() {
+        if ReviewTrainingVC.VERBOSE {
+            verbosityLabel.text = "Verbose"
+        } else {
+            verbosityLabel.text = "Binary"
+        }
+    }
+    
+    @objc func switchIsChanged(mySwitch: UISwitch) {
+        myView?.updateVerbosity(v: mySwitch.isOn)
+    }
+}

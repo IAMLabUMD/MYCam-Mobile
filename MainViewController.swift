@@ -214,9 +214,9 @@ class MainViewController: BaseViewController {
 //        httpController.reqeustTrain() {(response) in
 //            print("Training response: \(response)")
 //        }
-        self.httpController.sendARInfo(object_name: "Temp") {(response) in
-            print("Send AR Info: " + response)
-        }
+//        self.httpController.sendARInfo(object_name: "Temp") {(response) in
+//            print("Send AR Info: " + response)
+//        }
         
 //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "settingsTableVC") as! SettingsTableVC
 //        self.navigationController?.pushViewController(vc, animated: true)
@@ -419,7 +419,7 @@ class MainViewController: BaseViewController {
                 }
             }
         
-            if entropy > 0.1 {
+            if entropy > 2 {
                 label = "Don't know"
                 message = "Don't know"
                 Log.writeToLog("\(Actions.recognitionSuccessful.rawValue) false")
@@ -440,6 +440,12 @@ class MainViewController: BaseViewController {
     
     //var customAlert: EnterNameController!
     @IBAction func trainButtonAction(_ sender: Any) {
+        if isTraining {
+            textToSpeech("Training is in progress. Please wait until it is done.")
+            Log.writeToLog("MainTeachButton-TrainingInProgress")
+            return
+        }
+        
         ParticipantViewController.writeLog("MainTeachButton")
         Log.writeToLog("\(Actions.tappedOnBtn.rawValue) teachTORButton")
         
@@ -453,11 +459,6 @@ class MainViewController: BaseViewController {
 
         // MARK: - Remember to uncomment this trainchecker function call
         trainChecker.invalidate()
-        
-//        httpController.reqeustTrain {
-//            self.unmarkTraining()
-//        }
-        
     }
     
     

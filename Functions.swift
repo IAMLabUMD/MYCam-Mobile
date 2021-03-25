@@ -123,7 +123,7 @@ class Functions {
         
         for (index, image) in images.enumerated() {
             if let imgData = UIImageJPEGRepresentation(image, 0.5) {
-                let fileName = imgPath.appendingPathComponent("\(index).jpg")
+                let fileName = imgPath.appendingPathComponent("\(index+1).jpg")
                 do {
                     try imgData.write(to: fileName)
                     print("Low-res save successful in Functions -> \(fileName)")
@@ -154,7 +154,7 @@ class Functions {
                 print("Saved audio file. \(Log.userDirectory.appendingPathComponent(object).appendingPathComponent("\(object).wav").path))")
                 
             } else {
-                print("File does not exist")
+                print("The audio file does not exist")
             }
             
         } catch let error as NSError {

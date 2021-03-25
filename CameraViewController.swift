@@ -323,7 +323,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
         count = count + 1
         saveImage(count)
         
-        httpController.getImgDescriptor(image: currImg!, index: count) {(response) in
+        httpController.getImgDescriptor(image: currImg!, index: count, object_name: "tmpobj") {(response) in
             let output_components = response.components(separatedBy: ",")
             let hand = output_components[0]
             let blurry = output_components[1]

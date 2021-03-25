@@ -16,9 +16,12 @@ class ItemInfoVC: BaseItemAudioVC {
     var hasName = false
     var isTraining = true
     var recordedAudio = false
+<<<<<<< HEAD
     var madeChanges = false
     var object_name = "tmpobj"
     var previousName = ""
+=======
+>>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
     var trainChecker: Timer!
     var toastLabel: UILabel!
     var guideText = "You can add a personal note to the item by recording an audio description of the item. For example, my favorite almond, cashew and walnut nutbars from Kirkland."
@@ -115,7 +118,6 @@ class ItemInfoVC: BaseItemAudioVC {
     }
     
     func presentEnterNameVC() {
-        
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let enterNameVC = mainStoryboard.instantiateViewController(withIdentifier: "EnterNameUI") as! EnterNameController
         enterNameVC.modalPresentationStyle = .overCurrentContext
@@ -126,7 +128,6 @@ class ItemInfoVC: BaseItemAudioVC {
         enterNameVC.header = "Rename \(headerName)"
         enterNameVC.itemInfoVC = self
         present(enterNameVC, animated: true)
-        
     }
     
     func saveAudio(newName: String) {
@@ -156,31 +157,63 @@ class ItemInfoVC: BaseItemAudioVC {
     }
     
     func rename(newName: String) {
+<<<<<<< HEAD
         
         print("Renaming object to ---> \(newName) from \(object_name)")
         ParticipantViewController.writeLog("TrainingView-rename-\(newName)")
         httpController.requestRename(org_name: object_name, new_name: newName){}
+=======
+        print("Renaming object to ---> \(newName)")
+        Log.writeToLog("TrainingView-rename-\(newName)")
+        httpController.requestRename(org_name: objectName, new_name: newName){}
+>>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
 
         do {
             let fileManager = FileManager.init()
             var isDirectory = ObjCBool(true)
+<<<<<<< HEAD
 
             if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(object_name).path, isDirectory: &isDirectory) {
                 try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(object_name).path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
                 print("Good with new path: \(Log.userDirectory.appendingPathComponent(newName).path)")
+=======
+            
+            // change audio file
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(objectName).wav").path, isDirectory: &isDirectory) {
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(objectName).wav").path, toPath: Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(newName).wav").path)
+            }
+            
+            //change directory name
+            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(objectName).path, isDirectory: &isDirectory) {
+                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(objectName).path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
+>>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
             }
         }
         catch let error as NSError {
             print("Ooops! Something went wrong: \(error)")
         }
 
-        self.title = object_name
+        self.title = objectName
         navigationItem.titleView = Functions.createHeaderView(title: "Edit \(newName)")
         
-        object_name = newName
+        objectName = newName
         hasName = true
         saveButton.isHidden = false
+<<<<<<< HEAD
         madeChanges = true
+=======
+        
+        guard let count = self.navigationController?.viewControllers.count else {
+            print("no view controllers in the navigation controller")
+            return
+        }
+        if count > 1 {
+            if let attrVC = self.navigationController?.viewControllers[count-2] as? ItemAttrAndInfoVC {
+                //Set the value
+                attrVC.objectName = newName
+            }
+        }
+>>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
     }
     
     func handleRecording() {

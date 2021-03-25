@@ -147,7 +147,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
                //self.httpController.sendImage(object_name: self.object_name, index: i){}
            }
            
-           self.httpController.reqeustTrain() {(response) in
+           self.httpController.reqeustTrain(train_id: "", object_name: "") {(response) in
                //self.textToSpeech("Training ended.")
                print("Training response: \(response)")
                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Training ended.")
