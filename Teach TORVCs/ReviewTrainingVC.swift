@@ -18,8 +18,8 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     var item: Item?
     
-    var attributes = ["Small object", "Cropped object", "Blurry", "Hand in image"]
-    var var_attributes = ["Background variation", "Side variation", "Distance variation"]
+    var attributes = ["Background variation", "Side variation", "Distance variation", "Small object", "Cropped object", "Blurry", "Hand in image"]
+//    var var_attributes = ["Background variation", "Side variation", "Distance variation"]
     
     var backgroundVariation = 0.0
     var sideVariation = 0.0
@@ -42,7 +42,7 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
             switchCell.myView = self
             
             let name = Functions.separateWords(name: item.itemName)
-            objectNameLabel.text = name
+            objectNameLabel.text = "Training quality"
             
             
             let imgPath = Log.userDirectory.appendingPathComponent("tmpobj/1.jpg")
@@ -88,6 +88,7 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
         view.backgroundColor = .themeBackground
         objectImageView.layer.cornerRadius = 12
         objectImageView.layer.masksToBounds = true
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, objectNameLabel)
     }
     
     @IBAction func OKButtonAction(_ sender: Any) {
@@ -109,15 +110,13 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return var_attributes.count
-        } else if section == 2 {
             return attributes.count
         }
         return 1
@@ -133,74 +132,65 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "attributesCell", for: indexPath) as! ItemAttributeTableViewCellRT
 
         // Configure the cell...
-        cell.attributeLabel.text = attributes[indexPath.row]
-        
         if indexPath.section == 1 {
-            cell.attributeLabel.text = var_attributes[indexPath.row]
-        } else if indexPath.section == 2 {
             cell.attributeLabel.text = attributes[indexPath.row]
         }
         
         if indexPath.section == 1 {
-            
             if indexPath.row == 0 {
                 let varVal = backgroundVariation/0.15*100
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
-                    cell.level.text = backgroundVariation > 0.1 ? "Yes": "No"
+                    cell.level.text = backgroundVariation > 0.1 ? "High": "Low"
                 }
-                
+
             } else if indexPath.row == 1 {
-                
+
                 let varVal = sideVariation/1.5*100
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
-                    cell.level.text = sideVariation > 1 ? "Yes": "No"
+                    cell.level.text = sideVariation > 1 ? "High": "Low"
                 }
-                
+
             } else if indexPath.row == 2 {
-                
+
                 let varVal = distanceVariation/0.15*100
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
-                    cell.level.text = distanceVariation > 0.1 ? "Yes": "No"
+                    cell.level.text = distanceVariation > 0.1 ? "High": "Low"
                 }
-            }
-        }
-        else if indexPath.section == 2 {
-            
-            if indexPath.row == 0 {
+            } else if indexPath.row == 3 {
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_small) out of 30"
                 } else {
-                    cell.level.text = cnt_small > 5 ? "Yes": "No"
+                    cell.level.text = cnt_small > 5 ? "High": "Low"
                 }
                 
-            } else if indexPath.row == 1 {
+            } else if indexPath.row == 4 {
                 
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_crop) out of 30"
                 } else {
-                    cell.level.text = cnt_crop > 5 ? "Yes": "No"
+                    cell.level.text = cnt_crop > 5 ? "High": "Low"
                 }
                 
-            } else if indexPath.row == 2 {
+            } else if indexPath.row == 5 {
                 
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_blurry) out of 30"
                 } else {
-                    cell.level.text = cnt_blurry > 5 ? "Yes": "No"
+                    cell.level.text = cnt_blurry > 5 ? "High": "Low"
                 }
                 
-            } else if indexPath.row == 3 {
+            } else if indexPath.row == 6 {
                 
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = "\(cnt_hand) out of 30"
                 } else {
-                    cell.level.text = cnt_hand > 5 ? "Yes": "No"
+                    cell.level.text = cnt_hand > 5 ? "High": "Low"
                 }
             }
         }
@@ -229,9 +219,7 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
         if section == 0 {
             headerLabel.text = "Verbosity"
         } else if section == 1 {
-            headerLabel.text = "Variation attributes"
-        } else if section == 2 {
-            headerLabel.text = "Photo attributes"
+            headerLabel.text = "Attributes"
         }
         
         headerLabel.textColor = .darkGray
@@ -278,7 +266,7 @@ class SwitchTableViewCellRT: UITableViewCell {
     
     func initCell() {
         self.contentView.backgroundColor = .white
-        verbosityLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 24))
+        verbosityLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 160, height: 24))
         verbosityLabel.text = "Verbose"
         verbosityLabel.textColor = .darkGray
         verbosityLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
@@ -288,7 +276,7 @@ class SwitchTableViewCellRT: UITableViewCell {
         
         self.contentView.setupView(viewToAdd: verbosityLabel, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
         
-        self.contentView.setupView(viewToAdd: verbositySwitch, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -16, topView: self.contentView, shouldSwitchTop: false, topConstant: 8, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 8)
+        self.contentView.setupView(viewToAdd: verbositySwitch, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -20, topView: self.contentView, shouldSwitchTop: false, topConstant: 25, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
     }
     
     func setup() {
@@ -296,9 +284,9 @@ class SwitchTableViewCellRT: UITableViewCell {
     
     override func layoutSubviews() {
         if ReviewTrainingVC.VERBOSE {
-            verbosityLabel.text = "Verbose"
+            verbosityLabel.text = "More verbose"
         } else {
-            verbosityLabel.text = "Binary"
+            verbosityLabel.text = "Less verbose"
         }
     }
     

@@ -24,11 +24,12 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var countView: UIView!
-    @IBOutlet weak var photoAttrView: UIVisualEffectView!
     @IBOutlet weak var dismissButton: UIButton!
-    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var arSceneView: ARSCNView!
     @IBOutlet weak var debugView: UILabel!
+    
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet var photoAttrView: UIView!
     
     var videoCapture: VideoCapture!
     var device: MTLDevice!
@@ -105,6 +106,8 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss-SSSS"
         start_time = formatter.string(from: date)
+        
+//        generateAndSaveMergedARObject()
     }
     
     
@@ -139,16 +142,21 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: "ar_objects", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
+        
+        let obj_name1 = "Lays"
+        let obj_name2 = "Cheetos"
+        let obj_name3 = "Fritos"
+        
         print("load objects")
         var o1 = [ARReferenceObject]()
         var o2 = [ARReferenceObject]()
         var o3 = [ARReferenceObject]()
         for obj in referenceObjects {
-            if obj.name!.contains("BakingSoda") {
+            if obj.name!.contains(obj_name1) {
                 o1.append(obj)
-            } else if obj.name!.contains("Nutrition") {
+            } else if obj.name!.contains(obj_name2) {
                 o2.append(obj)
-            } else if obj.name!.contains("ChewyBar") {
+            } else if obj.name!.contains(obj_name3) {
                 o3.append(obj)
             }
         }
@@ -160,9 +168,9 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         let merged_o3 = mergeARObjects(obj_list: o3)
         
         print("save objects")
-        saveARObject(obj: merged_o1, filename: "merged_BakingSoda.arobject")
-        saveARObject(obj: merged_o2, filename: "merged_Nutrition.arobject")
-        saveARObject(obj: merged_o3, filename: "merged_ChewyBar.arobject")
+        saveARObject(obj: merged_o1, filename: "merged_\(obj_name1).arobject")
+        saveARObject(obj: merged_o2, filename: "merged_\(obj_name2).arobject")
+        saveARObject(obj: merged_o3, filename: "merged_\(obj_name3).arobject")
     }
     
     func saveARObject(obj: ARReferenceObject, filename: String) {
@@ -198,13 +206,13 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         var o2: ARReferenceObject?
         var o3: ARReferenceObject?
         for obj in referenceObjects {
-            if obj.name! == "merged_BakingSoda" {
+            if obj.name! == "merged_Lays" {
                 o1 = obj
             }
-            if obj.name! == "merged_Nutrition" {
+            if obj.name! == "merged_Cheetos" {
                 o2 = obj
             }
-            if obj.name! == "merged_ChewyBar" {
+            if obj.name! == "merged_Fritos" {
                 o3 = obj
             }
         }
@@ -325,7 +333,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             }
             
             let camPos = String(format: "%7.2f %7.2f %7.2f - \(ar_side)", x, y, z)
-//            print("Cam position: \(camPos)     \(ar_side)")
+            print("Cam position: \(camPos) \(detectedObject?.name)")
         }
     }
     
@@ -526,6 +534,23 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             view.transform = .identity
             view.alpha = 1
         }
+        
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            
+            view.transform = .identity
+            view.alpha = 1
+            
+        }) { (_) in
+            UIView.animate(withDuration: 0.4, delay: 0.8, animations: {
+                view.alpha = 0
+                view.transform = CGAffineTransform.init(translationX: 0, y: 40)
+                
+            }) { (_) in
+                view.removeFromSuperview()
+            }
+        }
+        
     }
     
     // MARK: - Animates a view out
@@ -652,8 +677,8 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
                     self.textView.text = attrs
                     if attrs != "" {
                         self.textToSpeech(attrs.replacingOccurrences(of: "•", with: ""))
+                        self.animateIn(view: self.photoAttrView)
                     }
-                    self.animateIn(view: self.photoAttrView)
                 }
                 resp = response
             }
