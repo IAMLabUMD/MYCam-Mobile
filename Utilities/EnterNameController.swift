@@ -20,7 +20,7 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var enterNameLabel: UILabel!
     
-    var header = "New Object"
+    var header = "Name your object"
     var objectName: String?
     //var delegate: EnterNameViewDelegate?
     //var parentView: TrainingVC!
