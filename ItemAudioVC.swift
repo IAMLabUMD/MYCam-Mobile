@@ -11,7 +11,6 @@ import AVFoundation
 
 class ItemAudioVC: BaseItemAudioVC {
 
-    
     let playImage = #imageLiteral(resourceName: "play_button").withRenderingMode(.alwaysTemplate)
     let rewindImage = #imageLiteral(resourceName: "rewind").withRenderingMode(.alwaysTemplate)
     let forwardImage = #imageLiteral(resourceName: "forward").withRenderingMode(.alwaysTemplate)
@@ -35,7 +34,7 @@ class ItemAudioVC: BaseItemAudioVC {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         
-        mainActionButton.accessibilityLabel = "Plays the recorded audio description for \(headerName)"
+        mainActionButton.accessibilityLabel = "Play"
         elapsedLabel.accessibilityLabel = "Elapsed time"
         remainingLabel.accessibilityLabel = "Time remaining"
         
@@ -82,7 +81,6 @@ class ItemAudioVC: BaseItemAudioVC {
             tertiaryButton.isEnabled = true
             tertiaryButton.isAccessibilityElement = true
         }
-        
     }
     
     
@@ -114,7 +112,17 @@ class ItemAudioVC: BaseItemAudioVC {
             audioPlayer.stop()
             mainActionButton.setImage(playImage, for: .normal)
         } else {
-            audioPlayer.play()
+            
+            // This introduces a delay when voiceover is on so there's no interferance in playback
+            if UIAccessibilityIsVoiceOverRunning() {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.audioPlayer.play()
+                }
+            } else {
+                audioPlayer.play()
+            }
+            
             mainActionButton.setImage(stopImage, for: .normal)
         }
     }

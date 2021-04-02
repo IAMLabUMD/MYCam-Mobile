@@ -71,7 +71,7 @@ class TrainingVC: BaseItemAudioVC {
         
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.setTitleColor(.lightGray, for: .highlighted)
-        saveButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
+        saveButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
         saveButton.setTitle("SAVE", for: .normal)
         saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
         saveButton.accessibilityLabel = "Save \(objectName) to you items and begin training."
@@ -241,10 +241,23 @@ class TrainingVC: BaseItemAudioVC {
                 audioController.stopAudio()
                 progressBar.progress = 0.0
             } else {
-                audioController.playFileSound(name: "recording-tmpobj.wav", delegate: nil)
-                audioDuration = audioController.audioPlayer.duration - 0.3
-                audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(checkAudioTime), userInfo: nil, repeats: true)
-                remainingLabel.text = timeFloatToStr(audioDuration)
+                
+                // This introduces a delay when voiceover is on so there's no interferance in playback
+                if UIAccessibilityIsVoiceOverRunning() {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        
+                        self.audioController.playFileSound(name: "recording-tmpobj.wav", delegate: nil)
+                        self.audioDuration = self.audioController.audioPlayer.duration - 0.3
+                        self.audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.checkAudioTime), userInfo: nil, repeats: true)
+                        self.remainingLabel.text = self.timeFloatToStr(self.audioDuration)
+                    }
+                } else {
+                    
+                    audioController.playFileSound(name: "recording-tmpobj.wav", delegate: nil)
+                    audioDuration = audioController.audioPlayer.duration - 0.3
+                    audioTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(checkAudioTime), userInfo: nil, repeats: true)
+                    remainingLabel.text = timeFloatToStr(audioDuration)
+                }
             }
             return
         }
@@ -264,8 +277,21 @@ class TrainingVC: BaseItemAudioVC {
             ParticipantViewController.writeLog("TrainRecordStart")
             print("Recording -----> ")
             
-            audioController.startRecording(fileName: "recording-tmpobj.wav", delegate: nil)
-            isRecording = true
+            // This introduces a delay when voiceover is on so there is no interference during recording
+            if UIAccessibilityIsVoiceOverRunning() {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    print("Now recording")
+                    self.audioController.startRecording(fileName: "recording-tmpobj.wav", delegate: nil)
+                    self.isRecording = true
+                }
+                
+            } else {
+                
+                self.audioController.startRecording(fileName: "recording-tmpobj.wav", delegate: nil)
+                self.isRecording = true
+                
+            }
         }
     }
     
@@ -286,22 +312,8 @@ class TrainingVC: BaseItemAudioVC {
        }
     }
     
-//    func textToSpeech(_ text: String) {
-//        if synth.isSpeaking {
-//            synth.stopSpeaking(at: AVSpeechBoundary.immediate)
-//        }
-//
-//        print("tts: \(text)")
-//        myUtterance = AVSpeechUtterance(string: text)
-//        myUtterance.rate = AVSpeechUtteranceDefaultSpeechRate
-//        myUtterance.volume = 1.0
-//        synth.speak(myUtterance)
-//    }
+
     
 
 }
 
-//extension TrainingVC: AVAudioRecorderDelegate {
-//    
-//    
-//}
