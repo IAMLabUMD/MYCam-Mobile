@@ -138,7 +138,7 @@ class Functions {
     }
     
     // MARK: - Saves the audio recording of the object locally on user's device
-    static func saveRecording(for object: String) {
+    static func saveRecording(for object: String, oldName: String) {
         do {
             let fileManager = FileManager.default
                    
@@ -148,6 +148,12 @@ class Functions {
                 let destURL = Log.userDirectory.appendingPathComponent(object).appendingPathComponent("\(object).wav")
                 if fileManager.fileExists(atPath: destURL.path) {
                     try! fileManager.removeItem(at: destURL)
+                }
+                
+                // Delete other file if we are overwriting
+                let oldFile = Log.userDirectory.appendingPathComponent(object).appendingPathComponent("\(oldName).wav")
+                if fileManager.fileExists(atPath: oldFile.path) {
+                    try! fileManager.removeItem(at: oldFile)
                 }
                 
                 try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent("recording-tmpobj.wav").path, toPath: destURL.path)

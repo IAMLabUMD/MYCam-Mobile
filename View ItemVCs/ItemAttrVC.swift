@@ -15,12 +15,8 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var item: Item?
-    
-<<<<<<< HEAD
-    var attributes = ["Small", "Cropped", "Blurry", "Hand in image"]
-=======
+
     var attributes = ["Small object", "Cropped object", "Blurry", "Hand in image"]
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
     var var_attributes = ["Background variation", "Side variation", "Distance variation"]
     
     var backgroundVariation = 0.0
@@ -115,17 +111,10 @@ class ItemAttrVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-<<<<<<< HEAD
-        
+
         if section == 0 {
             return var_attributes.count
         }
-        
-=======
-        if section == 0 {
-            return var_attributes.count
-        }
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
         return attributes.count
     }
     

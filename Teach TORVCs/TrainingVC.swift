@@ -109,7 +109,7 @@ class TrainingVC: BaseItemAudioVC {
             //self.uploadPhotos()
             
             Functions.deleteImages(for: self.object_name)
-            Functions.saveRecording(for: self.object_name)
+            Functions.saveRecording(for: self.object_name, oldName: "")
             
             self.textToSpeech("Training started.")
             self.httpController.reqeustTrain(train_id: self.train_id!, object_name: self.object_name){(response) in
@@ -145,7 +145,7 @@ class TrainingVC: BaseItemAudioVC {
         }
         
         Functions.deleteImages(for: self.object_name)
-        Functions.saveRecording(for: self.object_name)
+        Functions.saveRecording(for: self.object_name, oldName: "")
     }
     
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))

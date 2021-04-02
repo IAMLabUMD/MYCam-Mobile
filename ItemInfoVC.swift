@@ -16,12 +16,9 @@ class ItemInfoVC: BaseItemAudioVC {
     var hasName = false
     var isTraining = true
     var recordedAudio = false
-<<<<<<< HEAD
     var madeChanges = false
     var object_name = "tmpobj"
     var previousName = ""
-=======
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
     var trainChecker: Timer!
     var toastLabel: UILabel!
     var guideText = "You can add a personal note to the item by recording an audio description of the item. For example, my favorite almond, cashew and walnut nutbars from Kirkland."
@@ -111,7 +108,7 @@ class ItemInfoVC: BaseItemAudioVC {
         // Handle saving object to database and begin training..
         print("Saving.....")
         if madeChanges {
-            saveAudio(newName: object_name)
+            saveAudio(newName: objectName)
         }
         
         navigationController?.popToRootViewController(animated: true)
@@ -132,22 +129,25 @@ class ItemInfoVC: BaseItemAudioVC {
     
     func saveAudio(newName: String) {
         
-        print("Previous name: \(previousName)")
+        print("Previous name: \(previousName), New name: \(objectName)")
         do {
+            
             let fileManager = FileManager.default
-            let path = Log.userDirectory.appendingPathComponent(object_name).appendingPathComponent("\(previousName).wav").path
+            let path = Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(previousName).wav").path
             print("Audio file: \(path)")
             if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent("recording-tmpobj.wav").path) {
 
                 print("We recorded a new audio")
-                Functions.saveRecording(for: newName)
+                Functions.saveRecording(for: newName, oldName: previousName)
                  
             } else if fileManager.fileExists(atPath: path) {
                 print("We are renaming the saved recording because file exists at path")
-                try fileManager.moveItem(atPath: path, toPath: Log.userDirectory.appendingPathComponent(object_name).appendingPathComponent("\(newName).wav").path)
+                try fileManager.moveItem(atPath: path, toPath: Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(objectName).wav").path)
                 
                 
             } else {
+                
+                // File does not exist at the path created
                 print("Failed switching audio")
             }
         }
@@ -157,36 +157,24 @@ class ItemInfoVC: BaseItemAudioVC {
     }
     
     func rename(newName: String) {
-<<<<<<< HEAD
-        
-        print("Renaming object to ---> \(newName) from \(object_name)")
-        ParticipantViewController.writeLog("TrainingView-rename-\(newName)")
-        httpController.requestRename(org_name: object_name, new_name: newName){}
-=======
+
         print("Renaming object to ---> \(newName)")
         Log.writeToLog("TrainingView-rename-\(newName)")
         httpController.requestRename(org_name: objectName, new_name: newName){}
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
 
         do {
             let fileManager = FileManager.init()
             var isDirectory = ObjCBool(true)
-<<<<<<< HEAD
 
             if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(object_name).path, isDirectory: &isDirectory) {
                 try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(object_name).path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
                 print("Good with new path: \(Log.userDirectory.appendingPathComponent(newName).path)")
-=======
-            
-            // change audio file
-            if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(objectName).wav").path, isDirectory: &isDirectory) {
-                try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(objectName).wav").path, toPath: Log.userDirectory.appendingPathComponent(objectName).appendingPathComponent("\(newName).wav").path)
             }
+            
             
             //change directory name
             if fileManager.fileExists(atPath: Log.userDirectory.appendingPathComponent(objectName).path, isDirectory: &isDirectory) {
                 try fileManager.moveItem(atPath: Log.userDirectory.appendingPathComponent(objectName).path, toPath: Log.userDirectory.appendingPathComponent(newName).path)
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
             }
         }
         catch let error as NSError {
@@ -195,13 +183,12 @@ class ItemInfoVC: BaseItemAudioVC {
 
         self.title = objectName
         navigationItem.titleView = Functions.createHeaderView(title: "Edit \(newName)")
+        madeChanges = true
         
         objectName = newName
         hasName = true
         saveButton.isHidden = false
-<<<<<<< HEAD
-        madeChanges = true
-=======
+
         
         guard let count = self.navigationController?.viewControllers.count else {
             print("no view controllers in the navigation controller")
@@ -213,7 +200,6 @@ class ItemInfoVC: BaseItemAudioVC {
                 attrVC.objectName = newName
             }
         }
->>>>>>> c73c51f1093d37f7d6d5561957fa19969f9541bd
     }
     
     func handleRecording() {

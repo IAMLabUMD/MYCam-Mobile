@@ -598,7 +598,15 @@ class PlayAudioTableCell: UITableViewCell, AVAudioPlayerDelegate, AVAudioRecorde
             audioPlayer.stop()
             mainActionButton.setImage(playImage, for: .normal)
         } else {
-            audioPlayer.play()
+            
+            if UIAccessibilityIsVoiceOverRunning() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.audioPlayer.play()
+                }
+            } else {
+                audioPlayer.play()
+            }
+            
             mainActionButton.setImage(stopImage, for: .normal)
         }
     }

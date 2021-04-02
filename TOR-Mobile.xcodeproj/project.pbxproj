@@ -34,7 +34,6 @@
 		17CA82D325F5A81B00BD3D9F /* OnboardingViewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA82D225F5A81B00BD3D9F /* OnboardingViewsController.swift */; };
 		17CA82D625F7DBDB00BD3D9F /* OnboardingNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA82D525F7DBDB00BD3D9F /* OnboardingNavVC.swift */; };
 		17CC0C84252D8C0A00090FDA /* ItemAttributesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CC0C83252D8C0A00090FDA /* ItemAttributesTVC.swift */; };
-		44A439AAED1B927FD10F24B4 /* Pods_CheckList_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D606098C13B8E179A8DD8831 /* Pods_CheckList_app.framework */; };
 		AF36738E209E98160099A340 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF36738D209E98160099A340 /* AppDelegate.swift */; };
 		AF367393209E98170099A340 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF367391209E98170099A340 /* Main.storyboard */; };
 		AF367395209E98190099A340 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF367394209E98190099A340 /* Assets.xcassets */; };
@@ -255,7 +254,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3AA87F0224840ED00EF6377 /* AVFoundation.framework in Frameworks */,
-				44A439AAED1B927FD10F24B4 /* Pods_CheckList_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,7 +868,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VHXA3TE4B;
+				DEVELOPMENT_TEAM = D678R58TXJ;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -894,7 +892,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VHXA3TE4B;
+				DEVELOPMENT_TEAM = D678R58TXJ;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
