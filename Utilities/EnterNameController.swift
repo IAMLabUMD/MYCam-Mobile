@@ -20,7 +20,7 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var enterNameLabel: UILabel!
     
-    var header = "New Object"
+    var header = "Name your object"
     var objectName: String?
     //var delegate: EnterNameViewDelegate?
     //var parentView: TrainingVC!
@@ -30,6 +30,7 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     var confirmTitle = ""
     var denyTitle = ""
     var hideTextfield = false
+    var hideCancelButton = false
     var placeholder = "Enter the name of this object"
     
 
@@ -50,7 +51,11 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
         cancelButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
         alertView.addShadow()
         
+        saveButton.isEnabled = false
+        saveButton.backgroundColor = .lightGray
+        
         objName.isHidden = hideTextfield
+        cancelButton.isHidden = hideCancelButton
         
         if confirmTitle != "" {
             saveButton.setTitle(confirmTitle, for: .normal)
@@ -94,9 +99,6 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layoutIfNeeded()
-//        cancelButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
-//        cancelButton.addBorder(side: .Right, color: alertViewGrayColor, width: 1)
-//        saveButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
     }
 
     func setupView() {
@@ -118,15 +120,15 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
         Log.writeToLog("\(Actions.tappedOnBtn) okEnterNameButton")
         
         let oName = objName.text!
+        
+        
         if oName == "" {
             
         } else {
             
-            //delegate?.rename(newName: oName)
             objectName = oName
             Log.writeToLog("action= entered name: \(oName)")
             self.dismiss(animated: true, completion: nil)
-            //delegate?.addItemTapped(object_name: oName)
             
         }
         
@@ -157,6 +159,18 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
         
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, cancelButton)
         return true
+    }
+    
+    
+    @IBAction func didEnterText(_ sender: UITextField) {
+        
+        if Functions.validText(text: sender.text) {
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = #colorLiteral(red: 0, green: 0.5663797259, blue: 0.3164396882, alpha: 1)
+        } else {
+            saveButton.isEnabled = false
+            saveButton.backgroundColor = .lightGray
+        }
     }
     
 }

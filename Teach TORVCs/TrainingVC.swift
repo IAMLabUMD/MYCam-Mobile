@@ -34,7 +34,7 @@ class TrainingVC: BaseItemAudioVC {
         setupButtons()
         view.accessibilityLabel = "Enter description"
         navigationItem.titleView = Functions.createHeaderView(title: "New Object")
-        presentEnterNameVC()
+        presentEnterNameVC(hideCancelBtn: true)
         
         Log.writeToLog("\(Actions.enteredScreen.rawValue) \(Screens.editNewObjScreen.rawValue)")
         print("start TrainingVC")
@@ -53,7 +53,7 @@ class TrainingVC: BaseItemAudioVC {
     }
     
     override func handleSecondaryActionButton() {
-        presentEnterNameVC()
+        presentEnterNameVC(hideCancelBtn: false)
     }
     
     func setupButtons() {
@@ -197,7 +197,7 @@ class TrainingVC: BaseItemAudioVC {
         self.present(customAlert, animated: true, completion: nil)
     }
     
-    func presentEnterNameVC() {
+    func presentEnterNameVC(hideCancelBtn: Bool) {
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let enterNameVC = mainStoryboard.instantiateViewController(withIdentifier: "EnterNameUI") as! EnterNameController
@@ -206,6 +206,7 @@ class TrainingVC: BaseItemAudioVC {
         enterNameVC.definesPresentationContext = true
         enterNameVC.modalTransitionStyle = .crossDissolve
         enterNameVC.trainingVC = self
+        enterNameVC.hideCancelButton = hideCancelBtn
         present(enterNameVC, animated: true, completion: nil)
         
     }

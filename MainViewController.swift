@@ -46,8 +46,8 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        displayLink = CADisplayLink(target: self, selector: #selector(handleAnimation))
-        displayLink.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+//        displayLink = CADisplayLink(target: self, selector: #selector(handleAnimation))
+//        displayLink.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
         
         print("MainViewController: \(ParticipantViewController.userName) \(ParticipantViewController.category) \(ParticipantViewController.mode)")
         setUpCamera()
@@ -534,6 +534,7 @@ class MainViewController: BaseViewController {
         if output.contains("training in progress") {
             //showToast()
             isTraining = true
+            bgView.alpha = 1.0
             print("yes training")
             
         } else {

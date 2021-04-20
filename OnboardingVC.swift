@@ -52,7 +52,7 @@ class OnboardingVC: UIViewController {
         
         view.backgroundColor = .themeForeground
         titleLabel.font = .rounded(ofSize: 21, weight: .bold)
-        titleLabel.textColor = .white
+        titleLabel.textColor = .themeForeground
         
         descriptionLabel.font = .rounded(ofSize: 18, weight: .bold)
         descriptionLabel.textColor = .white

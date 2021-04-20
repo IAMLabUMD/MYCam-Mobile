@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         
+        
         // Check to see if onboarding screens should be presented
         if let onboardedUser = UserDefaults.standard.value(forKey: "onboardedUser") as? Bool {
             

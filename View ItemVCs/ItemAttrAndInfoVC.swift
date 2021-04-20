@@ -17,8 +17,8 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     var objectName = ""
     
-    var attributes = ["Small object", "Cropped object", "Blurry", "Hand in image"]
-    var var_attributes = ["Background variation", "Side variation", "Distance variation"]
+    var attributes = ["Background variation", "Side variation", "Distance variation", "Small object", "Cropped object", "Blurry", "Hand in image"]
+//    var var_attributes = ["Background variation", "Side variation", "Distance variation"]
     
     var backgroundVariation = 0.0
     var sideVariation = 0.0
@@ -108,15 +108,13 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return var_attributes.count
-        } else if section == 2 {
             return attributes.count
         }
         return 1
@@ -127,9 +125,9 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
 //            let cell = SwitchTableViewCell()
             
             return switchCell
-        } else if indexPath.section == 3 {
+        } else if indexPath.section == 2 {
             return collectionViewCell
-        } else if indexPath.section == 4 {
+        } else if indexPath.section == 3 {
             return playAudioCell
         }
         
@@ -137,8 +135,6 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
 
         // Configure the cell...
         if indexPath.section == 1 {
-            cell.attributeLabel.text = var_attributes[indexPath.row]
-        } else if indexPath.section == 2 {
             cell.attributeLabel.text = attributes[indexPath.row]
         }
         
@@ -148,7 +144,7 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
                 if ItemAttrAndInfoVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
-                    cell.level.text = backgroundVariation > 0.1 ? "Yes": "No"
+                    cell.level.text = backgroundVariation > 0.1 ? "High": "Low"
                 }
 
             } else if indexPath.row == 1 {
@@ -157,7 +153,7 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
                 if ItemAttrAndInfoVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
-                    cell.level.text = sideVariation > 1 ? "Yes": "No"
+                    cell.level.text = sideVariation > 1 ? "High": "Low"
                 }
 
             } else if indexPath.row == 2 {
@@ -166,40 +162,37 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
                 if ItemAttrAndInfoVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
-                    cell.level.text = distanceVariation > 0.1 ? "Yes": "No"
+                    cell.level.text = distanceVariation > 0.1 ? "High": "Low"
                 }
-            }
-        }
-        else if indexPath.section == 2 {
-            if indexPath.row == 0 {
+            } else if indexPath.row == 3 {
                 if ItemAttrAndInfoVC.VERBOSE {
                     cell.level.text = "\(cnt_small) out of 30"
                 } else {
-                    cell.level.text = cnt_small > 5 ? "Yes": "No"
+                    cell.level.text = cnt_small > 5 ? "High": "Low"
                 }
                 
-            } else if indexPath.row == 1 {
+            } else if indexPath.row == 4 {
                 
                 if ItemAttrAndInfoVC.VERBOSE {
                     cell.level.text = "\(cnt_crop) out of 30"
                 } else {
-                    cell.level.text = cnt_crop > 5 ? "Yes": "No"
+                    cell.level.text = cnt_crop > 5 ? "High": "Low"
                 }
                 
-            } else if indexPath.row == 2 {
+            } else if indexPath.row == 5 {
                 
                 if ItemAttrAndInfoVC.VERBOSE {
                     cell.level.text = "\(cnt_blurry) out of 30"
                 } else {
-                    cell.level.text = cnt_blurry > 5 ? "Yes": "No"
+                    cell.level.text = cnt_blurry > 5 ? "High": "Low"
                 }
                 
-            } else if indexPath.row == 3 {
+            } else if indexPath.row == 6 {
                 
                 if ItemAttrAndInfoVC.VERBOSE {
                     cell.level.text = "\(cnt_hand) out of 30"
                 } else {
-                    cell.level.text = cnt_hand > 5 ? "Yes": "No"
+                    cell.level.text = cnt_hand > 5 ? "High": "Low"
                 }
             }
         }
@@ -210,11 +203,11 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 3 {
+        if indexPath.section == 2 {
             return CollectionViewTableCell.CollectionViewHeight
         }
         
-        if indexPath.section == 4 {
+        if indexPath.section == 3 {
             return playAudioCell.PlayAudioViewHeight
         }
         return 77
@@ -235,12 +228,10 @@ class ItemAttrAndInfoVC: UIViewController, UITableViewDataSource, UITableViewDel
         if section == 0 {
             headerLabel.text = "Verbosity"
         } else if section == 1 {
-           headerLabel.text = "Variation attributes"
+           headerLabel.text = "Attributes"
         } else if section == 2 {
-            headerLabel.text = "Photo attributes"
-        } else if section == 3 {
             headerLabel.text = "Images"
-        } else if section == 4 {
+        } else if section == 3 {
             headerLabel.text = "Audio description"
         }
         
@@ -270,7 +261,7 @@ class SwitchTableViewCell2: UITableViewCell {
     
     func initCell() {
         self.contentView.backgroundColor = .white
-        verbosityLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 24))
+        verbosityLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 160, height: 24))
         verbosityLabel.text = "Verbose"
         verbosityLabel.textColor = .darkGray
         verbosityLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
@@ -280,7 +271,7 @@ class SwitchTableViewCell2: UITableViewCell {
         
         self.contentView.setupView(viewToAdd: verbosityLabel, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
         
-        self.contentView.setupView(viewToAdd: verbositySwitch, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -16, topView: self.contentView, shouldSwitchTop: false, topConstant: 8, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 8)
+        self.contentView.setupView(viewToAdd: verbositySwitch, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -20, topView: self.contentView, shouldSwitchTop: false, topConstant: 25, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
     }
     
     func setup() {
@@ -288,9 +279,9 @@ class SwitchTableViewCell2: UITableViewCell {
     
     override func layoutSubviews() {
         if ItemAttrAndInfoVC.VERBOSE {
-            verbosityLabel.text = "Verbose"
+            verbosityLabel.text = "More verbose"
         } else {
-            verbosityLabel.text = "Binary"
+            verbosityLabel.text = "Less verbose"
         }
     }
     
@@ -324,19 +315,27 @@ class ImageCollectionViewSmallCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         imageView.center = contentView.center
     }
-    
+}
+
+class AccessibleCollectionView: UICollectionView {
+    override func accessibilityElementCount() -> Int {
+        guard let dataSource = dataSource else {
+            return 0
+        }
+
+        return dataSource.collectionView(self, numberOfItemsInSection: 0)
+    }
 }
 
 
-
-class CollectionViewTableCell: UITableViewCell, UICollectionViewDataSource {
-    let imageCollectionView: UICollectionView = {
+class CollectionViewTableCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
+    let imageCollectionView: AccessibleCollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 16, left: 8, bottom: 8, right: 8)
         layout.itemSize = CGSize(width: 50, height: 50)
         
         let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width-30, height: CollectionViewTableCell.CollectionViewHeight)
-        let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        let collectionView = AccessibleCollectionView(frame: frame, collectionViewLayout: layout)
         
         collectionView.register(ImageCollectionViewSmallCell.self, forCellWithReuseIdentifier: "imageCell")
         collectionView.backgroundColor = .white
@@ -354,6 +353,8 @@ class CollectionViewTableCell: UITableViewCell, UICollectionViewDataSource {
     
     func initCell(object_name: String) {
         imageCollectionView.dataSource = self
+        imageCollectionView.delegate = self
+        imageCollectionView.isAccessibilityElement = true
         images = Functions.fetchImages(for: object_name)
         
         self.contentView.addSubview(imageCollectionView)
@@ -364,7 +365,6 @@ class CollectionViewTableCell: UITableViewCell, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("number of images in collection view \(images.count)")
         return images.count
     }
     
@@ -372,6 +372,10 @@ class CollectionViewTableCell: UITableViewCell, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewSmallCell
         cell.imageView.image = images[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected \(indexPath.row) in collection view")
     }
 }
 
@@ -494,7 +498,10 @@ class PlayAudioTableCell: UITableViewCell, AVAudioPlayerDelegate, AVAudioRecorde
         }
         
         self.contentView.backgroundColor = .white
-        self.contentView.setupView(viewToAdd: progressBar, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 0, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
+        progressBar.isAccessibilityElement = false
+        elapsedLabel.isAccessibilityElement = false
+        remainingLabel.isAccessibilityElement = false
+        self.contentView.setupView(viewToAdd: progressBar, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 10, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
 
         self.contentView.setupView(viewToAdd: elapsedLabel, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 8, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: progressBar, shouldSwitchTop: true, topConstant: 8, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
 

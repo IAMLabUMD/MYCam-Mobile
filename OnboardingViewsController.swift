@@ -21,10 +21,9 @@ class OnboardingViewsController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        print("Hodor?")
-        let scan = OnboardingScreen(title: "", description: "Hold up your phone and recognize objects just by pointing your camera at them.", image: UIImage(named: "scan")!.withRenderingMode(.alwaysTemplate), index: 1)
-        let teach = OnboardingScreen(title: "", description: "Take 30 photos of the object you would like to recognize and the object recognizer will train itself to identify that object.", image: UIImage(named: "teach")!.withRenderingMode(.alwaysTemplate), index: 2)
-        let view = OnboardingScreen(title: "", description: "Check the list of items. Listen to the audio description and edit the name of an object in the list.", image: UIImage(named: "items")!.withRenderingMode(.alwaysTemplate), index: 3)
+        let scan = OnboardingScreen(title: "Scan", description: "Hold up your phone and recognize objects just by pointing your camera at them.", image: UIImage(named: "scan")!.withRenderingMode(.alwaysTemplate), index: 1)
+        let teach = OnboardingScreen(title: "Teach", description: "Take 30 photos of the object you would like to recognize and the object recognizer will train itself to identify that object.", image: UIImage(named: "teach")!.withRenderingMode(.alwaysTemplate), index: 2)
+        let view = OnboardingScreen(title: "Review", description: "Check the list of items. Listen to the audio description and edit the name of an object in the list.", image: UIImage(named: "items")!.withRenderingMode(.alwaysTemplate), index: 3)
         
         scan.next = teach
         teach.previous = scan
@@ -36,9 +35,7 @@ class OnboardingViewsController: UIViewController {
         if segue.identifier == "embededSegue" {
             
             if let destination = segue.destination as? OnboardingVC {
-                print(screens.count)
                 destination.screen = screens[0]
-                
             }
         }
     }

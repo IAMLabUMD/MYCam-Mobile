@@ -562,6 +562,7 @@ extension ChecklistViewController2 {
     @IBAction func handleYesClearButton(_ sender: Any) {
         clearItems()
         textToSpeech("All items are removed.")
+        dismissClearView()
     }
     
     @IBAction func handleNoClearButton(_ sender: Any) {

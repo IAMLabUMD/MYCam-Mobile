@@ -186,6 +186,10 @@ class Functions {
         return newWord
     }
     
+    static func validText(text: String?) -> Bool {
+        return text?.rangeOfCharacter(from: .letters) != nil
+    }
+    
     
     // MARK: - Gets gyroscope data when the user is using the camera
     static func startGyros(for image: Int) {
