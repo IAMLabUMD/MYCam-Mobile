@@ -13,7 +13,7 @@ import MediaPlayer //Only for hidding  Volume view
 class CameraViewController: UIViewController, AVAudioPlayerDelegate {
 
 //    var guideText = "This is a screen for taking photos of the item. You need 30 photos of this item. You can take a photo by tapping on the 'take photo' button at the bottom center. The phone will vibrate everytime you take a photo. You will be notified when you take every 5 photos and when you finished taking photos. Tap on any part of the screen to start."
-    var guideText = "You can teach TOR to recognize an item by taking 30 photos of the item. TOR works best when you capture the object with lot of variations and angles."
+    var guideText = "You can teach MYCam to recognize an item by taking 30 photos of the item. MYCam works best when you capture the object with lot of variations and angles."
     var olView: UIView!
     @IBOutlet weak var cameraView: UIImageView!
     @IBOutlet weak var captureView: UIImageView!
@@ -68,7 +68,7 @@ class CameraViewController: UIViewController, AVAudioPlayerDelegate {
 
         }
         
-        navigationItem.titleView = Functions.createHeaderView(title: "Teach TOR")
+        navigationItem.titleView = Functions.createHeaderView(title: "Teach MYCam")
         photoAttrView.layer.cornerRadius = 12
         dismissButton.roundButton(withBackgroundColor: .clear, opacity: 0)
         

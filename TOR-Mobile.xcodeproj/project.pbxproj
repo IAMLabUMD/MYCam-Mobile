@@ -195,7 +195,7 @@
 		17CA82D525F7DBDB00BD3D9F /* OnboardingNavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavVC.swift; sourceTree = "<group>"; };
 		17CC0C83252D8C0A00090FDA /* ItemAttributesTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAttributesTVC.swift; sourceTree = "<group>"; };
 		9B4BF32A4657EF7668E2130E /* Pods-CheckList app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckList app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckList app/Pods-CheckList app.debug.xcconfig"; sourceTree = "<group>"; };
-		AF36738A209E98160099A340 /* TOR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF36738A209E98160099A340 /* MYCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF36738D209E98160099A340 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF367392209E98170099A340 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF367394209E98190099A340 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -384,7 +384,7 @@
 		AF36738B209E98160099A340 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF36738A209E98160099A340 /* TOR.app */,
+				AF36738A209E98160099A340 /* MYCam.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -477,7 +477,7 @@
 			);
 			name = "TOR-Mobile";
 			productName = "CheckList app";
-			productReference = AF36738A209E98160099A340 /* TOR.app */;
+			productReference = AF36738A209E98160099A340 /* MYCam.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -868,14 +868,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D678R58TXJ;
+				DEVELOPMENT_TEAM = 8VHXA3TE4B;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IAM.TOR2;
-				PRODUCT_NAME = TOR;
+				PRODUCT_NAME = MYCam;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CheckList app-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -892,14 +892,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D678R58TXJ;
+				DEVELOPMENT_TEAM = 8VHXA3TE4B;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IAM.TOR2;
-				PRODUCT_NAME = TOR;
+				PRODUCT_NAME = MYCam;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CheckList app-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
