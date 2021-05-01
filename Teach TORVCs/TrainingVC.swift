@@ -106,12 +106,17 @@ class TrainingVC: BaseItemAudioVC {
         
             
         DispatchQueue.global(qos: .background).async {
+            self.textToSpeech("Training started.")
+            
+            DispatchQueue.main.async {
+//                self.effectView.removeFromSuperview()
+                self.navigationController?.popToRootViewController(animated: true)
+            }
             //self.uploadPhotos()
             
             Functions.deleteImages(for: self.object_name)
             Functions.saveRecording(for: self.object_name, oldName: "")
             
-            self.textToSpeech("Training started.")
             self.httpController.reqeustTrain(train_id: self.train_id!, object_name: self.object_name){(response) in
             }
             
@@ -121,11 +126,6 @@ class TrainingVC: BaseItemAudioVC {
 //            }
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
                 Functions.stopGyros()
-            }
-            
-            DispatchQueue.main.async {
-//                self.effectView.removeFromSuperview()
-                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }

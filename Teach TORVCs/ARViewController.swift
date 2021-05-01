@@ -55,6 +55,8 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     internal var screenCenter = CGPoint()
     var start_time = ""
     
+    var st_second = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -106,7 +108,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss-SSSS"
         start_time = formatter.string(from: date)
-        
+        st_second = CFAbsoluteTimeGetCurrent()
 //        generateAndSaveMergedARObject()
     }
     
@@ -151,26 +153,51 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         var o1 = [ARReferenceObject]()
         var o2 = [ARReferenceObject]()
         var o3 = [ARReferenceObject]()
+        
+        var o1_back = [ARReferenceObject]()
+        var o2_back = [ARReferenceObject]()
+        var o3_back = [ARReferenceObject]()
         for obj in referenceObjects {
-            if obj.name!.contains(obj_name1) {
-                o1.append(obj)
-            } else if obj.name!.contains(obj_name2) {
-                o2.append(obj)
-            } else if obj.name!.contains(obj_name3) {
-                o3.append(obj)
+            if  !obj.name!.contains("merged") {
+                if obj.name!.contains(obj_name1) {
+                    if obj.name!.contains("back") {
+                        o1_back.append(obj)
+                    } else {
+                        o1.append(obj)
+                    }
+                } else if obj.name!.contains(obj_name2) {
+                    if obj.name!.contains("back") {
+                        o2_back.append(obj)
+                    } else {
+                        o2.append(obj)
+                    }
+                } else if obj.name!.contains(obj_name3) {
+                    if obj.name!.contains("back") {
+                        o3_back.append(obj)
+                    } else {
+                        o3.append(obj)
+                    }
+                }
             }
         }
-        print("obj lists \(o1.count) \(o2.count) \(o3.count)")
+        print("obj lists \(o1.count) \(o2.count) \(o3.count) \(o1_back.count) \(o2_back.count) \(o3_back.count)")
             
         print("merge objects")
         let merged_o1 = mergeARObjects(obj_list: o1)
         let merged_o2 = mergeARObjects(obj_list: o2)
         let merged_o3 = mergeARObjects(obj_list: o3)
+        let merged_o1_back = mergeARObjects(obj_list: o1_back)
+        let merged_o2_back = mergeARObjects(obj_list: o2_back)
+        let merged_o3_back = mergeARObjects(obj_list: o3_back)
         
         print("save objects")
-        saveARObject(obj: merged_o1, filename: "merged_\(obj_name1).arobject")
-        saveARObject(obj: merged_o2, filename: "merged_\(obj_name2).arobject")
-        saveARObject(obj: merged_o3, filename: "merged_\(obj_name3).arobject")
+        saveARObject(obj: merged_o1, filename: "merged_\(obj_name1)_front.arobject")
+        saveARObject(obj: merged_o2, filename: "merged_\(obj_name2)_front.arobject")
+        saveARObject(obj: merged_o3, filename: "merged_\(obj_name3)_front.arobject")
+        
+        saveARObject(obj: merged_o1_back, filename: "merged_\(obj_name1)_back.arobject")
+        saveARObject(obj: merged_o2_back, filename: "merged_\(obj_name2)_back.arobject")
+        saveARObject(obj: merged_o3_back, filename: "merged_\(obj_name3)_back.arobject")
     }
     
     func saveARObject(obj: ARReferenceObject, filename: String) {
@@ -195,29 +222,23 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     }
     
     func initARScene() {
-        
         print("make config")
         let configuration = ARWorldTrackingConfiguration()
         guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: "ar_objects", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
-        
-        var o1: ARReferenceObject?
-        var o2: ARReferenceObject?
-        var o3: ARReferenceObject?
+//        let obj_names = ["merged_Lays_v2", "merged_Cheetos_v2", "merged_Fritos_v2"]
+//        let obj_names = ["Cheetos4", "Fritos4", "Lays4"]
+        let obj_names = ["merged_Lays_front", "merged_Cheetos_front", "merged_Fritos_front", "merged_Lays_back", "merged_Cheetos_back", "merged_Fritos_back"]
+//        let obj_names = ["Cheetos4", "Fritos4", "Lays4", "Cheetos5-back", "Fritos5-back", "Lays5-back"]
+        var det_objs = [ARReferenceObject]()
         for obj in referenceObjects {
-            if obj.name! == "merged_Lays" {
-                o1 = obj
-            }
-            if obj.name! == "merged_Cheetos" {
-                o2 = obj
-            }
-            if obj.name! == "merged_Fritos" {
-                o3 = obj
+            if obj_names.contains(obj.name!) {
+                det_objs.append(obj)
             }
         }
         
-        configuration.detectionObjects = [o1!, o2!, o3!]
+        configuration.detectionObjects = Set(det_objs)
         
         arSceneView.session.run(configuration)
         initDetection()
@@ -230,6 +251,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
         averageDetectionDelayInSeconds = 0
         
         self.lastDetectionStartTime = Date()
+        print("start detection. \(CFAbsoluteTimeGetCurrent() - st_second), \(lastDetectionStartTime)")
         
         startNoDetectionTimer()
     }
@@ -248,10 +270,18 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     }
     
     var detectedObject: ARObjectAnchor?
+    var prev_name = ""
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if let objectAnchor = anchor as? ARObjectAnchor {
             let name = objectAnchor.referenceObject.name!
             print("object is detected \(name), \(detections)")
+            
+            if prev_name != name {
+                DispatchQueue.main.async {
+                    self.animateLabel(message: name, showSubtitle: true)
+                }
+            }
+            prev_name = name
             
             detectedObject = objectAnchor
             successfulDetection(objectAnchor)
@@ -331,9 +361,12 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
                     ar_side = "right"
                 }
             }
+            ar_side += "-" + (detectedObject?.name)!
             
             let camPos = String(format: "%7.2f %7.2f %7.2f - \(ar_side)", x, y, z)
-            print("Cam position: \(camPos) \(detectedObject?.name)")
+            if framecnt%10 == 0 {
+                print("Cam position: \(camPos) \(framecnt)")
+            }
         }
     }
     
@@ -806,7 +839,6 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             print("The image is saved.\n\(filename)")
         }
         
-        
         if index == ParticipantViewController.itemNum {
             textToSpeech("Done")
             animateLabel(message: "Done", showSubtitle: false)
@@ -824,9 +856,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
                 vc.train_id = "Train-\(self.start_time)"
                 self.navigationController?.pushViewController(vc, animated: true)
             })
-            
         }
-        
         print(countSamples(object_name))
     }
     
