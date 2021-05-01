@@ -99,13 +99,14 @@ class ChecklistViewController: UIViewController { //UITableViewController {
                     continue
                 }
                 
-                var date = "N/A"
+                var date = Date()
                 if let attributes = try? FileManager.default.attributesOfItem(atPath: url.path) as [FileAttributeKey: Any],
                     let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
                     print(creationDate)
+                    date = creationDate
                 }
                 
-                itemArray.append(Item(itemName: cname, itemDate: "tmp", relativeDate: "tmp", image:"1"))
+                itemArray.append(Item(itemName: cname, itemDate: "tmp", relativeDate: "tmp", date: date, image:"1"))
             }
         } catch {
             print("Error while enumerating classes \(documentsDirectory): \(error.localizedDescription)")

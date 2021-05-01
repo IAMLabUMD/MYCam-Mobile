@@ -52,7 +52,7 @@ class ItemList {
                     
                     if let attributes = try? FileManager.default.attributesOfItem(atPath: url.path) as [FileAttributeKey: Any],
                         let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
-                        itemArray.append(Item(itemName: cname, itemDate: formatDateAbsolute(date: creationDate), relativeDate: formatDateRelative(date: creationDate), image:"1"))
+                        itemArray.append(Item(itemName: cname, itemDate: formatDateAbsolute(date: creationDate), relativeDate: formatDateRelative(date: creationDate), date: creationDate, image:"1"))
                         //print(cname)
                     }
                 }
@@ -61,7 +61,11 @@ class ItemList {
             print("Error while enumerating classes \(Log.userDirectory): \(error.localizedDescription)")
         }
         
-        itemArray = itemArray.sorted(by: { $0.itemDate > $1.itemDate })
+        
+        //itemArray = itemArray.sorted(by: { $0.itemDate > $1.itemDate })
+        
+        // This line will cause previous versions of the app to crash because prior Items did not have the 'date' property.
+        itemArray = itemArray.sorted(by: {$0.date > $1.date})
     }
     
     func countSamples (_ label: String) -> Int {

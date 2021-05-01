@@ -820,7 +820,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
 //                self.navigationController?.pushViewController(vc, animated: true)
                 
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReviewTrainingVC") as! ReviewTrainingVC
-                vc.item = Item(itemName: "New object", itemDate: "", relativeDate: "Now", image:"1")
+                vc.item = Item(itemName: "New object", itemDate: "", relativeDate: "Now", date: Date(), image:"1")
                 vc.train_id = "Train-\(self.start_time)"
                 self.navigationController?.pushViewController(vc, animated: true)
             })

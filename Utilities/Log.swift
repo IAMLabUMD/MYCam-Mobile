@@ -88,25 +88,6 @@ class Log {
                     
                 }
                 
-//                print("Log entry --> \(String(decoding: textData, as: UTF8.self))")
-                
-                
-                
-//                if !FileManager.default.fileExists(atPath: (fileURL.absoluteString)) {
-//                    FileManager.default.createFile(atPath: (fileURL.absoluteString), contents: textData, attributes: nil)
-//                    print("Log file is created. \(fileURL.absoluteString)")
-//
-//                    try textData.write(to: fileURL)
-//                } else {
-//                    if let fileHandle = try? FileHandle(forWritingTo: fileURL) {
-//                        defer {
-//                            fileHandle.closeFile()
-//                        }
-//
-//                        fileHandle.seekToEndOfFile()
-//                        fileHandle.write(textData)
-//                    }
-//                }
                 if let fileHandle = try? FileHandle(forWritingTo: fileURL) {
                     defer {
                         fileHandle.closeFile()
