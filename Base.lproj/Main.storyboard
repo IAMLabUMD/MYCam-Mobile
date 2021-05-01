@@ -13,7 +13,7 @@
         <!--Item Audio View Controller-->
         <scene sceneID="e2C-cw-Jqq">
             <objects>
-                <viewController storyboardIdentifier="ItemAudioViewController" id="kfA-ft-SVb" customClass="ItemAudioViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemAudioViewController" id="kfA-ft-SVb" customClass="ItemAudioViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wjN-KR-VGc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="sct-HM-Yez" customClass="ImageCollectionViewCell" customModule="TOR" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="sct-HM-Yez" customClass="ImageCollectionViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="l5D-TF-qhe">
@@ -147,7 +147,7 @@
         <!--Item Info View Controller-->
         <scene sceneID="4fr-12-NnQ">
             <objects>
-                <viewController storyboardIdentifier="ItemInfoViewController" id="oXt-Sc-QAr" customClass="ItemInfoViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemInfoViewController" id="oXt-Sc-QAr" customClass="ItemInfoViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p8L-mE-evb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,7 +163,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="bme-q5-9Lo" customClass="ImageCollectionViewCell" customModule="TOR" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="bme-q5-9Lo" customClass="ImageCollectionViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="r45-xd-gz0">
@@ -301,7 +301,7 @@
         <!--Checklist View Controller-->
         <scene sceneID="opJ-NG-PY5">
             <objects>
-                <tableViewController storyboardIdentifier="ChecklistViewController" id="KlT-Pe-Z7h" customClass="ChecklistViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ChecklistViewController" id="KlT-Pe-Z7h" customClass="ChecklistViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <outlet property="SearchBar" destination="gNv-nk-YcU" id="c7N-p8-ptq"/>
                         <outlet property="UITableView" destination="6Uu-QT-pAn" id="VPF-zl-vaE"/>
@@ -318,7 +318,7 @@
                         <textInputTraits key="textInputTraits"/>
                     </searchBar>
                     <prototypes>
-                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="17" reuseIdentifier="ChecklistItem" rowHeight="130" id="zHt-rv-jsk" customClass="ChecklistTableViewCell" customModule="TOR" customModuleProvider="target">
+                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="17" reuseIdentifier="ChecklistItem" rowHeight="130" id="zHt-rv-jsk" customClass="ChecklistTableViewCell" customModule="MYCam" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="72" width="375" height="130"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zHt-rv-jsk" id="NQ0-fW-Pqr">
@@ -346,7 +346,7 @@
         <!--Training View Controller-->
         <scene sceneID="FWC-ti-I9o">
             <objects>
-                <viewController storyboardIdentifier="TrainingViewController" id="DP6-4P-HlQ" customClass="TrainingViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrainingViewController" id="DP6-4P-HlQ" customClass="TrainingViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nTA-RR-yqP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -371,7 +371,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="XRP-jr-dQx" customClass="ImageCollectionViewCell" customModule="TOR" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="XRP-jr-dQx" customClass="ImageCollectionViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="111" height="117"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2J1-Zg-zeZ">
@@ -545,7 +545,7 @@
         <!--Item AttrVC-->
         <scene sceneID="x1S-I8-Zcx">
             <objects>
-                <viewController storyboardIdentifier="itemAttrVC" id="gte-Kz-gSX" customClass="ItemAttrVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="itemAttrVC" id="gte-Kz-gSX" customClass="ItemAttrVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DXu-d9-go1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -586,7 +586,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="72" id="Zle-pV-gJm" customClass="ItemAttributeTableViewCell" customModule="TOR" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="72" id="Zle-pV-gJm" customClass="ItemAttributeTableViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="245" width="343" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zle-pV-gJm" id="QLh-eS-LF3">
@@ -653,7 +653,7 @@
         <!--Item AttributesTVC-->
         <scene sceneID="hKc-up-jbc">
             <objects>
-                <tableViewController storyboardIdentifier="ItemAttributesVC" id="LvL-zd-HCQ" customClass="ItemAttributesTVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ItemAttributesVC" id="LvL-zd-HCQ" customClass="ItemAttributesTVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="40" sectionFooterHeight="28" id="IFd-eR-DND">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -720,7 +720,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="55" id="o34-aO-BYV" customClass="ItemAttributeTableViewCell" customModule="TOR" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="55" id="o34-aO-BYV" customClass="ItemAttributeTableViewCell" customModule="MYCam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="245" width="375" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o34-aO-BYV" id="dPV-1v-uNN">
@@ -780,7 +780,7 @@
         <!--Enter Name Controller-->
         <scene sceneID="Zvu-8g-RMT">
             <objects>
-                <viewController storyboardIdentifier="EnterNameUI" modalPresentationStyle="overFullScreen" id="qJg-aH-MXR" customClass="EnterNameController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterNameUI" modalPresentationStyle="overFullScreen" id="qJg-aH-MXR" customClass="EnterNameController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FUe-cV-zzv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -880,7 +880,7 @@
         <!--Camera View Controller-->
         <scene sceneID="yuf-7B-VZc">
             <objects>
-                <viewController storyboardIdentifier="CameraViewController" id="ZtY-Q2-iqX" customClass="CameraViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" id="ZtY-Q2-iqX" customClass="CameraViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KHg-QK-C5B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1048,7 +1048,7 @@
         <!--Cam Finish View Controller-->
         <scene sceneID="NLN-R2-dAY">
             <objects>
-                <viewController storyboardIdentifier="CamFinishViewController" id="4dU-U6-kJq" customClass="CamFinishViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CamFinishViewController" id="4dU-U6-kJq" customClass="CamFinishViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZEM-R6-GiE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1105,7 +1105,7 @@
         <!--Audio View Controller-->
         <scene sceneID="QwI-WX-VGP">
             <objects>
-                <viewController id="cdc-tW-afa" customClass="AudioViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cdc-tW-afa" customClass="AudioViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9xj-5i-TmD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1152,7 +1152,7 @@
         <!--Coke-->
         <scene sceneID="ohK-NH-nfO">
             <objects>
-                <viewController title="Coke" id="Faf-PU-xUA" customClass="ViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Coke" id="Faf-PU-xUA" customClass="ViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FJ2-QI-lbs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1168,7 +1168,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="iJW-4h-R87" customClass="CollectionViewCell" customModule="TOR" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="iJW-4h-R87" customClass="CollectionViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="116" height="116"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1211,7 +1211,7 @@
         <!--Checklist View Controller2-->
         <scene sceneID="Jnl-MJ-Rhp">
             <objects>
-                <viewController storyboardIdentifier="ObjectsViewController" id="ny3-Ui-dE6" customClass="ChecklistViewController2" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ObjectsViewController" id="ny3-Ui-dE6" customClass="ChecklistViewController2" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SQK-Nw-E9M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1222,7 +1222,7 @@
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexTrackingBackgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ChecklistItem2" rowHeight="151" id="fPv-pt-sLO" customClass="ChecklistTableViewCell" customModule="TOR" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ChecklistItem2" rowHeight="151" id="fPv-pt-sLO" customClass="ChecklistTableViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="151"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fPv-pt-sLO" id="vv6-tF-pvJ">
@@ -1473,7 +1473,7 @@
         <!--Main View Controller-->
         <scene sceneID="yTD-s0-YZM">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CGf-IY-W6Q" customClass="MainViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CGf-IY-W6Q" customClass="MainViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" tag="10" contentMode="scaleToFill" id="QuS-qy-4bK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1596,18 +1596,11 @@
         <!--Welcome View Controller-->
         <scene sceneID="aqt-18-sfS">
             <objects>
-                <viewController storyboardIdentifier="WelcomeViewController" id="CTW-lL-AzN" customClass="WelcomeViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" id="CTW-lL-AzN" customClass="WelcomeViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a9j-6U-l8D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TOR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfC-TL-hjS">
-                                <rect key="frame" x="148" y="275" width="79" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                                <color key="textColor" red="0.38039215686274508" green="0.6420714259147644" blue="0.83141982555389404" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Teachable Object Recognizer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DV4-uJ-B1C">
                                 <rect key="frame" x="75" y="323" width="224" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1620,6 +1613,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MYCam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfC-TL-hjS">
+                                <rect key="frame" x="116" y="275" width="143" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                                <color key="textColor" red="0.38039215686274508" green="0.6420714259147644" blue="0.83141982555389404" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1642,7 +1642,7 @@
         <!--Onboarding Views Controller-->
         <scene sceneID="o4m-32-or1">
             <objects>
-                <viewController id="0fe-ao-VPO" customClass="OnboardingViewsController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0fe-ao-VPO" customClass="OnboardingViewsController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LJ1-ZX-zm4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1675,7 +1675,7 @@
         <!--Participant View Controller-->
         <scene sceneID="pGN-Eu-Z0Q">
             <objects>
-                <viewController id="Apz-1c-glq" customClass="ParticipantViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Apz-1c-glq" customClass="ParticipantViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5HZ-RR-vmo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1749,7 +1749,7 @@
         <!--Help View Controller-->
         <scene sceneID="GNv-Gw-V5H">
             <objects>
-                <viewController storyboardIdentifier="HelpViewController" id="hET-cR-qaJ" customClass="HelpViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HelpViewController" id="hET-cR-qaJ" customClass="HelpViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X0p-AR-nGH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1773,7 +1773,7 @@
         <!--Base Navigation Controller-->
         <scene sceneID="pZ2-HC-lnb">
             <objects>
-                <navigationController storyboardIdentifier="baseNavVC" automaticallyAdjustsScrollViewInsets="NO" id="oxL-kA-6CP" customClass="BaseNavigationController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="baseNavVC" automaticallyAdjustsScrollViewInsets="NO" id="oxL-kA-6CP" customClass="BaseNavigationController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XWw-6w-wb5">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -1791,7 +1791,7 @@
         <!--Ready View Controller-->
         <scene sceneID="Q9W-3A-h7h">
             <objects>
-                <viewController storyboardIdentifier="ReadyViewController" id="IW5-3H-2jL" customClass="ReadyViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReadyViewController" id="IW5-3H-2jL" customClass="ReadyViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nan-IV-m3n">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1830,7 +1830,7 @@
         <!--More View Controller-->
         <scene sceneID="ZMT-tn-yNo">
             <objects>
-                <viewController storyboardIdentifier="MoreVC" id="SgJ-BH-br3" customClass="MoreViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoreVC" id="SgJ-BH-br3" customClass="MoreViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jit-WG-YKv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1842,7 +1842,7 @@
                                     <constraint firstAttribute="height" constant="200" id="Epn-aJ-caM"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoreTableViewCell" rowHeight="68" id="Dhx-Ul-3mv" customClass="MoreTableViewCell" customModule="TOR" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoreTableViewCell" rowHeight="68" id="Dhx-Ul-3mv" customClass="MoreTableViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dhx-Ul-3mv" id="kQA-Xl-PD5">
@@ -1918,7 +1918,7 @@
         <!--SettingsVC-->
         <scene sceneID="Gf9-OO-VOm">
             <objects>
-                <viewController storyboardIdentifier="settingsVC" id="s0O-u8-qYy" customClass="SettingsVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settingsVC" id="s0O-u8-qYy" customClass="SettingsVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UdM-m4-KLR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1930,7 +1930,7 @@
                                     <constraint firstAttribute="height" constant="600" id="w3x-oF-aP0"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="68" id="23A-CM-K8t" customClass="SettingsCell" customModule="TOR" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="68" id="23A-CM-K8t" customClass="SettingsCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="23A-CM-K8t" id="Bmn-Zj-v3r">
@@ -1991,7 +1991,7 @@
         <!--InstructionsVC-->
         <scene sceneID="J9O-1T-tMZ">
             <objects>
-                <viewController storyboardIdentifier="instructionsVC" id="jqu-6d-Jvf" customClass="InstructionsVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="instructionsVC" id="jqu-6d-Jvf" customClass="InstructionsVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FEr-sG-spS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2102,7 +2102,7 @@
         <!--Menu View Controller-->
         <scene sceneID="lFl-aF-iHZ">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gk9-ZU-ZyV" customClass="MenuViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gk9-ZU-ZyV" customClass="MenuViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u89-Vy-81n">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2210,7 +2210,7 @@
         <!--Settings Table View Controller-->
         <scene sceneID="jAm-Oi-zpl">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsTableViewController" id="KAc-SO-c6b" customClass="SettingsTableViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableViewController" id="KAc-SO-c6b" customClass="SettingsTableViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ObL-UD-Oz7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2288,7 +2288,7 @@
         <!--AboutVC-->
         <scene sceneID="0Lq-BG-6AY">
             <objects>
-                <viewController storyboardIdentifier="aboutVC" id="rIu-m9-Xu7" customClass="AboutVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="aboutVC" id="rIu-m9-Xu7" customClass="AboutVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="533-SO-0s8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2307,9 +2307,9 @@
                                 <rect key="frame" x="16" y="132" width="343" height="320"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPJ-OD-Olm">
-                                        <rect key="frame" x="8" y="22" width="327" height="133"/>
+                                        <rect key="frame" x="8" y="22" width="1504" height="133"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">Teachable object recognizer (TOR) is an object recognizer that you can train by taking photos of your own objects. The TOR extracts visual information from your object and convert it to a name that you assigned to the object. </string>
+                                        <string key="text">MYCam is an object recognizer that you can train by taking photos of your own objects. The TOR extracts visual information from your object and convert it to a name that you assigned to the object. </string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2344,13 +2344,13 @@
         <!--Help-->
         <scene sceneID="owr-CA-CfJ">
             <objects>
-                <viewController storyboardIdentifier="GuideViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="19a-JD-CmB" customClass="GuideViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuideViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="19a-JD-CmB" customClass="GuideViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GGl-Ef-egc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="435" id="cR4-wR-ecb" customClass="GuideTableViewCell" customModule="TOR" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="435" id="cR4-wR-ecb" customClass="GuideTableViewCell" customModule="MYCam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="435"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cR4-wR-ecb" id="L7l-gy-VYc">
@@ -2393,7 +2393,7 @@
         <!--Support View Controller-->
         <scene sceneID="fH3-jU-pop">
             <objects>
-                <viewController storyboardIdentifier="SupportViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bXT-1k-fGg" customClass="SupportViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SupportViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bXT-1k-fGg" customClass="SupportViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bNk-LM-zB6" customClass="SupportViewController">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2423,7 +2423,7 @@
         <!--AR View Controller-->
         <scene sceneID="Waw-p0-zcl">
             <objects>
-                <viewController restorationIdentifier="AR View Controller" storyboardIdentifier="ARViewController" title="AR View Controller" id="4Yj-j8-npr" customClass="ARViewController" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AR View Controller" storyboardIdentifier="ARViewController" title="AR View Controller" id="4Yj-j8-npr" customClass="ARViewController" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MFV-uV-hYU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2620,7 +2620,7 @@
         <!--OnboardingVC-->
         <scene sceneID="GMx-sP-4Go">
             <objects>
-                <viewController storyboardIdentifier="onboardingVC" id="IJW-NI-4X5" customClass="OnboardingVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onboardingVC" id="IJW-NI-4X5" customClass="OnboardingVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vn0-aR-Kep">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="726"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2722,7 +2722,7 @@
         <!--Onboarding NavVC-->
         <scene sceneID="C3C-mV-Sek">
             <objects>
-                <navigationController storyboardIdentifier="onboardingNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="tN9-gZ-WQI" customClass="OnboardingNavVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="onboardingNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="tN9-gZ-WQI" customClass="OnboardingNavVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zrL-AY-CbF">
                         <autoresizingMask key="autoresizingMask"/>
@@ -2739,7 +2739,7 @@
         <!--Review TrainingVC-->
         <scene sceneID="R9U-0h-D0W">
             <objects>
-                <viewController storyboardIdentifier="ReviewTrainingVC" id="gcU-Va-beO" customClass="ReviewTrainingVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewTrainingVC" id="gcU-Va-beO" customClass="ReviewTrainingVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Ow-vc-idO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2780,7 +2780,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="72" id="V4D-Xv-p5X" customClass="ItemAttributeTableViewCellRT" customModule="TOR" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="72" id="V4D-Xv-p5X" customClass="ItemAttributeTableViewCellRT" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="245" width="294" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V4D-Xv-p5X" id="o9I-I2-iRI">
@@ -2883,7 +2883,7 @@
         <!--Item Attr And InfoVC-->
         <scene sceneID="4p8-n5-w1I">
             <objects>
-                <viewController storyboardIdentifier="ItemAttrAndInfoVC" id="dEu-ip-632" customClass="ItemAttrAndInfoVC" customModule="TOR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemAttrAndInfoVC" id="dEu-ip-632" customClass="ItemAttrAndInfoVC" customModule="MYCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WPA-vX-hGz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2914,7 +2914,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="72" id="39T-u4-Pey" customClass="ItemAttributeTableViewCell" customModule="TOR" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributesCell" rowHeight="72" id="39T-u4-Pey" customClass="ItemAttributeTableViewCell" customModule="MYCam" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="343" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="39T-u4-Pey" id="S0M-D9-Ndh">

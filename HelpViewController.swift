@@ -41,13 +41,13 @@ class HelpViewController: UIViewController {
 //        y = addBody("Teachable object recognizer (TOR) is an object recognizer that you can train by taking photos of your own objects. The TOR extracts visual information from your object and convert it to a name that you assigned to the object. You can learn how to teach, recognize, and manage items with this TOR below.", y: y)
         
         var y = addHead("Teach Objects", y: 20)
-        y = addBody("To start teaching an object, tap on the teach TOR button in the home screen. You will be prompted to enter the name of the object that you want to teach to TOR. After you enter the name, it will take you to a new screen where you can take photos. \n\nYou need to take 30 photos by selecting take photo button in the screen. For every 5 photos, the screen will tell you how many photos are left until 30. When you are done with taking photos, you will be prompted with a message saying 'you finished taking 30 photos' and an OK button. Tap on the OK button to go to the next screen. \n\n At the next screen, this app will start teaching itself, which takes 1 minute. While waiting, you can record a description of the object by tapping on the record button in the screen. The app will tell you when the training is done.", y: y)
+        y = addBody("To start teaching an object, tap on the teach button in the home screen. You will be prompted to enter the name of the object that you want to teach to MYCam. After you enter the name, it will take you to a new screen where you can take photos. \n\nYou need to take 30 photos by selecting take photo button in the screen. For every 5 photos, the screen will tell you how many photos are left until 30. When you are done with taking photos, you will be prompted with a message saying 'you finished taking 30 photos' and an OK button. Tap on the OK button to go to the next screen. \n\n At the next screen, this app will start teaching itself, which takes 1 minute. While waiting, you can record a description of the object by tapping on the record button in the screen. The app will tell you when the training is done.", y: y)
         
         y = addHead("Scanning Objects", y: y)
         y = addBody("You can scan items in the home screen. Move the camera frame to include the item and tap on the scan item button. You will hear the recognition result in response.", y: y)
         
         y = addHead("Managing items", y: y)
-        y = addBody("Tap on the view item list. This will take you to the screen with a list of items that you have taught to this TOR. Tap on the item that you want to change the name, audio description, or photos. This will take you to the next screen where you can do these tasks.", y: y)
+        y = addBody("Tap on the view item list. This will take you to the screen with a list of items that you have taught to this app. Tap on the item that you want to change the name, audio description, or photos. This will take you to the next screen where you can do these tasks.", y: y)
         
         scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: y)
     }

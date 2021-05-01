@@ -54,7 +54,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AF367389209E98160099A340"
-            BuildableName = "TOR.app"
+            BuildableName = "MYCam.app"
             BlueprintName = "TOR-Mobile"
             ReferencedContainer = "container:TOR-Mobile.xcodeproj">
          </BuildableReference>

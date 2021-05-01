@@ -138,7 +138,7 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
         
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-                let varVal = backgroundVariation/0.15*100
+                let varVal = min(backgroundVariation/0.15*100, 100)
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
@@ -147,7 +147,7 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
 
             } else if indexPath.row == 1 {
 
-                let varVal = sideVariation/1.5*100
+                let varVal = min(sideVariation*0.15*100, 100)
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {
@@ -156,7 +156,7 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
 
             } else if indexPath.row == 2 {
 
-                let varVal = distanceVariation/0.15*100
+                let varVal = min(distanceVariation/0.15*100, 100)
                 if ReviewTrainingVC.VERBOSE {
                     cell.level.text = String(format: "%.1f%%", varVal)
                 } else {

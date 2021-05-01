@@ -20,7 +20,7 @@ class MainViewController: BaseViewController {
     var toastLabel: UILabel!
     var trainChecker: Timer!
 //    var guideText = "This is the main screen. You can read the instructions by tapping on the help button at the top right corner. You can scan items, view item list, and teach new item to TOR by tapping on one of the buttons at the bottom of the screen. Tap on any part of the screen to start."
-    var guideText = "Teach an object to TOR by capturing photos of your personal item. Read more on how to teach TOR on the instruction page."
+    var guideText = "Teach an object to MYCam by capturing photos of your personal item. Read more on how to teach MYCam on the instruction page."
     var olView: UIView!
     
     var videoCapture: VideoCapture!
@@ -74,15 +74,15 @@ class MainViewController: BaseViewController {
         helpButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
         helpButton.setTitle("•••", for: .normal)
         helpButton.addTarget(self, action: #selector(guideButtonAction), for: .touchUpInside)
-        helpButton.accessibilityLabel = "More. This button takes you to a screen that will give you information about the TOR app"
+        helpButton.accessibilityLabel = "More. This button takes you to a screen that will give you information about the MYCam"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: helpButton)
-        navigationItem.titleView = Functions.createHeaderView(title: "TOR")
+        navigationItem.titleView = Functions.createHeaderView(title: "MYCam")
         
         scanButton.accessibilityLabel = "Scan items. This button allows you to take a photo of an item and gives a description of the item."
         
         listButton.accessibilityLabel = "View items. This button takes you to a screen that has a list of all items you have taught the object recognizer."
         
-        teachButton.accessibilityLabel = "Teach TOR. This button takes you to a screen that allows you to take photos to teach the object recognizer."
+        teachButton.accessibilityLabel = "Teach MYCam. This button takes you to a screen that allows you to take photos to teach the object recognizer."
         
         
         // add overlay
@@ -447,7 +447,7 @@ class MainViewController: BaseViewController {
         }
         
         ParticipantViewController.writeLog("MainTeachButton")
-        Log.writeToLog("\(Actions.tappedOnBtn.rawValue) teachTORButton")
+        Log.writeToLog("\(Actions.tappedOnBtn.rawValue) teachButton")
         
 //        let tvc = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
         if #available(iOS 12.0, *) {
