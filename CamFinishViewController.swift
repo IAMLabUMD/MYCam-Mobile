@@ -32,12 +32,12 @@ class CamFinishViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        ParticipantViewController.writeLog("CamDoneView")
+        Log.writeToLog("CamDoneView")
         animateView()
     }
     
     @IBAction func okButtonAction(_ sender: Any) {
-        ParticipantViewController.writeLog("CameraDoneOKButton-\(self.object_name)")
+        Log.writeToLog("CameraDoneOKButton-\(self.object_name)")
         
         let tvc = self.storyboard?.instantiateViewController(withIdentifier: "TrainingViewController") as! TrainingViewController
         tvc.object_name = self.object_name

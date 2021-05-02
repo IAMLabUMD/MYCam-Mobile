@@ -49,7 +49,7 @@ class MainViewController: BaseViewController {
 //        displayLink = CADisplayLink(target: self, selector: #selector(handleAnimation))
 //        displayLink.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
         
-        print("MainViewController: \(ParticipantViewController.userName) \(ParticipantViewController.category) \(ParticipantViewController.mode)")
+        print("MainViewController: \(Log.userUUID) \(ParticipantViewController.category) \(ParticipantViewController.mode)")
         setUpCamera()
         makeToast()
         addViewsToSuperView()
@@ -291,7 +291,7 @@ class MainViewController: BaseViewController {
     // or for Swift 4
     @objc func touchOverlay(_ sender:UITapGestureRecognizer){
         // do other task
-        ParticipantViewController.writeLog("MainOverlayDismiss")
+        Log.writeToLog("MainOverlayDismiss")
         scanButton.accessibilityElementsHidden = false
         listButton.accessibilityElementsHidden = false
         teachButton.accessibilityElementsHidden = false
@@ -446,7 +446,6 @@ class MainViewController: BaseViewController {
             return
         }
         
-        ParticipantViewController.writeLog("MainTeachButton")
         Log.writeToLog("\(Actions.tappedOnBtn.rawValue) teachButton")
         
 //        let tvc = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController

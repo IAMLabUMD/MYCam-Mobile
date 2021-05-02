@@ -11,7 +11,7 @@ import UIKit
 class ParticipantViewController: UIViewController {
     
     @IBOutlet weak var pidField: UITextField!
-    static var userName = UserDefaults.standard.value(forKey: "userUUID") as? String ?? ""
+//    static var userName = UserDefaults.standard.value(forKey: "userUUID") as? String ?? "" // use Log.userUUID instead of userName.
     static var category = "Spice"
     static var mode = "step12"
     static var itemNum = 30
@@ -35,7 +35,8 @@ class ParticipantViewController: UIViewController {
         if uName == "" {
             showRecognitionToast(message: "Enter participant id.")
         } else {
-            ParticipantViewController.userName = uName
+//            ParticipantViewController.userName = uName
+            Log.userUUID = uName
             ParticipantViewController.category = "Spice"
             ParticipantViewController.mode = "step12"
             
@@ -51,7 +52,8 @@ class ParticipantViewController: UIViewController {
         if uName == "" {
             showRecognitionToast(message: "Enter participant id.")
         } else {
-            ParticipantViewController.userName = uName
+//            ParticipantViewController.userName = uName
+            Log.userUUID = uName
             ParticipantViewController.category = "Spice"
             ParticipantViewController.mode = "step34"
             
@@ -77,40 +79,6 @@ class ParticipantViewController: UIViewController {
         }, completion: {(isCompleted) in
             toastLabel.removeFromSuperview()
         })
-    }
-    
-    static func writeLog(_ text: String) {
-        let file = "log_\(ParticipantViewController.userName).txt" //this is the file. we will write to and read from it
-//        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//            let fileURL = dir.appendingPathComponent(file)
-//            
-//            do {
-//                let date = Date()
-//                let formatter = DateFormatter()
-//                formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss-SSSS"
-//                let millis = Int(date.timeIntervalSince1970*1000)
-//                let dateString = formatter.string(from: date)
-//                
-//                let header = "\(ParticipantViewController.userName),\(ParticipantViewController.category),\(ParticipantViewController.mode),\(dateString),\(millis)"
-//                
-//                let textData = "\(header),\(text)\n".data(using: String.Encoding.utf8)!
-//                
-//                
-//                
-//                if let fileHandle = try? FileHandle(forWritingTo: fileURL) {
-//                    defer {
-//                        fileHandle.closeFile()
-//                    }
-//                    
-//                    fileHandle.seekToEndOfFile()
-//                    fileHandle.write(textData)
-//                } else {
-//                    try textData.write(to: fileURL)
-//                }
-//            } catch {
-//                print("write log error")
-//            }
-//        }
     }
     
     func currentTimeInMilliSeconds()-> Int

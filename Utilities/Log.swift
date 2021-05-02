@@ -55,7 +55,7 @@ class Log {
     
     var num = 0
     static var userUUID = ""
-    static var participantID = ""
+//    static var participantID = "" // use userUUID instead of participantID
     static var sessionID = ""
     static var userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
@@ -75,7 +75,7 @@ class Log {
                 
                 var textData: Data!
                 //let sessionID = UserDefaults.standard.value(forKey: "sessionID") as? String
-                let header = "user= \(userUUID), participantID= \(participantID), sessionID= \(sessionID)"
+                let header = "user= \(userUUID), participantID= \(userUUID), sessionID= \(sessionID)"
                 
                 if text == Actions.appTerminated.rawValue {
                     
@@ -103,6 +103,21 @@ class Log {
             }
         }
         
+    }
+    
+    static func createUserDir() {
+        Log.userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(Log.userUUID)")
+        var isDirectory = ObjCBool(true)
+        if !FileManager.default.fileExists(atPath: Log.userDirectory.path, isDirectory: &isDirectory) {
+            do {
+                try FileManager.default.createDirectory(atPath: Log.userDirectory.path, withIntermediateDirectories: true, attributes: nil)
+                print("directory is created. \(Log.userDirectory.path)")
+            } catch let error as NSError {
+                print("Error creating directory: \(error.localizedDescription)")
+            }
+        } else {
+            print("The directory exists. \(Log.userDirectory.path)")
+        }
     }
     
     

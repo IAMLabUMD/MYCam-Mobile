@@ -80,7 +80,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
         //self.navigationController?.navigationBar.accessibilityElementsHidden = true
         
         //makeToast()
-        print("TrainingViewController: \(ParticipantViewController.userName) \(ParticipantViewController.category) \(object_name) \(ParticipantViewController.itemNum)")
+        print("TrainingViewController: \(Log.userUUID) \(ParticipantViewController.category) \(object_name) \(ParticipantViewController.itemNum)")
         
         // add overlay
         if ParticipantViewController.VisitedTrainView == 0 && ParticipantViewController.mode == "step12" {
@@ -99,7 +99,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
         }
         
         
-        ParticipantViewController.writeLog("TrainingView")
+        Log.writeToLog("TrainingView")
         trainChecker = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkTraining), userInfo: nil, repeats: true)
     }
     
@@ -124,7 +124,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
     }
     
     @IBAction func doneButtonAction(_ sender: Any) {
-        ParticipantViewController.writeLog("TrainOKButton-\(object_name)")
+        Log.writeToLog("TrainOKButton-\(object_name)")
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         self.navigationController?.pushViewController(vc, animated: true)
@@ -215,7 +215,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
     // or for Swift 4
     @objc func touchOverlay(_ sender:UITapGestureRecognizer){
         // do other task
-        ParticipantViewController.writeLog("TrainOverlayDismiss")
+        Log.writeToLog("TrainOverlayDismiss")
         recordButton.accessibilityElementsHidden = false
         okButton.accessibilityElementsHidden = false
         self.navigationController?.navigationBar.accessibilityElementsHidden = false
@@ -355,7 +355,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
         }
         
         if isRecording {
-            ParticipantViewController.writeLog("TrainRecordStop")
+            Log.writeToLog("TrainRecordStop")
             print("stop")
             
             //let rImage = UIImage(named: "record_button")
@@ -376,7 +376,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
             progressTimeLeft.isHidden = false
             progressTimeLeft.text = timeFloatToStr(audioDuration)
         } else {
-            ParticipantViewController.writeLog("TrainRecordStart")
+            Log.writeToLog("TrainRecordStart")
             print("record")
             
             recordButton.accessibilityLabel = ""
@@ -403,7 +403,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
     }
     
     func rename(newName: String) {
-        ParticipantViewController.writeLog("TrainingView-rename-\(newName)")
+        Log.writeToLog("TrainingView-rename-\(newName)")
         httpController.requestRename(org_name: "tmpobj", new_name: newName){}
         
         do {
@@ -460,7 +460,7 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, AVAudio
             return
         }
         
-        ParticipantViewController.writeLog("TrainingView-gotoCameraview")
+        Log.writeToLog("TrainingView-gotoCameraview")
         navigationController?.popViewController(animated: true)
     }
 }

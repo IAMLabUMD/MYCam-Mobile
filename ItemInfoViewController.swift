@@ -30,7 +30,7 @@ class ItemInfoViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        print("ItemInfoViewController: \(ParticipantViewController.userName) \(ParticipantViewController.category) \(object_name)")
+        print("ItemInfoViewController: \(Log.userUUID) \(ParticipantViewController.category) \(object_name)")
         //addImages()
         images = Functions.fetchImages(for: object_name)
         imagesCollectionView.dataSource = self
@@ -121,7 +121,7 @@ class ItemInfoViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     // or for Swift 4
     @objc func touchOverlay(_ sender:UITapGestureRecognizer){
         // do other task
-        ParticipantViewController.writeLog("ItemOverlayDismiss")
+        Log.writeToLog("ItemOverlayDismiss")
         audioButton.accessibilityElementsHidden = false
         recordButton.accessibilityElementsHidden = false
         renameButton.accessibilityElementsHidden = false
@@ -133,13 +133,13 @@ class ItemInfoViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated) // No need for semicolon
         
-        ParticipantViewController.writeLog("ItemEditView-\(object_name)")
+        Log.writeToLog("ItemEditView-\(object_name)")
         //makeToast()
         //trainChecker = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkTraining), userInfo: nil, repeats: true)
     }
     
     @IBAction func renameButtonAction(_ sender: Any) {
-        ParticipantViewController.writeLog("ItemRenameButton-\(object_name)")
+        Log.writeToLog("ItemRenameButton-\(object_name)")
 
         // custom view
         // https://medium.com/if-let-swift-programming/design-and-code-your-own-uialertview-ec3d8c000f0a
@@ -157,7 +157,7 @@ class ItemInfoViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var isRecording = false
     @IBAction func recordButtonAction(_ sender: Any) {
         if isRecording {
-            ParticipantViewController.writeLog("ItemRecordStop-\(object_name)")
+            Log.writeToLog("ItemRecordStop-\(object_name)")
             
             let rImage = UIImage(named: "record_button")
             recordButton.setImage(rImage, for: UIControlState.normal)
@@ -168,7 +168,7 @@ class ItemInfoViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             
             Thread.sleep(forTimeInterval: 0.3)
         } else {
-            ParticipantViewController.writeLog("ItemRecordStart-\(object_name)")
+            Log.writeToLog("ItemRecordStart-\(object_name)")
             
             let rImage = UIImage(named: "record_button2")
             recordButton.setImage(rImage, for: UIControlState.normal)

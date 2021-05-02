@@ -264,7 +264,7 @@ class TrainingVC: BaseItemAudioVC {
         }
         
         if isRecording {
-            ParticipantViewController.writeLog("TrainRecordStop")
+            Log.writeToLog("TrainRecordStop")
             print("Stop recording -----> ")
             
             audioController.stopRecording()
@@ -275,7 +275,7 @@ class TrainingVC: BaseItemAudioVC {
             
         } else {
             mainActionButton.setImage(#imageLiteral(resourceName: "recording"), for: .normal)
-            ParticipantViewController.writeLog("TrainRecordStart")
+            Log.writeToLog("TrainRecordStart")
             print("Recording -----> ")
             
             // This introduces a delay when voiceover is on so there is no interference during recording

@@ -70,36 +70,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let userUUID = UUID().uuidString
             UserDefaults.standard.set(userUUID, forKey: "userUUID")
             Log.userUUID = userUUID
-            ParticipantViewController.userName = userUUID
         }
         
         
         // Check if the participantID has been set
-        if let participantID = UserDefaults.standard.value(forKey: "participantID") as? String {
-            Log.participantID = participantID
-        } else {
-            
-            // ParticipantID does not exist. Create one and store it
-            let uuid = UUID().uuidString
-            let participantID = uuid.components(separatedBy: "-").first ?? "0ADE198"
-            print("Participant ID: \(participantID)")
-            UserDefaults.standard.set(participantID, forKey: "participantID")
-            Log.participantID = participantID
-        }
+//        if let participantID = UserDefaults.standard.value(forKey: "participantID") as? String {
+//            Log.participantID = participantID
+//        } else {
+//
+//            // ParticipantID does not exist. Create one and store it
+//            let uuid = UUID().uuidString
+//            let participantID = uuid.components(separatedBy: "-").first ?? "0ADE198"
+//            print("Participant ID: \(participantID)")
+//            UserDefaults.standard.set(participantID, forKey: "participantID")
+//            Log.participantID = participantID
+//        }
         
         
-        Log.userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
-        var isDirectory = ObjCBool(true)
-        if !FileManager.default.fileExists(atPath: Log.userDirectory.path, isDirectory: &isDirectory) {
-            do {
-                try FileManager.default.createDirectory(atPath: Log.userDirectory.path, withIntermediateDirectories: true, attributes: nil)
-                print("directory is created. \(Log.userDirectory.path)")
-            } catch let error as NSError {
-                print("Error creating directory: \(error.localizedDescription)")
-            }
-        } else {
-            print("The directory exists. \(Log.userDirectory.path)")
-        }
+        Log.createUserDir()
+//        Log.userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(Log.userUUID)")
+//        var isDirectory = ObjCBool(true)
+//        if !FileManager.default.fileExists(atPath: Log.userDirectory.path, isDirectory: &isDirectory) {
+//            do {
+//                try FileManager.default.createDirectory(atPath: Log.userDirectory.path, withIntermediateDirectories: true, attributes: nil)
+//                print("directory is created. \(Log.userDirectory.path)")
+//            } catch let error as NSError {
+//                print("Error creating directory: \(error.localizedDescription)")
+//            }
+//        } else {
+//            print("The directory exists. \(Log.userDirectory.path)")
+//        }
         
         Log.writeToLog(Actions.appLaunched.rawValue)
         

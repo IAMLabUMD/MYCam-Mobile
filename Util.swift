@@ -10,7 +10,7 @@ import UIKit
 
 class Util {
     
-    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(ParticipantViewController.userName)")
+    let userDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(Log.userUUID)")
     
     func createDirectory(_ label: String) {
         

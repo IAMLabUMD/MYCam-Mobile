@@ -75,7 +75,6 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        ParticipantViewController.writeLog("EnterNameView")
         Log.writeToLog("action= presented_enter_name_dialog")
         setupView()
         animateView()
@@ -116,7 +115,6 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func enterName(_ sender: Any) {
-        ParticipantViewController.writeLog("NameOKButton-\(objName.text!)")
         Log.writeToLog("\(Actions.tappedOnBtn) okEnterNameButton")
         
         let oName = objName.text!
@@ -136,8 +134,9 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
             
             if let newParticipantID = objName.text {
                 
-                UserDefaults.standard.set(newParticipantID, forKey: "participantID")
-                Log.participantID = newParticipantID
+                UserDefaults.standard.set(newParticipantID, forKey: "userUUID")
+                Log.userUUID = newParticipantID
+                Log.createUserDir()
             }
         }
         
@@ -145,7 +144,6 @@ class EnterNameController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelButtonAction(_ sender: Any) {
-        ParticipantViewController.writeLog("NameCancelButton")
         
         Log.writeToLog("\(Actions.tappedOnBtn) cancelEnterNameButton")
         

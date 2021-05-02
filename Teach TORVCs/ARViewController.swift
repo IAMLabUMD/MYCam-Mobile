@@ -60,7 +60,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("ARViewController: \(ParticipantViewController.userName) \(ParticipantViewController.category) \(object_name) \(ParticipantViewController.itemNum)")
+        print("ARViewController: \(Log.userUUID) \(ParticipantViewController.category) \(object_name) \(ParticipantViewController.itemNum)")
         
         //setUpCamera()
         createDirectory(object_name)
@@ -276,12 +276,12 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
             let name = objectAnchor.referenceObject.name!
             print("object is detected \(name), \(detections)")
             
-            if prev_name != name {
-                DispatchQueue.main.async {
-                    self.animateLabel(message: name, showSubtitle: true)
-                }
-            }
-            prev_name = name
+//            if prev_name != name {
+//                DispatchQueue.main.async {
+//                    self.animateLabel(message: name, showSubtitle: true)
+//                }
+//            }
+//            prev_name = name
             
             detectedObject = objectAnchor
             successfulDetection(objectAnchor)
@@ -464,7 +464,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
 //            let audioSession = AVAudioSession.sharedInstance()
 //            print(audioLevel, audioSession.outputVolume)
             
-            ParticipantViewController.writeLog("volumeButton")
+            Log.writeToLog("volumeButton")
             takePhoto()
         }
     }
@@ -528,7 +528,7 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     // or for Swift 4
     @objc func touchOverlay(_ sender:UITapGestureRecognizer){
         // do other task
-        ParticipantViewController.writeLog("CameraOverlayDismiss")
+        Log.writeToLog("CameraOverlayDismiss")
         
         cameraButton.accessibilityElementsHidden = false
         self.navigationController?.navigationBar.accessibilityElementsHidden = false
@@ -651,14 +651,12 @@ class ARViewController: UIViewController, AVAudioPlayerDelegate, ARSCNViewDelega
     }
     
     @IBAction func captureImage(_ sender: Any) {
-        ParticipantViewController.writeLog("captureButton")
         Log.writeToLog("\(Actions.tappedOnBtn.rawValue) button=captureButton")
         takePhoto()
     }
     
     func takePhoto() {
         captureView.alpha = 1
-        ParticipantViewController.writeLog("TakePhoto-\(object_name)-\(count+1)")
         Functions.startGyros(for: count+1)
         Log.writeToLog("\(Actions.photoTaken.rawValue) of \(object_name)-(\(count+1))")
         

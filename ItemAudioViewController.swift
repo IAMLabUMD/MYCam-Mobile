@@ -32,7 +32,7 @@ class ItemAudioViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        ParticipantViewController.writeLog("ItemAudioView-\(object_name)")
+        Log.writeToLog("ItemAudioView-\(object_name)")
         
         let editButton = UIButton()
         editButton.setTitleColor(.white, for: .normal)
@@ -58,7 +58,7 @@ class ItemAudioViewController: UIViewController, AVAudioPlayerDelegate {
     
     
     @IBAction func playButtonAction(_ sender: Any) {
-        ParticipantViewController.writeLog("ItemAudioPlay")
+        Log.writeToLog("ItemAudioPlay")
         
         if audioController.isAudioPlaying() {
             audioController.stopAudio()

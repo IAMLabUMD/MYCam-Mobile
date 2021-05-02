@@ -55,7 +55,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         deleteView.addShadow()
         clearView.addShadow()
 
-        print("ChecklistViewController2: \(ParticipantViewController.userName) \(ParticipantViewController.category)")
+        print("ChecklistViewController2: \(Log.userUUID) \(ParticipantViewController.category)")
         // Do any additional setup after loading the view.
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -177,9 +177,6 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated) // No need for semicolon
-        
-        ParticipantViewController.writeLog("ListView")
-        
         Log.writeToLog("\(Actions.enteredScreen.rawValue) \(Screens.savedObjsScreen.rawValue)")
         
         // add overlay
@@ -266,7 +263,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
     // or for Swift 4
     @objc func touchOverlay(_ sender:UITapGestureRecognizer){
         // do other task
-        ParticipantViewController.writeLog("ListOverlayDismiss")
+        Log.writeToLog("ListOverlayDismiss")
         
         self.navigationController?.navigationBar.accessibilityElementsHidden = false
         tableView.accessibilityElementsHidden = false
@@ -395,7 +392,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         if editingStyle == .delete {
             if resultSearchController.isActive {
                 let itemName = searchResults[indexPath.row].itemName
-                ParticipantViewController.writeLog("ListSelectItem-\(itemName)")
+                Log.writeToLog("ListSelectItem-\(itemName)")
                 httpController.requestRemove(itemName){}
                 itemList.deleteDirectory(itemName)
                 searchResults.remove(at: indexPath.row)
@@ -416,7 +413,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
                 print("------> Not active searchC")
                 
                 let itemName = itemList.itemArray[indexPath.row].itemName
-                ParticipantViewController.writeLog("ListSelectItem-\(itemName)")
+                Log.writeToLog("ListSelectItem-\(itemName)")
                 httpController.requestRemove(itemName){}
                 itemList.deleteDirectory(itemName)
                 itemList.itemArray.remove(at: indexPath.row)
@@ -437,7 +434,7 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         
         let itemName = currItemList[indexPath.row].itemName
         
-        ParticipantViewController.writeLog("ListSelectItem-\(itemName)")
+        Log.writeToLog("ListSelectItem-\(itemName)")
         
         trainChecker.invalidate()
         resultSearchController.searchBar.resignFirstResponder()

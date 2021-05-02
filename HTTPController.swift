@@ -42,7 +42,7 @@ class HTTPController {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName))
+        body.append(paramData(name: "userId", value: Log.userUUID))
         body.append(paramData(name: "type", value: "isTraining"))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
@@ -85,7 +85,7 @@ class HTTPController {
         let image_data = UIImageJPEGRepresentation(capturedImg, 1.0) //make
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName))
+        body.append(paramData(name: "userId", value: Log.userUUID))
         body.append(paramData(name: "type", value: "test"))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         
@@ -130,7 +130,7 @@ class HTTPController {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName))
+        body.append(paramData(name: "userId", value: Log.userUUID))
         body.append(paramData(name: "type", value: "remove"))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         body.append(paramData(name: "object_to_remove", value: object_to_remove))
@@ -167,7 +167,7 @@ class HTTPController {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName))
+        body.append(paramData(name: "userId", value: Log.userUUID))
         body.append(paramData(name: "type", value: "rename"))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         body.append(paramData(name: "org_name", value: org_name))
@@ -208,7 +208,7 @@ class HTTPController {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName))
+        body.append(paramData(name: "userId", value: Log.userUUID))
         body.append(paramData(name: "type", value: type))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
@@ -242,7 +242,7 @@ class HTTPController {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName))
+        body.append(paramData(name: "userId", value: Log.userUUID))
         body.append(paramData(name: "type", value: "sync"))
         body.append(paramData(name: "items", value: items))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
@@ -285,7 +285,7 @@ class HTTPController {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName)) // userId and category are always sent
+        body.append(paramData(name: "userId", value: Log.userUUID)) // userId and category are always sent
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         for (pname, pvalue) in params {
             body.append(paramData(name: pname, value: pvalue))
@@ -430,7 +430,7 @@ class HTTPController {
         let mimetype = "image/jpg"
         
         var body = Data()
-        body.append(paramData(name: "userId", value: ParticipantViewController.userName))
+        body.append(paramData(name: "userId", value: Log.userUUID))
         body.append(paramData(name: "type", value: "saveTrainPhoto"))
         body.append(paramData(name: "category", value: ParticipantViewController.category))
         body.append(paramData(name: "object_name", value: object_name))

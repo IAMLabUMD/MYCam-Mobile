@@ -52,7 +52,7 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell") as! SettingsCell
         
         if indexPath.section == 0 {
-            cell.label.text = Log.participantID
+            cell.label.text = Log.userUUID
             cell.cellDelegate = self
             
         } else {
@@ -121,10 +121,13 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     func resetParticipantID() {
         
         // ParticipantID does not exist. Create one and store it
-        let uuid = UUID().uuidString
-        let participantID = uuid.components(separatedBy: "-").first ?? "0ADE198"
-        UserDefaults.standard.set(participantID, forKey: "participantID")
-        Log.participantID = participantID
+//        let uuid = UUID().uuidString
+//        let participantID = uuid.components(separatedBy: "-").first ?? "0ADE198"
+//        UserDefaults.standard.set(participantID, forKey: "participantID")
+        let participantID = UUID().uuidString
+        UserDefaults.standard.set(participantID, forKey: "userUUID")
+        Log.userUUID = participantID
+        Log.createUserDir()
     }
     
     func showOptions() {
