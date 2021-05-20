@@ -60,13 +60,13 @@ class ChecklistViewController2: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        let clearButton = UIButton()
-        clearButton.setTitleColor(.white, for: .normal)
-        clearButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
-        clearButton.setTitle("Clear", for: .normal)
-        clearButton.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
-        clearButton.accessibilityLabel = "Clear. This button removes all items in the list."
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: clearButton)
+//        let clearButton = UIButton()
+//        clearButton.setTitleColor(.white, for: .normal)
+//        clearButton.titleLabel?.font = .rounded(ofSize: 16, weight: .bold)
+//        clearButton.setTitle("Clear", for: .normal)
+//        clearButton.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
+//        clearButton.accessibilityLabel = "Clear. This button removes all items in the list."
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: clearButton)
         
         resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)

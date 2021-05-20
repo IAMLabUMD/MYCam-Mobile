@@ -108,10 +108,6 @@ class TrainingVC: BaseItemAudioVC {
         DispatchQueue.global(qos: .background).async {
             self.textToSpeech("Training started.")
             
-            DispatchQueue.main.async {
-//                self.effectView.removeFromSuperview()
-                self.navigationController?.popToRootViewController(animated: true)
-            }
             //self.uploadPhotos()
             
             Functions.deleteImages(for: self.object_name)
@@ -126,6 +122,14 @@ class TrainingVC: BaseItemAudioVC {
 //            }
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
                 Functions.stopGyros()
+            }
+            
+            let nc = NotificationCenter.default
+            nc.post(name: Notification.Name("renewForTraining"), object: nil)
+            
+            DispatchQueue.main.async {
+//                self.effectView.removeFromSuperview()
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }

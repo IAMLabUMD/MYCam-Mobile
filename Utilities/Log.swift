@@ -17,8 +17,8 @@ public enum Screens: String {
     savedObjsScreen = "Saved_Objects_Screen",
     objScreen = "Object_Screen",
     editSavedObjScreen = "Edit_Saved_Object_Screen",
-    helpScreen = "Help_Screen"
-    
+    helpScreen = "Help_Screen",
+    reviewScreen = "Review_Screen"
 }
 
 // All actions that can be perfomed by a user

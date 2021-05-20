@@ -113,14 +113,18 @@ class MainViewController: BaseViewController {
 //            self.present(instructionsVC, animated: true, completion: nil)
 //        })
         
-
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(renewForTraining), name: Notification.Name("renewForTraining"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         Log.writeToLog("\(Actions.enteredScreen.rawValue) \(Screens.mainScreen.rawValue)")
         listenVolumeButton()
+        renewForTraining()
+    }
+    
+    @objc func renewForTraining() {
         itemList.renewList()
         print("We have \(itemList.itemArray.count) item(s) now.")
         trainChecker = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkTraining), userInfo: nil, repeats: true)

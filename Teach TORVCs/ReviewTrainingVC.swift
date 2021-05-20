@@ -36,6 +36,7 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.writeToLog("\(Actions.enteredScreen.rawValue) \(Screens.reviewScreen.rawValue)")
         
         if let item = item {
             switchCell.initCell()
@@ -91,6 +92,12 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, objectNameLabel)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Log.writeToLog("\(Actions.exitedScreen.rawValue) \(Screens.reviewScreen.rawValue)")
+    }
+    
     @IBAction func OKButtonAction(_ sender: Any) {
         let vc = TrainingVC()
         vc.train_id = train_id
@@ -139,17 +146,32 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
         if indexPath.section == 1 {
             if indexPath.row == 0 {
                 let varVal = min(backgroundVariation/0.15*100, 100)
-                if ReviewTrainingVC.VERBOSE {
+                if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[0] {
                     cell.level.text = String(format: "%.1f%%", varVal)
+                } else if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[1] {
+                    if varVal >= 75 {
+                        cell.level.text = "High"
+                    } else if varVal >= 25 {
+                        cell.level.text = "Medium"
+                    } else {
+                        cell.level.text = "Low"
+                    }
                 } else {
                     cell.level.text = backgroundVariation > 0.1 ? "High": "Low"
                 }
 
             } else if indexPath.row == 1 {
-
                 let varVal = min(sideVariation*0.15*100, 100)
-                if ReviewTrainingVC.VERBOSE {
+                if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[0] {
                     cell.level.text = String(format: "%.1f%%", varVal)
+                } else if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[1] {
+                    if varVal >= 75 {
+                        cell.level.text = "High"
+                    } else if varVal >= 25 {
+                        cell.level.text = "Medium"
+                    } else {
+                        cell.level.text = "Low"
+                    }
                 } else {
                     cell.level.text = sideVariation > 1 ? "High": "Low"
                 }
@@ -157,38 +179,76 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
             } else if indexPath.row == 2 {
 
                 let varVal = min(distanceVariation/0.15*100, 100)
-                if ReviewTrainingVC.VERBOSE {
+                if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[0] {
                     cell.level.text = String(format: "%.1f%%", varVal)
+                } else if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[1] {
+                    if varVal >= 75 {
+                        cell.level.text = "High"
+                    } else if varVal >= 25 {
+                        cell.level.text = "Medium"
+                    } else {
+                        cell.level.text = "Low"
+                    }
                 } else {
                     cell.level.text = distanceVariation > 0.1 ? "High": "Low"
                 }
             } else if indexPath.row == 3 {
-                if ReviewTrainingVC.VERBOSE {
+                if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[0] {
                     cell.level.text = "\(cnt_small) out of 30"
+                } else if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[1] {
+                    if cnt_small >= 20 {
+                        cell.level.text = "High"
+                    } else if cnt_small >= 6 {
+                        cell.level.text = "Medium"
+                    } else {
+                        cell.level.text = "Low"
+                    }
                 } else {
                     cell.level.text = cnt_small > 5 ? "High": "Low"
                 }
                 
             } else if indexPath.row == 4 {
-                
-                if ReviewTrainingVC.VERBOSE {
+                if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[0] {
                     cell.level.text = "\(cnt_crop) out of 30"
+                } else if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[1] {
+                    if cnt_crop >= 20 {
+                        cell.level.text = "High"
+                    } else if cnt_crop >= 6 {
+                        cell.level.text = "Medium"
+                    } else {
+                        cell.level.text = "Low"
+                    }
                 } else {
                     cell.level.text = cnt_crop > 5 ? "High": "Low"
                 }
                 
             } else if indexPath.row == 5 {
-                
-                if ReviewTrainingVC.VERBOSE {
+                if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[0] {
                     cell.level.text = "\(cnt_blurry) out of 30"
+                } else if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[1] {
+                    if cnt_blurry >= 20 {
+                        cell.level.text = "High"
+                    } else if cnt_blurry >= 6 {
+                        cell.level.text = "Medium"
+                    } else {
+                        cell.level.text = "Low"
+                    }
                 } else {
                     cell.level.text = cnt_blurry > 5 ? "High": "Low"
                 }
                 
             } else if indexPath.row == 6 {
                 
-                if ReviewTrainingVC.VERBOSE {
+                if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[0] {
                     cell.level.text = "\(cnt_hand) out of 30"
+                } else if ReviewTrainingVC.VERBOSITY == ReviewTrainingVC.verbosityLevels[1] {
+                    if cnt_hand >= 20 {
+                        cell.level.text = "High"
+                    } else if cnt_hand >= 6 {
+                        cell.level.text = "Medium"
+                    } else {
+                        cell.level.text = "Low"
+                    }
                 } else {
                     cell.level.text = cnt_hand > 5 ? "High": "Low"
                 }
@@ -230,9 +290,10 @@ class ReviewTrainingVC: UIViewController, UITableViewDataSource, UITableViewDele
         return headerView
     }
     
-    static var VERBOSE = true
-    func updateVerbosity(v: Bool) {
-        ReviewTrainingVC.VERBOSE = v
+    static let verbosityLevels = ["Percentage", "Intensity", "Severity"]
+    static var VERBOSITY = "Percentage"
+    func updateVerbosity(v: String) {
+        ReviewTrainingVC.VERBOSITY = v
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -260,37 +321,33 @@ class ItemAttributeTableViewCellRT: UITableViewCell {
 
 
 class SwitchTableViewCellRT: UITableViewCell {
-    var verbositySwitch = UISwitch()
+//    var verbositySwitch = UISwitch()
     var myView: ReviewTrainingVC?
     var verbosityLabel: UILabel!
     
     func initCell() {
         self.contentView.backgroundColor = .white
         verbosityLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 160, height: 24))
-        verbosityLabel.text = "Verbose"
+        verbosityLabel.text = "Verbosity"
         verbosityLabel.textColor = .darkGray
         verbosityLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
         verbosityLabel.textAlignment = .left
-        verbositySwitch.isOn = ReviewTrainingVC.VERBOSE
-        verbositySwitch.addTarget(self, action: #selector(switchIsChanged), for: UIControlEvents.valueChanged)
+        
+//        verbositySwitch.isOn = ReviewTrainingVC.VERBOSE
+//        verbositySwitch.addTarget(self, action: #selector(switchIsChanged), for: UIControlEvents.valueChanged)
+        let verbosityControl = UISegmentedControl(items: ReviewTrainingVC.verbosityLevels)
+        verbosityControl.selectedSegmentIndex = 0
+        verbosityControl.addTarget(self, action: #selector(verbosityIsChanged), for: UIControlEvents.valueChanged)
         
         self.contentView.setupView(viewToAdd: verbosityLabel, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
         
-        self.contentView.setupView(viewToAdd: verbositySwitch, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -20, topView: self.contentView, shouldSwitchTop: false, topConstant: 25, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
+        self.contentView.setupView(viewToAdd: verbosityControl, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -20, topView: self.contentView, shouldSwitchTop: false, topConstant: 20, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
     }
     
     func setup() {
     }
     
-    override func layoutSubviews() {
-        if ReviewTrainingVC.VERBOSE {
-            verbosityLabel.text = "More verbose"
-        } else {
-            verbosityLabel.text = "Less verbose"
-        }
-    }
-    
-    @objc func switchIsChanged(mySwitch: UISwitch) {
-        myView?.updateVerbosity(v: mySwitch.isOn)
+    @objc func verbosityIsChanged(verbosityControl: UISegmentedControl) {
+        myView?.updateVerbosity(v: ReviewTrainingVC.verbosityLevels[verbosityControl.selectedSegmentIndex])
     }
 }
