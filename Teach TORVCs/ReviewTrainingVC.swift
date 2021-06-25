@@ -338,10 +338,14 @@ class SwitchTableViewCellRT: UITableViewCell {
         let verbosityControl = UISegmentedControl(items: ReviewTrainingVC.verbosityLevels)
         verbosityControl.selectedSegmentIndex = 0
         verbosityControl.addTarget(self, action: #selector(verbosityIsChanged), for: UIControlEvents.valueChanged)
+                
+        let titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+//        verbosityControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        verbosityControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
         
-        self.contentView.setupView(viewToAdd: verbosityLabel, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
+//        self.contentView.setupView(viewToAdd: verbosityLabel, leadingView: self.contentView, shouldSwitchLeading: false, leadingConstant: 24, trailingView: nil, shouldSwitchTrailing: false, trailingConstant: 0, topView: self.contentView, shouldSwitchTop: false, topConstant: 0, bottomView: self.contentView, shouldSwitchBottom: false, bottomConstant: 0)
         
-        self.contentView.setupView(viewToAdd: verbosityControl, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -20, topView: self.contentView, shouldSwitchTop: false, topConstant: 20, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
+        self.contentView.setupView(viewToAdd: verbosityControl, leadingView: nil, shouldSwitchLeading: false, leadingConstant: 0, trailingView: self.contentView, shouldSwitchTrailing: false, trailingConstant: -35, topView: self.contentView, shouldSwitchTop: false, topConstant: 20, bottomView: nil, shouldSwitchBottom: false, bottomConstant: 0)
     }
     
     func setup() {
