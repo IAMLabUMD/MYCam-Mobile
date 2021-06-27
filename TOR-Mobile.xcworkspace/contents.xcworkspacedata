@@ -5,6 +5,9 @@
       location = "group:/Users/jonggihong/Downloads/GitHub/TORApp-Mobile/TOR-Mobile.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:TOR-Mobile.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
