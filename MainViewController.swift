@@ -391,7 +391,8 @@ class MainViewController: BaseViewController {
         var message = "Don't know"
         var max_prob = 0.0
         let epsilon = 0.00001
-        var entropy = 0.0 // entropy calculation: http://users.umiacs.umd.edu/~zhuolin/Publications/OnlineDDL.pdf
+//        var entropy = 0.0 // entropy calculation: http://users.umiacs.umd.edu/~zhuolin/Publications/OnlineDDL.pdf
+        var entropy = Double(output_components[0])!
         print(output_components)
         print(output_components.count)
         print(itemList.getListString())
@@ -401,23 +402,11 @@ class MainViewController: BaseViewController {
                 let prob = Double(label_pair[1])!
 
                 print("checking : \(label_pair[0]), \(prob)")
-                                
-                if prob >= 0.6 && max_prob < prob {
+                if prob >= 0.4 && max_prob < prob {
                     label = label_pair[0]
                     message = label_pair[0]
                     max_prob = prob
                 }
-                entropy = entropy - prob*log(prob)
-                //break
-
-                if prob >= 0.6 && max_prob < prob {
-                    print("selected : \(label_pair[0])")
-                    label = label_pair[0]
-                    message = label_pair[0]
-                    max_prob = prob
-
-                }
-                entropy = entropy - prob*log(prob + epsilon)
 //                if itemList.contains(obj_name: label_pair[0]) {
 //
 //                }
