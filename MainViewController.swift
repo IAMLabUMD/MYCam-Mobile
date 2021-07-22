@@ -401,26 +401,26 @@ class MainViewController: BaseViewController {
                 let prob = Double(label_pair[1])!
 
                 print("checking : \(label_pair[0]), \(prob)")
-                // check if the returned label exists or not
-
-                if itemList.contains(obj_name: label_pair[0]) {
-                    if prob >= 0.6 && max_prob < prob {
-                        label = label_pair[0]
-                        message = label_pair[0]
-                        max_prob = prob
-                    }
-                    entropy = entropy - prob*log(prob)
-                    //break
-
-                    if prob >= 0.6 && max_prob < prob {
-                        print("selected : \(label_pair[0])")
-                        label = label_pair[0]
-                        message = label_pair[0]
-                        max_prob = prob
-
-                    }
-                    entropy = entropy - prob*log(prob + epsilon)
+                                
+                if prob >= 0.6 && max_prob < prob {
+                    label = label_pair[0]
+                    message = label_pair[0]
+                    max_prob = prob
                 }
+                entropy = entropy - prob*log(prob)
+                //break
+
+                if prob >= 0.6 && max_prob < prob {
+                    print("selected : \(label_pair[0])")
+                    label = label_pair[0]
+                    message = label_pair[0]
+                    max_prob = prob
+
+                }
+                entropy = entropy - prob*log(prob + epsilon)
+//                if itemList.contains(obj_name: label_pair[0]) {
+//
+//                }
             }
         
             if entropy > 2 {
