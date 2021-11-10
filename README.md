@@ -44,7 +44,7 @@ The source codes are organized based on their functionalities (i.e., main screen
 ### Main screen
 `MainViewController.swift`: includes three teach, scan, list buttons and show a camera screen. 
 <p align="center">
-  <img src="Docs/Screenshots/main.png" alt="Signing and capabilities">
+  <img src="Docs/Screenshots/main.PNG" alt="main screen">
 </p>
 
 ### Teach
