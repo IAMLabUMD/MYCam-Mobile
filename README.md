@@ -42,9 +42,9 @@ To build and run the TOR app, please follow these steps,
 The source codes are organized based on their functionalities (i.e., main screen, teach, scan, list of items, and communication with the server). 
 
 ### Main screen
-`MainViewController.swift`: includes three teach, scan, list buttons and show a camera screen. 
+`MainViewController.swift`: includes three teach, scan, list buttons and shows a camera screen. 
 <p align="center">
-  <img src="Docs/Screenshots/main.PNG" alt="main screen">
+  <img src="Docs/Screenshots/main.PNG" width="50%" alt="main screen">
 </p>
 
 ### Teach
