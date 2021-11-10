@@ -45,35 +45,37 @@ The source codes are organized based on their functionalities (i.e., main screen
 `MainViewController.swift`
 
 <img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen">
+<img src="Docs/Screenshots/main_inprogress.PNG" width="25%" alt="main screen when training is in progress">
 
  
 
 
 ### Teach
-
-
-
 `Teach TORVCs/ARViewController.swift`
 
 `Teach TORVCs/ReviewTraining.swift`
 
 `Teach TORVCs/TrainingVC.swift`
 
-<img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen"> <img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen"> <img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen">
+<img src="Docs/Screenshots/train_feedback.PNG" width="25%" alt="training interface with feedback"> <img src="Docs/Screenshots/train_review.PNG" width="25%" alt="review with attributes"> <img src="Docs/Screenshots/train_enter_name.PNG" width="25%" alt="enter the name of the object">
 
 ### Scan
-`MainViewController.swift`: 
+`MainViewController.swift` (selecting the scan item button on the main screen)
+
+<img src="Docs/Screenshots/scan.PNG" width="25%" alt="result of recognition">
 
 ### List of items
 `View ItemVCs/ChecklistViewController2.swift`
 
 `View ItemVCs/ItemAttrAndInfoVC.swift`
 
+<img src="Docs/Screenshots/list.PNG" width="25%" alt="list of items"> <img src="Docs/Screenshots/list_info.PNG" width="25%" alt="information of an object"> <img src="Docs/Screenshots/list_info2.PNG" width="25%" alt="information of an object">
+
 ### Communication with the server
-`Model/HTTPController.swift`
+`Model/HTTPController.swift`: a class with functions to communicate with the Amorgos server (e.g., send an image, receiving the attributes of photos from the server)
 
 ### Logging
-`Utilities/Log.swift`
+`Utilities/Log.swift`: logging the users' actions
 
 ## Publications
 Under review
