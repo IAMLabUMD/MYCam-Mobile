@@ -23,7 +23,7 @@ TOR Server codes are [here](https://github.com/IAMLabUMD/TORApp-Server).
 
 ## Getting started
 To build and run the TOR app, please follow these steps,
-1. Clone the repository
+1. Clone the repository. You can use the following command or GUI tools.
 ```
    git clone https://github.com/IAMLabUMD/TORApp-Mobile.git
 ```
