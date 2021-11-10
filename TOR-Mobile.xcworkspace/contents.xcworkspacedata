@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/jonggihong/Downloads/GitHub/TORApp-Mobile/TOR-Mobile.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:TOR-Mobile.xcodeproj">
    </FileRef>
    <FileRef
