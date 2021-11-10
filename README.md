@@ -39,24 +39,40 @@ To build and run the TOR app, please follow these steps,
 </p>
 
 ## Structure of the app
-The source codes are organized based on their functionalities (i.e., main screen, teach, scan, list of items, and communication with the server). 
+The source codes are organized based on their functionalities (i.e., main screen, teach, scan, list of items, communication with the server, and logging). 
 
 ### Main screen
-`MainViewController.swift`: includes three teach, scan, list buttons and shows a camera screen. 
-<p align="center">
-  <img src="Docs/Screenshots/main.PNG" width="30%" alt="main screen">
-</p>
+| `MainViewController.swift`  |
+| ------------- |
+| <img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen"> |
+
+ 
+
 
 ### Teach
+
+| `Teach TORVCs/ARViewController.swift` | `Teach TORVCs/ReviewTraining.swift` | `Teach TORVCs/TrainingVC.swift` |
+| ------------- | ------------- | ------------- |
+| <img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen"> |<img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen"> |<img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen"> |
 
 ### Scan
 `MainViewController.swift`: 
 
 ### List of items
+`View ItemVCs/ChecklistViewController2.swift`
+
+`View ItemVCs/ItemAttrAndInfoVC.swift`
 
 ### Communication with the server
+`Model/HTTPController.swift`
+
+### Logging
+`Utilities/Log.swift`
 
 ## Publications
-
+Under review
 
 ## Contact
+Jonggi Hong <jhong12@umd.edu>
+
+Ernest Essuah Mensah <ernest.mensah27@icloud.com>
