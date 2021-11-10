@@ -24,6 +24,9 @@ TOR Server codes are [here](https://github.com/IAMLabUMD/TORApp-Server).
 ## Getting started
 To build and run the TOR app, please follow these steps,
 1. Clone the repository
+```
+   git clone https://github.com/IAMLabUMD/TORApp-Mobile.git
+```
 2. Open the project in Xcode by selecting `TOR-Mobile.xcworkspace`
 3. Set your Apple account as a developer of the app in the Signing & Capabilities tab. Add and select your Apple account for 'Team' and use any name for 'Bundle identifier' (see the example below).
 
