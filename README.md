@@ -1,11 +1,8 @@
 # TOR Mobile Application
-<a href="https://jonggi.github.io">
-      <img src="https://img.shields.io/badge/contact-Jonggi Hong-blue.svg?style=flat" alt="Contact">
-</a>
-<a href="LICENSE.md">
-      <img src="https://img.shields.io/badge/license-TBD-red.svg?style=flat" alt="License: TBD">
-</a>
-<img src="https://img.shields.io/badge/platform-ios-green"/> <img src="https://img.shields.io/badge/language-swift 4.0-lightblue"/>
+<a href="https://jonggi.github.io"><img src="https://img.shields.io/badge/contact-Jonggi Hong-blue.svg?style=flat" alt="Contact"/></a>
+<a href="LICENSE.md"><img src="https://img.shields.io/badge/license-TBD-red.svg?style=flat" alt="License: TBD"/></a>
+<img src="https://img.shields.io/badge/platform-ios-green"/> 
+<img src="https://img.shields.io/badge/language-swift 4.0-lightblue"/>
 
 The Swift 4.0 codes of the TOR app. The TOR mobile application includes user interfaces and communication with the Amorgos server in the IAM Lab.
 The user interfaces consists of main screen, training, scanning, and a list of items as shown below. The user interface of the app was designed based on the screen size of iPhone 8.
@@ -29,19 +26,16 @@ To build and run the TOR app, please follow these steps,
 1. Clone the repository
 2. Open the project in Xcode by selecting `TOR-Mobile.xcworkspace`
 3. Set your Apple account as a developer of the app in the Signing & Capabilities tab. Add and select your Apple account for 'Team' and use any name for 'Bundle identifier' (see the example below).
+
+<p align="center">
+  <img src="Docs/signing.png" alt="Signing and capabilities">
+</p>
+
 4. Connect an iPhone to your computer
 5. Run the app
 
 <p align="center">
-  <img src="Docs/signing.png" alt="Signing and capabilities">
-
-Set your Apple account as a developer of the app.
-</p>
-
-<p align="center">
   <img src="Docs/run.png" alt="Signing and capabilities">
-
-Run the app by selecting the triangle button.
 </p>
 
 ## Structure of the app
