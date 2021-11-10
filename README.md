@@ -51,8 +51,17 @@ The source codes are organized based on their functionalities (i.e., main screen
 
 ### Teach
 
-`Teach TORVCs/ARViewController.swift`, `Teach TORVCs/ReviewTraining.swift`, `Teach TORVCs/TrainingVC.swift`
-<img src="Docs/Screenshots/main.PNG" alt="main screen"> <img src="Docs/Screenshots/main.PNG" alt="main screen"> <img src="Docs/Screenshots/main.PNG" alt="main screen">
+`Teach TORVCs/ARViewController.swift`
+
+<img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen">
+
+`Teach TORVCs/ReviewTraining.swift`
+
+<img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen">
+
+`Teach TORVCs/TrainingVC.swift`
+
+<img src="Docs/Screenshots/main.PNG" width="25%" alt="main screen">
 
 ### Scan
 `MainViewController.swift`: 
