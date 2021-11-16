@@ -21,13 +21,13 @@ In order to run the MYCam app, you will need to meet the following requirements:
 - iOS 12.1 or later
 - Download and run the MYCam server codes
 ```
-MYCam server codes are [here](https://github.com/IAMLabUMD/TORApp-Server).
+MYCam server codes are [here](https://github.com/IAMLabUMD/MYCam-Server).
 
 ## Getting started
 To build and run the MYCam app, please follow these steps,
 1. Clone the repository. You can use the following command or GUI tools.
 ```
-   git clone https://github.com/IAMLabUMD/TORApp-Mobile.git
+   git clone https://github.com/IAMLabUMD/MYCam-Mobile.git
 ```
 2. Open the project in Xcode by selecting `TOR-Mobile.xcworkspace`
 3. Set your Apple account as a developer of the app in the Signing & Capabilities tab. Add and select your Apple account for 'Team' and use any name for 'Bundle identifier' (see the example below).
