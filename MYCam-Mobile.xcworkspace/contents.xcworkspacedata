@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/jonggihong/Downloads/GithubRepositories/TORApp-Mobile/MYCam-Mobile.xcodeproj">
+      location = "group:MYCam-Mobile.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -29,7 +29,7 @@ To build and run the MYCam app, please follow these steps,
 ```
    git clone https://github.com/IAMLabUMD/MYCam-Mobile.git
 ```
-2. Open the project in Xcode by selecting `TOR-Mobile.xcworkspace`
+2. Open the project in Xcode by selecting `MYCam-Mobile.xcworkspace`
 3. Set your Apple account as a developer of the app in the Signing & Capabilities tab. Add and select your Apple account for 'Team' and use any name for 'Bundle identifier' (see the example below).
 
 <p align="center">
@@ -59,11 +59,11 @@ The source codes are organized based on their functionalities (i.e., main screen
 
 
 ### Teach
-`Teach TORVCs/ARViewController.swift`
+`Teach MYCamVCs/ARViewController.swift`
 
-`Teach TORVCs/ReviewTraining.swift`
+`Teach MYCamVCs/ReviewTraining.swift`
 
-`Teach TORVCs/TrainingVC.swift`
+`Teach MYCamVCs/TrainingVC.swift`
 
 <img src="Docs/Screenshots/train_feedback.PNG" width="25%" alt="training interface with feedback"> <img src="Docs/Screenshots/train_review.PNG" width="25%" alt="review with attributes"> <img src="Docs/Screenshots/train_enter_name.PNG" width="25%" alt="enter the name of the object">
 
