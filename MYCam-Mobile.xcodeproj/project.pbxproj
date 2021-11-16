@@ -291,7 +291,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		17B814C12411AD240065A345 /* Teach TORVCs */ = {
+		17B814C12411AD240065A345 /* Teach MYCamVCs */ = {
 			isa = PBXGroup;
 			children = (
 				0809EBCD219CC13000FC4973 /* CameraViewController.swift */,
@@ -301,7 +301,7 @@
 				F372EDAD25A4D10F003A7369 /* ARViewController.swift */,
 				F3CF84FD25F5ECA4001E15E1 /* ReviewTrainingVC.swift */,
 			);
-			path = "Teach TORVCs";
+			path = "Teach MYCamVCs";
 			sourceTree = "<group>";
 		};
 		17B814C22411AD520065A345 /* Unused VCs */ = {
@@ -374,7 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				F3EB806D224F445700681A34 /* start_screen.png */,
-				AF36738C209E98160099A340 /* TOR-Mobile Files */,
+				AF36738C209E98160099A340 /* MYCam-Mobile Files */,
 				AF36738B209E98160099A340 /* Products */,
 				F3B42E98222C82A7002AFCE0 /* Frameworks */,
 				7CC31D8E22653E02CFB19389 /* Pods */,
@@ -389,7 +389,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AF36738C209E98160099A340 /* TOR-Mobile Files */ = {
+		AF36738C209E98160099A340 /* MYCam-Mobile Files */ = {
 			isa = PBXGroup;
 			children = (
 				AF36738D209E98160099A340 /* AppDelegate.swift */,
@@ -413,12 +413,12 @@
 				17A7E3EC25E3181D00B8B0D2 /* InstructionsVC.swift */,
 				17B73D9E253E46A100D48506 /* AboutVC.swift */,
 				08E7F01E2188B9C90074073C /* SettingsTableViewController.swift */,
-				17B814C12411AD240065A345 /* Teach TORVCs */,
+				17B814C12411AD240065A345 /* Teach MYCamVCs */,
 				17B814C42411ADD90065A345 /* View ItemVCs */,
 				17B814C02411AD030065A345 /* Model */,
 				F31F9EAD226EC9680015760D /* HTTPController.swift */,
 			);
-			name = "TOR-Mobile Files";
+			name = "MYCam-Mobile Files";
 			sourceTree = SOURCE_ROOT;
 		};
 		F3B42E98222C82A7002AFCE0 /* Frameworks */ = {
@@ -462,9 +462,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF367389209E98160099A340 /* TOR-Mobile */ = {
+		AF367389209E98160099A340 /* MYCam-Mobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF36739C209E98190099A340 /* Build configuration list for PBXNativeTarget "TOR-Mobile" */;
+			buildConfigurationList = AF36739C209E98190099A340 /* Build configuration list for PBXNativeTarget "MYCam-Mobile" */;
 			buildPhases = (
 				0EA5B4E388E0CC503287C404 /* [CP] Check Pods Manifest.lock */,
 				AF367386209E98160099A340 /* Sources */,
@@ -475,7 +475,7 @@
 			);
 			dependencies = (
 			);
-			name = "TOR-Mobile";
+			name = "MYCam-Mobile";
 			productName = "CheckList app";
 			productReference = AF36738A209E98160099A340 /* MYCam.app */;
 			productType = "com.apple.product-type.application";
@@ -501,7 +501,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AF367385209E98160099A340 /* Build configuration list for PBXProject "TOR-Mobile" */;
+			buildConfigurationList = AF367385209E98160099A340 /* Build configuration list for PBXProject "MYCam-Mobile" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -524,7 +524,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				AF367389209E98160099A340 /* TOR-Mobile */,
+				AF367389209E98160099A340 /* MYCam-Mobile */,
 			);
 		};
 /* End PBXProject section */
@@ -912,7 +912,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF367385209E98160099A340 /* Build configuration list for PBXProject "TOR-Mobile" */ = {
+		AF367385209E98160099A340 /* Build configuration list for PBXProject "MYCam-Mobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF36739A209E98190099A340 /* Debug */,
@@ -921,7 +921,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF36739C209E98190099A340 /* Build configuration list for PBXNativeTarget "TOR-Mobile" */ = {
+		AF36739C209E98190099A340 /* Build configuration list for PBXNativeTarget "MYCam-Mobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF36739D209E98190099A340 /* Debug */,
