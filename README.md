@@ -9,6 +9,8 @@ The user interfaces consists of main screen, training, scanning, and a list of i
 
 <p align="center">
   <img src="Docs/overview.jpg" alt="Overview of the TOR app">
+
+Click to see a bigger image
 </p>
 
 ## Requirements
