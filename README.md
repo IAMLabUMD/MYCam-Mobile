@@ -4,7 +4,7 @@
 <img src="https://img.shields.io/badge/platform-ios-green"/> 
 <img src="https://img.shields.io/badge/language-swift 4.0-lightblue"/>
 
-The Swift 4.0 codes of the MYCam app. The MYCam mobile application includes user interfaces and communication with the Amorgos server in the IAM Lab.
+The Swift 4.0 codes of the [MYCam app](https://github.com/IAMLabUMD/MYCam-Mobile). The MYCam mobile application includes user interfaces and communication with the Amorgos server in the IAM Lab.
 The user interfaces consists of main screen, training, scanning, and a list of items as shown below. The user interface of the app was designed based on the screen size of iPhone 8.
 
 <p align="center">
